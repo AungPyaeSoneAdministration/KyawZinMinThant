@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05. Todo API with Auth — Buddy Demo</title>
+<style>
+:root{--accent:#16a34a;--dark:#15803d;--soft:#f0fdf4;--bg:#f5f7fb;--text:#0f172a;--muted:#64748b;--border:#e4e9f2;--card:#fff}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+.demo-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 5%;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.demo-bar .back{font-weight:700;font-size:14px;color:#fff;text-decoration:none;padding:8px 15px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--dark))}
+.demo-bar .tag{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.demo{width:min(920px,92%);margin:34px auto 64px;flex:1}
+.demo h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.02em}
+.demo .lead{color:var(--muted);margin:8px 0 26px;max-width:640px}
+.demo-foot{border-top:1px solid var(--border);padding:18px 5%;text-align:center;color:var(--muted);font-size:13px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 12px 28px -22px rgba(15,23,42,.45);margin-bottom:18px}
+.panel h2{font-size:18px;margin-bottom:10px;letter-spacing:-.01em}
+.btn{display:inline-block;border:none;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;font-size:14px;background:var(--accent);color:#fff;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:var(--dark)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:var(--soft)}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--border);border-radius:10px;width:100%;background:#fff;color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 4px}
+pre,.terminal{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13.5px;line-height:1.7}
+.grid{display:grid;gap:16px}
+code{font-family:Consolas,monospace;background:var(--soft);color:var(--dark);padding:2px 6px;border-radius:6px;font-size:.92em}
+.code-block{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13px;line-height:1.65;margin:14px 0;white-space:pre}
+.muted{color:var(--muted);font-size:13.5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+
+</style>
+</head>
+<body>
+<header class="demo-bar">
+    <a class="back" href="../../Node/index.html">← Back to Node.js Course</a>
+    <span class="tag">Node.js · Project 05</span>
+</header>
+<main class="demo">
+    <h1>05. Todo API with Auth</h1>
+    <p class="lead">Add user registration, login with JWT, and protected todo endpoints.</p>
+    
+<section class="panel">
+    <div class="row">
+        <input id="auUser" placeholder="username" style="max-width:160px">
+        <input id="auPass" placeholder="password" type="password" style="max-width:160px">
+        <button class="btn" id="auLogin">POST /auth/login</button>
+        <button class="btn ghost" id="auTodo">GET /todos</button>
+    </div>
+    <p class="muted" style="margin-top:8px">Login returns a mock JWT; protected endpoints need the <code>Authorization</code> header.</p>
+    <pre id="auOut" style="margin-top:12px">// 1) log in first</pre>
+</section>
+<script>
+(function () {
+    var token = null;
+    var TODOS = [{ id: 1, text: 'Learn Express routes', done: false }];
+    var out = document.getElementById('auOut');
+    document.getElementById('auLogin').addEventListener('click', function () {
+        var u = document.getElementById('auUser').value.trim() || 'student';
+        token = 'eyJhbGciOiJIUzI1NiJ9.' + btoa(u).replace(/=/g, '') + '.demo-signature';
+        out.textContent = 'POST /auth/login → 201\n\n' + JSON.stringify({
+            token: token.slice(0, 44) + '…',
+            user: { username: u, role: 'student' }
+        }, null, 2);
+    });
+    document.getElementById('auTodo').addEventListener('click', function () {
+        if (!token) {
+            out.textContent = 'GET /todos → 401 Unauthorized\n\n{ "error": "Token required" }';
+            return;
+        }
+        out.textContent = 'GET /todos\nAuthorization: Bearer ' + token.slice(0, 24) + '…\n\n→ 200\n\n' +
+            JSON.stringify(TODOS, null, 2);
+    });
+})();
+</script>
+</main>
+<footer class="demo-foot">Buddy Edu · Practical Work demo — Node.js Project 05</footer>
+</body>
+</html>

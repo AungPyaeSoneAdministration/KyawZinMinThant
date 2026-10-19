@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next.js Complete Course — Modern Edition</title>
+    <script>
+        (function () {
+            var th = localStorage.getItem('next-theme');
+            if (th) document.documentElement.setAttribute('data-theme', th);
+            var pl = localStorage.getItem('pj-lang');
+            if (pl === 'mm' || localStorage.getItem('buddyEduLang') === 'my') document.documentElement.setAttribute('lang', 'my');
+        })();
+    </script>
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --surface: #ffffff;
+            --surface-2: #f1f5f9;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e4e9f2;
+            --primary: #6366f1;
+            --primary-2: #8b5cf6;
+            --primary-soft: rgba(99, 102, 241, .12);
+            --code-bg: #0f172a;
+            --code-head: rgba(148, 163, 184, .08);
+            --shadow: 0 18px 40px -22px rgba(15, 23, 42, .35);
+            --sidebar: #0f172a;
+            --sidebar-2: #1e293b;
+            --sidebar-text: #cbd5e1;
+            --ok: #10b981;
+        }
+
+        html[data-theme="dark"] {
+            --bg: #0b1120;
+            --surface: #0f172a;
+            --surface-2: #131c30;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --border: #1e293b;
+            --primary: #818cf8;
+            --primary-2: #a78bfa;
+            --primary-soft: rgba(129, 140, 248, .16);
+            --code-bg: #020617;
+            --sidebar: #0b1120;
+            --sidebar-2: #111c33;
+            --shadow: 0 18px 40px -22px rgba(0, 0, 0, .8);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--primary); }
+
+        /* ---------- Sidebar ---------- */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0; bottom: 0;
+            width: 320px;
+            background: linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
+            color: var(--sidebar-text);
+            display: flex;
+            flex-direction: column;
+            z-index: 60;
+            transition: transform .32s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .brand {
+            padding: 20px 22px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(148, 163, 184, .15);
+        }
+
+        .brand-logo {
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            display: grid; place-items: center;
+            font-weight: 800; font-size: 18px; color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            box-shadow: 0 8px 18px -6px rgba(99, 102, 241, .8);
+        }
+
+        .brand h1 { font-size: 15px; margin: 0; color: #fff; letter-spacing: .2px; }
+        .brand span { font-size: 12px; color: #94a3b8; }
+
+        .search {
+            padding: 14px 16px 6px;
+            position: relative;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 10px 12px 10px 36px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, .22);
+            background: rgba(2, 6, 23, .45);
+            color: #e2e8f0;
+            font-size: 13.5px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .search input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, .25);
+        }
+
+        .search svg {
+            position: absolute;
+            left: 28px; top: 50%;
+            transform: translateY(-38%);
+            width: 15px; height: 15px;
+            color: #64748b;
+        }
+
+        .nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 12px 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #334155 transparent;
+        }
+
+        .nav::-webkit-scrollbar { width: 8px; }
+        .nav::-webkit-scrollbar-thumb { background: #334155; border-radius: 8px; }
+
+        .part-head {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            padding: 11px 12px;
+            border: 0;
+            border-radius: 10px;
+            background: rgba(148, 163, 184, .08);
+            color: #e2e8f0;
+            font: inherit;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            text-align: left;
+            cursor: pointer;
+            transition: background .18s;
+        }
+
+        .part-head:hover { background: rgba(148, 163, 184, .16); }
+        .part-head .arrow { margin-left: auto; width: 14px; height: 14px; color: #94a3b8; transition: transform .2s; }
+        .part-head.open .arrow { transform: rotate(90deg); }
+
+        .nav-group {
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: #7c8aa3;
+            font-weight: 700;
+            padding: 13px 12px 4px;
+            line-height: 1.4;
+        }
+
+        .nav-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px 8px 16px;
+            border: 0;
+            background: transparent;
+            color: var(--sidebar-text);
+            font: inherit;
+            font-size: 13.5px;
+            text-align: left;
+            border-radius: 9px;
+            cursor: pointer;
+            transition: background .18s, color .18s;
+        }
+
+        .nav-item:hover { background: rgba(148, 163, 184, .12); color: #fff; }
+        .nav-item .nav-num {
+            width: 26px; height: 22px; flex: none;
+            display: grid; place-items: center;
+            font-size: 10.5px; font-weight: 700;
+            border-radius: 6px;
+            background: rgba(148, 163, 184, .15);
+            color: #cbd5e1;
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(99, 102, 241, .9), rgba(139, 92, 246, .85));
+            color: #fff;
+            box-shadow: 0 10px 20px -12px rgba(99, 102, 241, .9);
+        }
+
+        .nav-item.active .nav-num { background: rgba(255, 255, 255, .22); color: #fff; }
+        .nav-item.done .nav-num { background: rgba(16, 185, 129, .2); color: #34d399; }
+        .nav-item.done.active .nav-num { background: rgba(255, 255, 255, .22); color: #fff; }
+
+        .sidebar-foot {
+            padding: 14px 18px 20px;
+            border-top: 1px solid rgba(148, 163, 184, .15);
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .track {
+            height: 7px;
+            border-radius: 99px;
+            background: rgba(148, 163, 184, .2);
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .track > i {
+            display: block;
+            height: 100%;
+            width: 0;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-2));
+            transition: width .4s ease;
+        }
+
+        /* ---------- Main ---------- */
+        .main {
+            margin-left: 320px;
+            min-height: 100vh;
+            padding: 26px 44px 90px;
+        }
+
+        .inner { max-width: 980px; margin: 0 auto; }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .crumb { font-size: 13px; color: var(--muted); flex: 1; }
+        .crumb b { color: var(--text); font-weight: 600; }
+
+        .icon-btn {
+            margin-left: auto;
+            width: 42px; height: 42px;
+            display: grid; place-items: center;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            transition: transform .18s, box-shadow .18s, border-color .18s;
+        }
+
+        .icon-btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); border-color: var(--primary); }
+        .icon-btn svg { width: 19px; height: 19px; }
+
+        .lang-btn { width: auto; min-width: 42px; padding: 0 12px; font-weight: 800; font-size: 13px; }
+        .plan-btn { text-decoration: none; }
+
+        .menu-btn {
+            display: none;
+            width: 42px; height: 42px;
+            place-items: center;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .doc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 44px 46px 48px;
+            box-shadow: var(--shadow);
+            animation: rise .42s cubic-bezier(.2, .7, .2, 1);
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--primary);
+            background: var(--primary-soft);
+            padding: 5px 11px;
+            border-radius: 99px;
+            margin-bottom: 12px;
+        }
+
+        .doc h2 {
+            font-size: 1.9rem;
+            line-height: 1.2;
+            margin: 0 0 18px;
+            letter-spacing: -.02em;
+        }
+
+        .doc h3 {
+            font-size: 1.15rem;
+            margin: 28px 0 10px;
+            letter-spacing: -.01em;
+        }
+
+        .doc p { margin: 0 0 14px; color: var(--text); }
+
+        .doc ul { margin: 0 0 16px; padding-left: 22px; }
+        .doc li { margin: 6px 0; }
+
+        .doc p code, .doc li code, .doc td code {
+            font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+            font-size: .86em;
+            background: var(--primary-soft);
+            color: var(--primary);
+            padding: .12em .42em;
+            border-radius: 6px;
+        }
+
+        /* ---------- Code blocks ---------- */
+        .code {
+            margin: 18px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--code-bg);
+            border: 1px solid rgba(148, 163, 184, .16);
+            box-shadow: var(--shadow);
+        }
+
+        .code-head {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 14px;
+            background: var(--code-head);
+            border-bottom: 1px solid rgba(148, 163, 184, .12);
+        }
+
+        .dots { display: flex; gap: 6px; }
+        .dots i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+        .dots i:nth-child(1) { background: #ff5f57; }
+        .dots i:nth-child(2) { background: #febc2e; }
+        .dots i:nth-child(3) { background: #28c840; }
+
+        .code-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-left: 8px;
+            letter-spacing: .03em;
+        }
+
+        .copy {
+            margin-left: auto;
+            border: 1px solid rgba(148, 163, 184, .28);
+            background: transparent;
+            color: #cbd5e1;
+            font: inherit;
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+
+        .copy:hover { background: rgba(148, 163, 184, .16); }
+        .copy.ok { color: #34d399; border-color: #34d399; }
+
+        .code pre {
+            margin: 0;
+            padding: 18px 20px;
+            overflow: auto;
+            font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+            font-size: 13.5px;
+            line-height: 1.75;
+            color: #e2e8f0;
+            tab-size: 4;
+        }
+
+        .code pre code { background: none; color: inherit; padding: 0; }
+
+        .t-kw { color: #c792ea; }
+        .t-str { color: #c3e88d; }
+        .t-num { color: #f78c6c; }
+        .t-com { color: #5c6b8a; font-style: italic; }
+
+        /* ---------- Pager ---------- */
+        .pager {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            margin-top: 34px;
+            padding-top: 26px;
+            border-top: 1px solid var(--border);
+        }
+
+        .pager button {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 190px;
+            padding: 13px 18px;
+            border-radius: 13px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font: inherit;
+            cursor: pointer;
+            text-align: left;
+            transition: transform .18s, border-color .18s, box-shadow .18s;
+        }
+
+        .pager button.next { text-align: right; margin-left: auto; }
+        .pager button:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--primary); box-shadow: var(--shadow); }
+        .pager button:disabled { opacity: .4; cursor: not-allowed; }
+        .pager small { color: var(--muted); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; }
+        .pager b { font-weight: 600; font-size: 14.5px; }
+
+        .lang-note {
+            font-size: 12.5px;
+            color: var(--muted);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin: 0 0 14px;
+        }
+
+        .backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, .55);
+            backdrop-filter: blur(2px);
+            z-index: 55;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .sidebar { transform: translateX(-100%); box-shadow: 0 0 60px rgba(0, 0, 0, .5); }
+            body.nav-open .sidebar { transform: none; }
+            body.nav-open .backdrop { display: block; }
+            .main { margin-left: 0; padding: 18px 18px 70px; }
+            .menu-btn { display: grid; }
+            .plan-btn { display: none; }
+            .doc { padding: 28px 22px 32px; border-radius: 18px; }
+            .doc h2 { font-size: 1.55rem; }
+            .pager button { min-width: 0; flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">NEXT</div>
+            <div>
+                <h1>Next.js Complete Course</h1>
+                <span id="brand-sub">50 lessons · 10 modules</span>
+            </div>
+        </div>
+        <div class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input id="search" type="search" placeholder="Search 50 topics…" autocomplete="off">
+        </div>
+        <nav class="nav" id="nav"></nav>
+        <div class="sidebar-foot">
+            <div><strong id="progress-text">0 / 0</strong> <span id="progress-label">topics explored</span></div>
+            <div class="track"><i id="progress-bar"></i></div>
+        </div>
+    </aside>
+
+    <div class="backdrop" id="backdrop"></div>
+
+    <main class="main">
+        <div class="inner">
+            <div class="topbar">
+                <button class="menu-btn icon-btn" id="menu-btn" aria-label="Menu" style="margin-left:0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div class="crumb">Course &nbsp;/&nbsp; <b id="crumb">Loading…</b></div>
+                <a class="icon-btn plan-btn" href="../../CoursePlan/index.html" id="plan-link" aria-label="Study plan" title="Study plan" style="text-decoration:none">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4.5" width="18" height="16" rx="2.5"></rect><path d="M8 3v3M16 3v3M3 9.5h18M8 14h3"></path>
+                    </svg>
+                </a>
+                <a class="icon-btn" id="home-btn" href="../index.html" aria-label="Back to home" title="Back to home" style="text-decoration:none">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path><path d="M9.5 21v-6h5v6"></path>
+                    </svg>
+                </a>
+                <button class="icon-btn lang-btn" id="lang-btn" type="button" title="Switch language"><span id="lang-label">EN</span></button>
+                <button class="icon-btn" id="theme-btn" aria-label="Toggle theme" title="Toggle theme"></button>
+            </div>
+
+            <article class="doc" id="doc"></article>
+        </div>
+    </main>
+
+    <script>
+        /* ---------------- Syntax highlighting ---------------- */
+        function esc(s) {
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        var TOK = {
+            re: /(\/\/[^\n]*|\/\*[\s\S]*?\*\/)|(`[^`]*`|'[^']*'|"[^"]*")|\b(const|let|var|function|return|if|else|for|while|do|of|in|new|class|constructor|this|typeof|instanceof|null|undefined|true|false|async|await|try|catch|finally|throw|switch|case|break|continue|default|extends|super|static|get|set|export|import|from|yield)\b|\b(\d+(?:\.\d+)?)\b/g
+        };
+
+        function highlight(src) {
+            return esc(src).replace(TOK.re, function (m, com, str, kw, num) {
+                if (com) return '<span class="t-com">' + com + '</span>';
+                if (str) return '<span class="t-str">' + str + '</span>';
+                if (kw) return '<span class="t-kw">' + kw + '</span>';
+                if (num) return '<span class="t-num">' + num + '</span>';
+                return m;
+            });
+        }
+
+        function codeBlock(src, label) {
+            var clean = src.replace(/^\n/, '').replace(/\n[ \t]*$/, '').replace(/\t/g, '    ');
+            return '<div class="code">' +
+                '<div class="code-head"><span class="dots"><i></i><i></i><i></i></span>' +
+                '<span class="code-label">' + (label || 'TypeScript') + '</span>' +
+                '<button class="copy" onclick="copyCode(this)">' + tr('copy') + '</button></div>' +
+                '<pre><code>' + highlight(clean) + '</code></pre></div>';
+        }
+
+        function t(title, blocks, mmTitle, mmBlocks) {
+            var mmBody = null;
+            if (mmTitle && mmBlocks) {
+                mmBody = mmBlocks.map(function (b) {
+                    return (typeof b === 'string' && /^@\d+$/.test(b)) ? blocks[+b.slice(1)] : b;
+                }).join('');
+            }
+            return {
+                title: (LANG === 'mm' && mmTitle) ? mmTitle : title,
+                body: (LANG === 'mm' && mmBody) ? mmBody : blocks.join(''),
+                titleEn: title,
+                titleMm: mmTitle || title
+            };
+        }
+
+        function copyCode(btn) {
+            var code = btn.closest('.code').querySelector('pre code');
+            var text = code.innerText;
+            var done = function () {
+                btn.textContent = tr('copied');
+                btn.classList.add('ok');
+                setTimeout(function () { btn.textContent = tr('copy'); btn.classList.remove('ok'); }, 1500);
+            };
+            var legacy = function () {
+                try {
+                    var r = document.createRange(); r.selectNode(code);
+                    window.getSelection().removeAllRanges(); window.getSelection().addRange(r);
+                    document.execCommand('copy');
+                    window.getSelection().removeAllRanges();
+                } catch (e) {}
+                done();
+            };
+            if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done).catch(legacy); }
+            else { legacy(); }
+        }
+
+        /* ---------------- Language ---------------- */
+        var LANG = 'en';
+        try { if (localStorage.getItem('pj-lang') === 'mm' || localStorage.getItem('buddyEduLang') === 'my') LANG = 'mm'; } catch (e) {}
+        var STR = {
+            en: { copy:'Copy', copied:'Copied!', prev:'Previous', next:'Next', start:'Start', end:'End', noTopics:'No topics found', home:'Back to home', plan:'Study plan', theme:'Toggle dark mode', menu:'Open menu', langAria:'Switch language', langCode:'EN', topics:'topics explored' },
+            mm: { copy:'ကူးယူရန်', copied:'ကူးယူပြီးပါပြီ!', prev:'ယခင်', next:'နောက်', start:'အစ', end:'အဆုံး', noTopics:'ခေါင်းစဉ် ရှာမတွေ့ပါ', home:'ပင်မစာမျက်နှာ', plan:'လေ့လာရေးအစီအစဉ်', theme:'အမှောင်/အလင်း ပြောင်းရန်', menu:'မီနူး ဖွင့်ရန်', langAria:'ဘာသာစကား ပြောင်းရန်', langCode:'မြန်မာ', topics:'ခေါင်းစဉ် လေ့လာပြီး' }
+        };
+        function tr(k){ return (STR[LANG] && STR[LANG][k]) || STR.en[k] || k; }
+        function phSearch(){ return LANG==='mm' ? ('ခေါင်းစဉ် ' + SECTIONS.length + ' ခု ရှာရန်…') : ('Search ' + SECTIONS.length + ' topics…'); }
+        function brandSub(){ return LANG==='mm' ? ('သင်ခန်းစာ ' + SECTIONS.length + ' ခု · မော်ဂျူး ' + MODULES + ' ခု') : (SECTIONS.length + ' lessons · ' + MODULES + ' modules'); }
+
+        /* ---------------- Course content ---------------- */
+        var COURSE = [
+            { short: 'Part 1', name: 'Next.js Foundations', mmName: 'Next.js အခြေခံများ', modules: [
+
+                { name: 'Module 1 · Getting Started', mmName: 'မော်ဂျူး ၁ · စတင်လေ့လာခြင်း', items: [
+                    t('What Next.js Is and Why It Exists', [
+                        "<p><b>Next.js</b> is a React framework for building production web apps. React itself only renders UI, so teams used to hand-assemble routing, data loading, bundling and a server. Next.js packages all of that into one toolkit.</p>",
+                        "<p>It brings <b>Server Components</b>, file-based routing, three rendering modes (static, dynamic, streaming) and smart bundling with code splitting. A common mistake is treating it as a heavier create-react-app — Next.js also owns the server, so server-only code (database, API keys) never ships to the browser.</p>",
+                        codeBlock('// next.config.ts\nimport type { NextConfig } from "next";\n\nconst nextConfig: NextConfig = {\n  reactStrictMode: true,\n};\n\nexport default nextConfig;')
+                    ],
+                    'Next.js ဆိုတာ ဘာလဲ နှင့် ဘာကြောင့် ရှိသလဲ', [
+                        "<p><b>Next.js</b> ဆိုတာ production web app တွေ တည်ဆောက်ဖို့အတွက် React framework ဖြစ်ပါတယ်။ React ကိုယ်တိုင်က UI render လုပ်ရုံသာ ဖြစ်လို့ routing၊ data loading၊ bundling နှင့် server တို့ကို အသင်းတွေက လက်နဲ့ တွဲဖက် တည်ဆောက်ခဲ့ရပါတယ်။ Next.js က အဲဒါအားလုံးကို တစ်နေရာတည်း toolkit အဖြစ် ပေးထားပါတယ်။</p>",
+                        "<p><b>Server Components</b>၊ file-based routing၊ rendering mode သုံးမျိုး (static၊ dynamic၊ streaming) နှင့် code splitting ပါဝင်တဲ့ smart bundling တို့ကို ဆောင်ရွက်ပေးပါတယ်။ အများဆုံး မှားလေ့ရှိတာက create-react-app ရဲ့ ပိုပြီး အလေးချိန်များတဲ့ version လို့ မှတ်ယူကြတာပါ။ Next.js က server ကိုပါ ပိုင်ဆိုင်လို့ server-only code (database၊ API key) တွေက browser ထိ ဘယ်တော့မှ မရောက်ပါဘူး။</p>",
+                        "@2"
+                    ]),
+                    t('Creating a Project with create-next-app', [
+                        "<p>The fastest start is the official scaffolder. It asks a few questions (TypeScript, ESLint, Tailwind, App Router) and writes a working project you can run immediately.</p>",
+                        "<p>Common mistake: declining the App Router option and landing in the legacy Pages Router. For all new work choose <b>App Router</b>.</p>",
+                        codeBlock('npx create-next-app@latest my-app\n# answer the prompts: TypeScript, ESLint, App Router\ncd my-app\nnpm run dev', 'Terminal')
+                    ],
+                    'create-next-app ဖြင့် Project တစ်ခု ဖန်တီးခြင်း', [
+                        "<p>အမြန်ဆုံး စတင်နည်းက official scaffolder ဖြစ်ပါတယ်။ မေးခွန်းအနည်းငယ် (TypeScript၊ ESLint၊ Tailwind၊ App Router) မေးပြီး run လို့ရတဲ့ project တစ်ခုကို ချက်ချင်း ရေးသားပေးပါတယ်။</p>",
+                        "<p>အများဆုံး မှားလေ့ရှိတာက App Router option ကို ငြင်းဆိုပြီး legacy Pages Router ထဲ ရောက်သွားတာပါ။ အသစ်အားလုံးအတွက် <b>App Router</b> ကိုပဲ ရွေးချယ်ပါ။</p>",
+                        "@2"
+                    ]),
+                    t('Folder Structure and File Conventions', [
+                        "<p>Next.js is convention over configuration: special file names inside <code>app/</code> become routes and UI states. Everything else is just an ordinary folder.</p>",
+                        codeBlock('my-app/\n  app/\n    layout.tsx      # root layout (required)\n    page.tsx        # route: /\n    globals.css\n  public/           # static assets\n  next.config.ts\n  package.json\n  tsconfig.json'),
+                        "<p><code>components/</code> and <code>lib/</code> are popular conventions but not requirements — the compiler does not treat them specially.</p>"
+                    ],
+                    'Folder Structure နှင့် File ပုံစံများ', [
+                        "<p>Next.js က configuration ထက် convention ကို ဦးစားပေးပါတယ် — <code>app/</code> အတွင်းက အထူး file name တွေက route နှင့် UI state တွေ ဖြစ်လာပါတယ်။ ကျန်တာတွေက ပုံမှန် folder တွေပါ။</p>",
+                        "@1",
+                        "<p><code>components/</code> နှင့် <code>lib/</code> က popular convention တွေ ဖြစ်ပေမယ့် မဖြစ်မနေ မဟုတ်ပါ — compiler က သူတို့ကို အထူးမဆောင်ရွက်ပါဘူး။</p>"
+                    ]),
+                    t('The Development Server and Production Build', [
+                        "<p><code>npm run dev</code> starts a development server with fast refresh and helpful error overlays. It is not optimized for traffic.</p>",
+                        "<p><code>npm run build</code> compiles production code, pre-renders what it can and reports per-route bundle sizes. <code>npm run start</code> serves that build. Never benchmark the dev server — always measure a production build.</p>",
+                        codeBlock('npm run dev      # http://localhost:3000\nnpm run build    # production build in .next/\nnpm run start    # serve the production build', 'Terminal')
+                    ],
+                    'Development Server နှင့် Production Build', [
+                        "<p><code>npm run dev</code> က fast refresh နှင့် error overlay တွေပါတဲ့ development server ကို စတင်ပေးပါတယ်။ traffic အတွက် optimize လုပ်ထားတာ မဟုတ်ပါဘူး။</p>",
+                        "<p><code>npm run build</code> က production code ကို compile လုပ်၊ ဖြစ်နိုင်သမျှကို pre-render လုပ်ပြီး route တစ်ခုချင်းစာရဲ့ bundle size တွေကို ဖော်ပြပါတယ်။ <code>npm run start</code> က အဲဒီ build ကို serve လုပ်ပါတယ်။ dev server နဲ့ benchmark မလုပ်ပါနဲ့ — အမြဲတမ်း production build နဲ့ တိုင်းတာပါ။</p>",
+                        "@2"
+                    ]),
+                    t('App Router vs Pages Router', [
+                        "<p>The <b>Pages Router</b> (the <code>pages/</code> directory) was the original system: one file per route, data fetched with <code>getServerSideProps</code> or <code>getStaticProps</code>. The <b>App Router</b> (<code>app/</code> directory) replaces it with layouts, Server Components and streaming.</p>",
+                        "<p>New projects should use the App Router. The Pages Router still receives fixes but no new features.</p>",
+                        codeBlock('app/                      pages/\n  page.tsx      ->  /        index.tsx     ->  /\n  about/page.tsx -> /about   about.tsx     ->  /about')
+                    ],
+                    'App Router နှင့် Pages Router နှိုင်းယှဉ်ခြင်း', [
+                        "<p><b>Pages Router</b> (<code>pages/</code> directory) က မူလစနစ်ဖြစ်ပြီး route တစ်ခုအတွက် file တစ်ခုစီ၊ data ကို <code>getServerSideProps</code> သို့ <code>getStaticProps</code> နဲ့ fetch ပါတယ်။ <b>App Router</b> (<code>app/</code> directory) က ဒါကို layout၊ Server Component နှင့် streaming တို့နဲ့ အစားထိုးပါတယ်။</p>",
+                        "<p>project အသစ်တွေက App Router ကို သုံးသင့်ပါတယ်။ Pages Router က fix တွေ ဆက်ရနေပေမယ့် feature အသစ် မရတော့ပါဘူး။</p>",
+                        "@2"
+                    ])
+                ]},
+
+                { name: 'Module 2 · App Router Basics', mmName: 'မော်ဂျူး ၂ · App Router အခြေခံများ', items: [
+                    t('The app Directory and Routing Segments', [
+                        "<p>Every folder inside <code>app/</code> is a <b>URL segment</b>. A <code>page.tsx</code> inside that folder makes the segment routable; without it the folder is only organisation.</p>",
+                        codeBlock('app/\n  page.tsx             ->  /\n  settings/page.tsx    ->  /settings\n  shop/products/page.tsx -> /shop/products'),
+                        "<p>Segments nest predictably: <code>app/shop/products/page.tsx</code> serves <code>/shop/products</code>.</p>"
+                    ],
+                    'app Directory နှင့် Routing Segments', [
+                        "<p><code>app/</code> အတွင်းက folder တိုင်းက <b>URL segment</b> ဖြစ်ပါတယ်။ အဲဒီ folder ထဲမှာ <code>page.tsx</code> ရှိရင် segment ကို route လုပ်လို့ရပြီး၊ မရှိရင် folder က organization အတွက်ပဲ ဖြစ်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Segment တွေက ခန့်မှန်းနိုင်သလို nested ဖြစ်ပါတယ် — <code>app/shop/products/page.tsx</code> က <code>/shop/products</code> ကို serve လုပ်ပါတယ်။</p>"
+                    ]),
+                    t('The page File and Rendering Your First Route', [
+                        "<p><code>page.tsx</code> exports a default React component for its segment. By default it is a <b>Server Component</b>: it runs on the server, can talk to the database, and ships zero JavaScript for its own logic.</p>",
+                        codeBlock('// app/about/page.tsx\nexport default function AboutPage() {\n  return (\n    <main>\n      <h1>About us</h1>\n      <p>We build learning tools.</p>\n    </main>\n  );\n}'),
+                        "<p>The export must be a default export and the file must be named <code>page.tsx</code> (or <code>.js</code>/<code>.jsx</code>) — anything else returns a 404.</p>"
+                    ],
+                    'page File နှင့် ပထမဆုံး Route ကို Render ခြင်း', [
+                        "<p><code>page.tsx</code> က သူ့ segment အတွက် default React component ကို export လုပ်ပါတယ်။ ပုံမှန်အားဖြင့် သူက <b>Server Component</b> ဖြစ်ပြီး server ပေါ်မှာ run ပါတယ်၊ database နဲ့ ဆက်သွယ်နိုင်ပြီး သူ့ logic အတွက် JavaScript လုံးဝ မပို့ပါဘူး။</p>",
+                        "@1",
+                        "<p>Export က default export ဖြစ်ရမည်ဖြစ်ပြီး file နာမည်က <code>page.tsx</code> (သို့ <code>.js</code>/<code>.jsx</code>) ဖြစ်ရမည် — အခြားအမည်ဆိုရင် 404 ပြန်ပါတယ်။</p>"
+                    ]),
+                    t('Nested Routes and Folders', [
+                        "<p>Folders compose URLs; there is no separate route config file. A missing <code>page.tsx</code> at a level means that exact URL does not exist even if children below it do.</p>",
+                        codeBlock('app/\n  blog/page.tsx           ->  /blog\n  blog/[slug]/page.tsx    ->  /blog/hello\n  blog/[slug]/edit/page.tsx -> /blog/hello/edit'),
+                        "<p>Shared UI for a whole subtree belongs in that folder's <code>layout.tsx</code> — covered in the next module.</p>"
+                    ],
+                    'Nested Routes နှင့် Folders', [
+                        "<p>Folder တွေက URL တွေ ဖန်တီးပြီး route config file သီးသန့် မလိုပါဘူး။ အဆင့်တစ်ခုမှာ <code>page.tsx</code> ပျောက်နေရင် အဲဒီ URL မတည်ရှိတော့ဘူး — အောက်က child folder တွေ ရှိနေလည်း ဖြစ်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Subtree တစ်ခုလုံးအတွက် မျှဝေသုံးမယ့် UI က အဲဒီ folderရဲ့ <code>layout.tsx</code> မှာ ထားသင့်ပါတယ် — နောက် module မှာ ရှင်းပြပါမယ်။</p>"
+                    ]),
+                    t('Route Groups and Private Folders', [
+                        "<p>Wrap a folder in parentheses — <code>(marketing)</code> — to organise routes without adding a URL segment. Route groups are perfect for giving different sections their own root-level layout.</p>",
+                        "<p>Folders starting with <code>_</code> are <b>private</b>: excluded from routing entirely. Two route groups must not define the same URL.</p>",
+                        codeBlock('app/\n  (marketing)/\n    page.tsx           ->  /\n    pricing/page.tsx   ->  /pricing\n  (dashboard)/\n    layout.tsx\n    settings/page.tsx  ->  /settings\n  _components/         # never routed')
+                    ],
+                    'Route Groups နှင့် Private Folders', [
+                        "<p>Folder ကို ဝတ်စုပ်စု (parentheses) — <code>(marketing)</code> — နဲ့ ချုပ်ပြီး URL segment မထည့်ဘဲ route တွေကို စီစဉ်နိုင်ပါတယ်။ Route group တွေက section တစ်ခုချင်းစီအတွက် ကိုယ်ပိုင် root layout ပေးဖို့ အသင့်ဆုံး ဖြစ်ပါတယ်။</p>",
+                        "<p><code>_</code> နဲ့ စတင်တဲ့ folder တွေက <b>private</b> ဖြစ်ပြီး routing မှာ လုံးဝ ချန်ထားပါတယ်။ Route group နှစ်ခုက တူညီတဲ့ URL ကို သတ်မှတ်၍ မရပါ။</p>",
+                        "@2"
+                    ]),
+                    t('Dynamic Segments with [slug]', [
+                        "<p>A folder in square brackets captures part of the URL: <code>app/blog/[slug]/page.tsx</code> matches <code>/blog/hello</code> and <code>/blog/anything</code>. Catch-alls (<code>[...All]</code>) and optional catch-alls (<code>[[...All]]</code>) capture multiple segments.</p>",
+                        "<p>In the App Router, <code>params</code> is an async prop — always <code>await</code> it.</p>",
+                        codeBlock('// app/blog/[slug]/page.tsx\ntype Props = { params: Promise<{ slug: string }> };\n\nexport default async function PostPage({ params }: Props) {\n  const { slug } = await params;\n  return <h1>Post: {slug}</h1>;\n}')
+                    ],
+                    '[slug] ဖြင့် Dynamic Segments', [
+                        "<p>Square bracket ထဲက folder က URL ရဲ့ အစိတ်အပိုင်းကို ဖမ်းယူပါတယ် — <code>app/blog/[slug]/page.tsx</code> က <code>/blog/hello</code> နှင့် <code>/blog/anything</code> နှစ်ခုလုံးကို ကိုက်ပါတယ်။ Catch-all (<code>[...All]</code>) နှင့် optional catch-all (<code>[[...All]]</code>) က segment အများအပြားကို ဖမ်းပါတယ်။</p>",
+                        "<p>App Router မှာ <code>params</code> က async prop ဖြစ်လို့ အမြဲတမ်း <code>await</code> လုပ်ပါ။</p>",
+                        "@2"
+                    ])
+                ]},
+
+                { name: 'Module 3 · Layouts and Navigation', mmName: 'မော်ဂျူး ၃ · Layout နှင့် Navigation', items: [
+                    t('The Root Layout and Nested Layouts', [
+                        "<p><code>app/layout.tsx</code> is required and wraps every page. It must render <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code>. Global CSS, fonts and providers belong here.</p>",
+                        codeBlock('// app/layout.tsx\nimport "./globals.css";\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return (\n    <html lang="en">\n      <body>{children}</body>\n    </html>\n  );\n}'),
+                        "<p>Each folder can add its own layout; layouts nest automatically from the root down to the page.</p>"
+                    ],
+                    'Root Layout နှင့် Nested Layouts', [
+                        "<p><code>app/layout.tsx</code> က မဖြစ်မနေ လိုအပ်ပြီး page အားလုံးကို ဝတ်စုပ်ထားပါတယ်။ <code>&lt;html&gt;</code> နှင့် <code>&lt;body&gt;</code> ကို render ရမည်။ Global CSS၊ font နှင့် provider တွေက ဒီမှာ ထားသင့်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Folder တိုင်းက သူ့ layout ကို ထည့်နိုင်ပြီး layout တွေက root ကနေ page အထိ အလိုအလျောက် nested ဖြစ်ပါတယ်။</p>"
+                    ]),
+                    t('Layouts Persist Across Navigations', [
+                        "<p>When you navigate between sibling routes, Next.js keeps the parent layout mounted — its state and effects survive, and only the segment below it swaps. That makes layouts the right home for sidebars, headers and scroll containers.</p>",
+                        "<p>Common mistake: re-fetching header data in every page. Fetch it once in the layout and let it persist.</p>",
+                        codeBlock('// app/dashboard/layout.tsx\nexport default function DashboardLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return (\n    <section>\n      <nav>Dashboard menu</nav>\n      {children}\n    </section>\n  );\n}')
+                    ],
+                    'Navigation အတွင်း Layout တွေ ဆက်လက်ရှိနေခြင်း', [
+                        "<p>Sibling route တွေကြား navigate လုပ်ရင် Next.js က parent layout ကို mount ထားစည်းထားပြီး ၎င်းရဲ့ state နှင့် effect တွေ မပျက်ဘဲ အောက်က segment ပဲ ပြောင်းလဲပါတယ်။ ဒါကြောင့် sidebar၊ header နှင့် scroll container တွေအတွက် layout က မှန်ကန်တဲ့ နေရာ ဖြစ်ပါတယ်။</p>",
+                        "<p>အများဆုံး မှားလေ့ရှိတာက header data ကို page တိုင်းမှာ ပြန် fetch လုပ်တာပါ။ layout မှာ တစ်ခါတည်း fetch ပြီး ဆက်လက်ရှိစေပါ။</p>",
+                        "@2"
+                    ]),
+                    t('The Link Component and Client-Side Navigation', [
+                        "<p><code>&lt;Link&gt;</code> prefetches the route when it enters the viewport and navigates on the client — no full page reload. It works in both Server and Client Components.</p>",
+                        codeBlock('import Link from "next/link";\n\nexport function Nav() {\n  return (\n    <nav>\n      <Link href="/">Home</Link>\n      <Link href="/blog">Blog</Link>\n      <Link href="/about">About</Link>\n    </nav>\n  );\n}'),
+                        "<p>Use a plain <code>&lt;a&gt;</code> only for external sites or when you intentionally want a full reload.</p>"
+                    ],
+                    'Link Component နှင့် Client-Side Navigation', [
+                        "<p><code>&lt;Link&gt;</code> က viewport ထဲ ဝင်တာနဲ့ route ကို prefetch လုပ်ပြီး client ပေါ်မှာပဲ navigate ပါတယ် — full page reload မလိုတော့ပါ။ Server Component နှင့် Client Component နှစ်ခုလုံးမှာ အလုပ်လုပ်ပါတယ်။</p>",
+                        "@1",
+                        "<p>ပြင်ပ site တွေအတွက်ပဲ သို့ ရည်ရွယ်ချင်ရင် full reload လုပ်ချင်ရင်ပဲ သာမန် <code>&lt;a&gt;</code> ကို သုံးပါ။</p>"
+                    ]),
+                    t('Active Links and usePathname', [
+                        "<p><code>usePathname()</code> from <code>next/navigation</code> returns the current URL so you can highlight the active item. It is a hook, so the component must be a Client Component.</p>",
+                        codeBlock('"use client";\n\nimport Link from "next/link";\nimport { usePathname } from "next/navigation";\n\nexport function Nav() {\n  const pathname = usePathname();\n  const links = [\n    { href: "/", label: "Home" },\n    { href: "/blog", label: "Blog" },\n  ];\n  return (\n    <nav>\n      {links.map((l) => (\n        <Link\n          key={l.href}\n          href={l.href}\n          aria-current={pathname === l.href ? "page" : undefined}\n        >\n          {l.label}\n        </Link>\n      ))}\n    </nav>\n  );\n}'),
+                        "<p>Marking the active link with <code>aria-current=\"page\"</code> helps screen readers as well as CSS.</p>"
+                    ],
+                    'Active Links နှင့် usePathname', [
+                        "<p><code>next/navigation</code> ကနေ <code>usePathname()</code> က current URL ကို ပြန်ပေးလို့ active item ကို highlight လုပ်နိုင်ပါတယ်။ Hook ဖြစ်လို့ component က Client Component ဖြစ်ရမည်။</p>",
+                        "@1",
+                        "<p>Active link ကို <code>aria-current=\"page\"</code> နဲ့ မှတ်သားတာက CSS တင်မက screen reader တွေအတွက်ပါ အကျိုးရှိပါတယ်။</p>"
+                    ]),
+                    t('useRouter, redirect and notFound', [
+                        "<p>On the server, navigate with <code>redirect()</code>; throw a 404 with <code>notFound()</code>. Both come from <code>next/navigation</code> and must be called in server code (or event handlers on the client).</p>",
+                        codeBlock('// app/dashboard/page.tsx\nimport { redirect } from "next/navigation";\nimport { getUser } from "@/lib/auth";\n\nexport default async function DashboardPage() {\n  const user = await getUser();\n  if (!user) redirect("/login");\n  return <h1>Welcome, {user.name}</h1>;\n}'),
+                        codeBlock('// app/products/[id]/page.tsx\nimport { notFound } from "next/navigation";\n\nexport default async function ProductPage({\n  params,\n}: {\n  params: Promise<{ id: string }>;\n}) {\n  const { id } = await params;\n  const product = await getProduct(id);\n  if (!product) notFound();\n  return <h1>{product.name}</h1>;\n}')
+                    ],
+                    'useRouter၊ redirect နှင့် notFound', [
+                        "<p>Server ပေါ်မှာ <code>redirect()</code> နဲ့ navigate လုပ်ပြီး၊ <code>notFound()</code> နဲ့ 404 throw ပါ။ နှစ်ခုလုံးက <code>next/navigation</code> ကနေ ရပြီး server code (သို့ client ဘက်က event handler) မှာပဲ call ရမည်။</p>",
+                        "@1",
+                        "@2"
+                    ])
+                ]},
+
+                { name: 'Module 4 · Rendering Models', mmName: 'မော်ဂျူး ၄ · Rendering ပုံစံများ', items: [
+                    t('Server Components vs Client Components', [
+                        "<p>By default every component in the App Router is a <b>Server Component</b>. It renders on the server, can be async, and can import database drivers or secret-bearing modules — none of that code reaches the browser.</p>",
+                        "<p><b>Client Components</b> run in the browser and may use hooks, state and event handlers. The rule of thumb: stay on the server by default, and mark only the interactive leaves with <code>\"use client\"</code>.</p>",
+                        codeBlock('// Server Component — can query the database directly\nimport { db } from "@/lib/db";\n\nexport default async function Page() {\n  const users = await db.user.findMany();\n  return <UserList users={users} />;\n}')
+                    ],
+                    'Server Components နှင့် Client Components', [
+                        "<p>App Router မှာ ပုံမှန် component အားလုံးက <b>Server Component</b> ဖြစ်ပါတယ်။ Server ပေါ်မှာ render ပြီး async ဖြစ်နိုင်ကာ database driver သို့ secret ပါဝင်တဲ့ module တွေကို import လုပ်နိုင်ပါတယ် — အဲဒီ code တွေ ဘယ်တော့မှ browser ကို မရောက်ပါဘူး။</p>",
+                        "<p><b>Client Components</b> တွေက browser မှာ run ပြီး hook၊ state နှင့် event handler တွေ သုံးနိုင်ပါတယ်။ လက်တွေ့နည်းလမ်းက — ပုံမှန် server မှာပဲ ထားပြီး interactive ဖြစ်တဲ့ leaf တွေကိုပဲ <code>\"use client\"</code> နဲ့ သတ်မှတ်ပါ။</p>",
+                        "@2"
+                    ]),
+                    t('"use client" and When You Need It', [
+                        "<p>The <code>\"use client\"</code> directive at the top of a file marks the boundary: that module and everything it imports becomes client code. You need it for <code>useState</code>, <code>useEffect</code>, event handlers, browser APIs and third-party libraries that require the DOM.</p>",
+                        "<p>Mistake to avoid: putting <code>\"use client\"</code> in <code>page.tsx</code> just to use one button. Extract the button into its own file and keep the page on the server.</p>",
+                        codeBlock("'use client';\n\nimport { useState } from 'react';\n\nexport function Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Clicked {count} times\n    </button>\n  );\n}")
+                    ],
+                    '"use client" နှင့် ဘယ်အခါ လိုအပ်သလဲ', [
+                        "<p>File ထိပ်ဆုံးက <code>\"use client\"</code> directive က boundary ကို မှတ်သားပေးပါတယ် — အဲဒီ module နှင့် ၎င်း import လုပ်ထားတဲ့အရာအားလုံး client code ဖြစ်သွားပါတယ်။ <code>useState</code>၊ <code>useEffect</code>၊ event handler၊ browser API နှင့် DOM လိုအပ်တဲ့ third-party library တွေအတွက် လိုအပ်ပါတယ်။</p>",
+                        "<p>ရှောင်ရမယ့် မှားယွင်းချက်က ခလုတ်တစ်ခုတည်းအတွက် <code>page.tsx</code> ထဲ <code>\"use client\"</code> ထည့်တာပါ။ ခလုတ်ကို သီးသန့် file ခွဲထုတ်ပြီး page ကို server မှာပဲ ထားပါ။</p>",
+                        "@2"
+                    ]),
+                    t('Static vs Dynamic Rendering', [
+                        "<p><b>Static</b> pages are rendered at build time and reused for every request. <b>Dynamic</b> pages render per request. Using dynamic APIs (cookies, headers, searchParams) or <code>cache: \"no-store\"</code> opts a route into dynamic rendering.</p>",
+                        codeBlock('// app/stats/page.tsx\nexport const dynamic = "force-dynamic";\n\nexport default async function Page() {\n  const res = await fetch("https://api.example.com/stats", {\n    cache: "no-store",\n  });\n  const stats = await res.json();\n  return <pre>{JSON.stringify(stats)}</pre>;\n}'),
+                        "<p>Trust the build output over your assumptions: Next.js prints each route as static (<code>&#9679;</code>) or dynamic (<code>&#9675;</code>) right after <code>npm run build</code>.</p>"
+                    ],
+                    'Static နှင့် Dynamic Rendering', [
+                        "<p><b>Static</b> page တွေက build time မှာ render ပြီး request တိုင်းအတွက် ပြန်သုံးပါတယ်။ <b>Dynamic</b> page တွေက request တစ်ခုချင်းစီအတွက် render ပါတယ်။ Dynamic API (cookie၊ header၊ searchParams) သို့ <code>cache: \"no-store\"</code> သုံးရင် route က dynamic rendering ထဲ ဝင်သွားပါတယ်။</p>",
+                        "@1",
+                        "<p>ခန့်မှန်းချက်ထက် build output ကို ယုံကြည်ပါ — Next.js က <code>npm run build</code> ပြီးတာနဲ့ route တိုင်းကို static (<code>&#9679;</code>) သို့ dynamic (<code>&#9675;</code>) အဖြစ် ဖော်ပြပါတယ်။</p>"
+                    ]),
+                    t('Streaming and Suspense Basics', [
+                        "<p>Server Components can suspend while fetching. Next.js streams the HTML that is ready and fills in the rest, so users see the page shell immediately instead of a blank screen.</p>",
+                        codeBlock('import { Suspense } from "react";\nimport Reviews from "./reviews";\n\nexport default function Page() {\n  return (\n    <main>\n      <h1>Product</h1>\n      <Suspense fallback={<p>Loading reviews...</p>}>\n        <Reviews />\n      </Suspense>\n    </main>\n  );\n}'),
+                        "<p><code>Reviews</code> can be an async Server Component — its awaited data streams into the placeholder without any client-side fetching.</p>"
+                    ],
+                    'Streaming နှင့် Suspense အခြေခံ', [
+                        "<p>Server Component တွေက fetch နေစဉ် suspend ဖြစ်နိုင်ပါတယ်။ Next.js က အဆင်သင့်ဖြစ်နေတဲ့ HTML ကို stream လုပ်ပြီး ကျန်တာကို ဖြည့်ပေးလို့ user တွေက blank screen အစား page shell ကို ချက်ချင်း မြင်ရပါတယ်။</p>",
+                        "@1",
+                        "<p><code>Reviews</code> က async Server Component ဖြစ်နိုင်ပြီး ၎င်း await ထားတဲ့ data က client-side fetching မလိုဘဲ placeholder ထဲ stream ဝင်လာပါတယ်။</p>"
+                    ]),
+                    t('Choosing the Right Rendering Model', [
+                        "<p>Ask three questions: does the data change per user? Does it change per request? Does the UI need interactivity?</p>",
+                        "<ul><li>Marketing pages and docs — <b>static</b>, cached at the edge.</li><li>Dashboards that read cookies — <b>dynamic</b>, streamed with Suspense.</li><li>Heavy interactive widgets — small <b>client</b> islands inside a server page.</li></ul>",
+                        "<p>Most real apps mix all three. Start static and add dynamic rendering only where the data demands it — dynamic is the expensive default.</p>"
+                    ],
+                    'မှန်ကန်တဲ့ Rendering Model ရွေးချယ်ခြင်း', [
+                        "<p>မေးခွန်းသုံးခု မေးပါ — data က user တစ်ဦးချင်းစီအတွက် ပြောင်းလဲလား။ request တစ်ခုချင်းစီအတွက် ပြောင်းလဲလား။ UI မှာ interaction လိုအပ်လား။</p>",
+                        "<ul><li>Marketing page နှင့် doc တွေ — <b>static</b>၊ edge မှာ cache ထားပါ။</li><li>Cookie ဖတ်တဲ့ dashboard — <b>dynamic</b>၊ Suspense နဲ့ stream လုပ်ပါ။</li><li>အလေးနည်းတဲ့ interactive widget — server page ထဲက အသေးငယ်တဲ့ <b>client</b> island တွေ။</li></ul>",
+                        "<p>တကယ့် app အများစုက သုံးမျိုးလုံး ရောနှော သုံးပါတယ်။ Static နဲ့ စပြီး data က လိုအပ်တဲ့နေရာမှာပဲ dynamic rendering ထည့်ပါ — dynamic က ဈေးကြီးတဲ့ default ဖြစ်လို့ပါ။</p>"
+                    ])
+                ]},
+
+                { name: 'Module 5 · Data Fetching', mmName: 'မော်ဂျူး ၅ · Data Fetching', items: [
+                    t('Async Server Components and fetch', [
+                        "<p>Server Components can be <code>async</code> and simply <code>await</code> their data — no effect hooks, no loading-state boilerplate. <code>fetch</code> inside a Server Component is extended by Next.js with caching and request memoization.</p>",
+                        codeBlock('// app/posts/page.tsx\ntype Post = { id: number; title: string };\n\nexport default async function PostsPage() {\n  const res = await fetch("https://api.example.com/posts");\n  const posts: Post[] = await res.json();\n  return (\n    <ul>\n      {posts.map((p) => (\n        <li key={p.id}>{p.title}</li>\n      ))}\n    </ul>\n  );\n}'),
+                        "<p>Multiple components fetching the same URL during one render share a single request — that is request memoization.</p>"
+                    ],
+                    'Async Server Components နှင့် fetch', [
+                        "<p>Server Component တွေက <code>async</code> ဖြစ်နိုင်ပြီး data ကို <code>await</code> ရုံဖြစ်ပါတယ် — effect hook မလို၊ loading-state boilerplate မလိုပါဘူး။ Server Component ထဲက <code>fetch</code> ကို Next.js က caching နှင့် request memoization နဲ့ ချဲ့ထွင်ပေးထားပါတယ်။</p>",
+                        "@1",
+                        "<p>တစ်ခုတည်းသော render အတွင်း component အများအပြား တူညီတဲ့ URL ကို fetch ရင် request တစ်ခုတည်း မျှသုံးပါတယ် — ဒါက request memoization ဖြစ်ပါတယ်။</p>"
+                    ]),
+                    t('loading.tsx and Instant Feedback', [
+                        "<p>Drop a <code>loading.tsx</code> next to <code>page.tsx</code> and Next.js wraps the segment in <code>&lt;Suspense&gt;</code> automatically. Navigations show the fallback instantly while the page streams in.</p>",
+                        codeBlock('// app/posts/loading.tsx\nexport default function Loading() {\n  return <p>Loading posts...</p>;\n}'),
+                        "<p>Keep fallbacks shaped like the real content to avoid layout jumps when data arrives.</p>"
+                    ],
+                    'loading.tsx နှင့် ချက်ချင်း Feedback', [
+                        "<p><code>page.tsx</code> ဘေးမှာ <code>loading.tsx</code> ထည့်လိုက်ရင် Next.js က segment ကို <code>&lt;Suspense&gt;</code> နဲ့ အလိုအလျောက် ဝတ်စုပ်ပေးပါတယ်။ Page stream ဝင်နေစဉ် navigation တွေက fallback ကို ချက်ချင်း ပြပါတယ်။</p>",
+                        "@1",
+                        "<p>Data ရောက်လာတဲ့အခါ layout မခုန်ဖို့ fallback တွေကို တကယ့် content နဲ့ ဆင်တူအောင် ထားပါ။</p>"
+                    ]),
+                    t('error.tsx and Error Boundaries', [
+                        "<p><code>error.tsx</code> catches runtime errors in its segment and below. It <b>must</b> be a Client Component and receives the <code>error</code> object plus a <code>reset</code> function that retries the render.</p>",
+                        "<p>Errors are logged server-side; in production the message is replaced by a digest so users never see stack traces.</p>",
+                        codeBlock("'use client';\n\nexport default function Error({\n  error,\n  reset,\n}: {\n  error: Error & { digest?: string };\n  reset: () => void;\n}) {\n  return (\n    <div>\n      <h2>Something went wrong</h2>\n      <button onClick={() => reset()}>Try again</button>\n    </div>\n  );\n}")
+                    ],
+                    'error.tsx နှင့် Error Boundaries', [
+                        "<p><code>error.tsx</code> က သူ့ segment နှင့်အောက်ပိုင်းက runtime error တွေကို ဖမ်းယူပါတယ်။ ၎င်းက Client Component ဖြစ်ရမည်ဖြစ်ပြီး <code>error</code> object နှင့် render ကို ပြန်ကြိုးစားစေတဲ့ <code>reset</code> function ကို လက်ခံပါတယ်။</p>",
+                        "<p>Error တွေကို server ဘက်မှာ log လုပ်ပြီး production မှာ message ကို digest နဲ့ အစားထိုးထားလို့ user တွေက stack trace ကို ဘယ်တော့မှ မမြင်ရပါ။</p>",
+                        "@2"
+                    ]),
+                    t('not-found.tsx and 404 Handling', [
+                        "<p><code>not-found.tsx</code> renders when <code>notFound()</code> is called or when a URL matches no route at the root. Place one in a segment to give that subtree its own 404 screen.</p>",
+                        codeBlock('// app/not-found.tsx\nexport default function NotFound() {\n  return (\n    <div>\n      <h2>404 — Page not found</h2>\n      <a href="/">Back home</a>\n    </div>\n  );\n}'),
+                        "<p>Do not confuse it with <code>error.tsx</code>: notFound is for expected missing data, error.tsx is for failures.</p>"
+                    ],
+                    'not-found.tsx နှင့် 404 Handling', [
+                        "<p><code>notFound()</code> call လုပ်ရင် သို့ root မှာ URL က ဘယ် route နဲ့မှ မကိုက်ရင် <code>not-found.tsx</code> render ပါတယ်။ Segment တစ်ခုမှာ ထားရင် ၎င်း subtree ရဲ့ 404 screen ကို ရရှိပါတယ်။</p>",
+                        "@1",
+                        "<p><code>error.tsx</code> နဲ့ မရှုပ်ပါနဲ့ — notFound က မျှော်လင့်ထားတဲ့ data ပျောက်တာအတွက်၊ error.tsx က မအောင်မြင်မှုတွေအတွက် ဖြစ်ပါတယ်။</p>"
+                    ]),
+                    t('Requesting Data Per Navigation', [
+                        "<p>Each navigation can read fresh input via <code>searchParams</code> — also an async prop in the App Router. Combine it with <code>cache: \"no-store\"</code> or on-demand revalidation for live data such as feeds and search results.</p>",
+                        codeBlock('// app/feed/page.tsx\nexport default async function FeedPage({\n  searchParams,\n}: {\n  searchParams: Promise<{ page?: string }>;\n}) {\n  const { page = "1" } = await searchParams;\n  const res = await fetch(\n    `https://api.example.com/feed?page=${page}`,\n    { cache: "no-store" }\n  );\n  const items = await res.json();\n  return <FeedList items={items} />;\n}'),
+                        "<p>Mistake to avoid: spreading <code>searchParams</code> straight into a fetch URL — validate and sanitize every value first.</p>"
+                    ],
+                    'Navigation တစ်ခုချင်းစီအတွက် Data တောင်းခံခြင်း', [
+                        "<p>Navigation တိုင်းက <code>searchParams</code> ကတစ်ဆင့် fresh input ဖတ်နိုင်ပါတယ် — App Router မှာ ၎င်းက async prop ဖြစ်ပါတယ်။ Feed နှင့် search result လို live data အတွက် <code>cache: \"no-store\"</code> သို့ on-demand revalidation နဲ့ ပေါင်းစပ်ပါ။</p>",
+                        "@1",
+                        "<p>ရှောင်ရမယ့် မှားယွင်းချက်က <code>searchParams</code> ကို fetch URL ထဲ တိုက်ရိုက် ဖြန့်ထားတာ — value တိုင်းကို အရင် validate နှင့် sanitize လုပ်ပါ။</p>"
+                    ])
+                ]}
+            ]},
+
+            { short: 'Part 2', name: 'Building Production Apps', mmName: 'ထုတ်လုပ်ရေး App များ တည်ဆောက်ခြင်း', modules: [
+
+                { name: 'Module 6 · Mutations and Forms', mmName: 'မော်ဂျူး ၆ · Mutations နှင့် Forms', items: [
+                    t('Server Actions with "use server"', [
+                        "<p>A <b>Server Action</b> is an async function marked <code>\"use server\"</code> that always runs on the server. Next.js compiles it into a secure RPC endpoint you can call from forms or client components — no hand-written API route required.</p>",
+                        codeBlock("'use server';\n\nimport { db } from '@/lib/db';\n\nexport async function createPost(formData: FormData) {\n  const title = String(formData.get('title') || '');\n  await db.post.create({ data: { title } });\n}"),
+                        "<p>Actions can read cookies, write to the database and return data; they replace most POST route handlers used by forms.</p>"
+                    ],
+                    '"use server" ဖြင့် Server Actions', [
+                        "<p><b>Server Action</b> ဆိုတာ <code>\"use server\"</code> နဲ့ မှတ်သားထားတဲ့ async function ဖြစ်ပြီး အမြဲတမ်း server ပေါ်မှာ run ပါတယ်။ Next.js က ၎င်းကို form သို့ client component ကနေ call နိုင်တဲ့ secure RPC endpoint အဖြစ် compile လုပ်ပေးလို့ API route လက်နဲ့ ရေးစရာ မလိုပါဘူး။</p>",
+                        "@1",
+                        "<p>Action တွေက cookie ဖတ်၊ database ထဲ ရေးနှင့် data ပြန် return လုပ်နိုင်ပြီး form တွေသုံးတဲ့ POST route handler အများစုကို အစားထိုးပါတယ်။</p>"
+                    ]),
+                    t('Building Forms with Server Actions', [
+                        "<p>Pass the action straight to <code>&lt;form action={...}&gt;</code>. The <code>FormData</code> object carries the fields, and a child button wrapped in <code>useFormStatus</code> can disable itself while the action runs.</p>",
+                        codeBlock('import { createPost } from "../actions";\n\nexport default function NewPostPage() {\n  return (\n    <form action={createPost}>\n      <input name="title" placeholder="Title" required />\n      <button type="submit">Create</button>\n    </form>\n  );\n}'),
+                        "<p>Progressive enhancement still works: the form submits even before JavaScript finishes loading.</p>"
+                    ],
+                    'Server Actions ဖြင့် Forms တည်ဆောက်ခြင်း', [
+                        "<p>Action ကို <code>&lt;form action={...}&gt;</code> ထဲ တိုက်ရိုက် ပေးပါ။ <code>FormData</code> object က field တွေကို သယ်ဆောင်ပြီး၊ <code>useFormStatus</code> နဲ့ ဝတ်စုပ်ထားတဲ့ child button က action လုပ်နေစဉ် သူ့ကိုယ်သူ disable လုပ်နိုင်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Progressive enhancement က ဆက်လုပ်နိုင်သေးတယ် — JavaScript မပြီးခင်မှာပင် form က submit ဖြစ်ပါတယ်။</p>"
+                    ]),
+                    t('revalidatePath and revalidateTag', [
+                        "<p>After a mutation, cached pages are stale until you say otherwise. <code>revalidatePath(\"/posts\")</code> purges one route; <code>revalidateTag(\"posts\")</code> purges every fetch registered with that tag.</p>",
+                        codeBlock("import { revalidatePath, revalidateTag } from 'next/cache';\n\nexport async function createPost(formData: FormData) {\n  const title = String(formData.get('title') || '');\n  await db.post.create({ data: { title } });\n  revalidatePath('/posts');\n  revalidateTag('posts');\n}"),
+                        "<p>Call them inside the action, after the write — they run on the server and the next request returns fresh HTML.</p>"
+                    ],
+                    'revalidatePath နှင့် revalidateTag', [
+                        "<p>Mutation ပြီးရင် cached page တွေက stale ဖြစ်နေပြီး သင်မပြောမချင်း မပြောင်းလဲပါ။ <code>revalidatePath(\"/posts\")</code> က route တစ်ခုကို purge လုပ်ပြီး၊ <code>revalidateTag(\"posts\")</code> က အဲဒီ tag နဲ့ မှတ်ထားတဲ့ fetch အားလုံးကို purge လုပ်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Write လုပ်ပြီးတဲ့နောက် action အတွင်းမှာ call ပါ — ၎င်းတွေက server ပေါ်မှာ run ပြီး နောက် request က fresh HTML ပြန်ရပါတယ်။</p>"
+                    ]),
+                    t('Validation and useActionState', [
+                        "<p>Validate on the server with a schema library such as Zod, and surface the result with <code>useActionState</code> from React. The hook keeps the previous state visible while the action runs.</p>",
+                        codeBlock("'use client';\n\nimport { useActionState } from 'react';\nimport { signUp } from './actions';\n\nexport function SignUpForm() {\n  const [state, formAction, pending] = useActionState(signUp, null);\n  return (\n    <form action={formAction}>\n      <input name=\"email\" />\n      {state?.error && <p>{state.error}</p>}\n      <button disabled={pending}>Sign up</button>\n    </form>\n  );\n}"),
+                        "<p>Client-side validation is a convenience, never a security boundary — the action must re-check everything.</p>"
+                    ],
+                    'Validation နှင့် useActionState', [
+                        "<p>Zod လို schema library နဲ့ server ပေါ်မှာ validate လုပ်ပြီး React ရဲ့ <code>useActionState</code> ကတစ်ဆင့် ရလဒ်ကို ပြသပါ။ Action လုပ်နေစဉ် hook က ယခင် state ကို ဆက်ပြနေပါတယ်။</p>",
+                        "@1",
+                        "<p>Client-side validation က အဆင်ပြေဖို့သာ ဖြစ်ပြီး security boundary လုံးဝ မဟုတ်ပါ — action က အားလုံးကို ပြန်စစ်ရမည်။</p>"
+                    ]),
+                    t('Optimistic UI Patterns with useOptimistic', [
+                        "<p><code>useOptimistic</code> shows an assumed result immediately, then reconciles when the server responds. Pair it with <code>startTransition</code> so React can roll the value back on failure.</p>",
+                        codeBlock("'use client';\n\nimport { useOptimistic, startTransition } from 'react';\nimport { addLike } from './actions';\n\nexport function LikeButton({ id, likes }: { id: string; likes: number }) {\n  const [optimistic, addOptimistic] = useOptimistic(\n    likes,\n    (state) => state + 1\n  );\n  return (\n    <button\n      onClick={() => startTransition(async () => {\n        addOptimistic(addLike(id));\n      })}\n    >\n      {optimistic} likes\n    </button>\n  );\n}"),
+                        "<p>Reserve optimism for fast, frequently tapped actions — likes, toggles, cart adds — not long-running jobs.</p>"
+                    ],
+                    'useOptimistic ဖြင့် Optimistic UI ပုံစံများ', [
+                        "<p><code>useOptimistic</code> က ခန့်မှန်းထားတဲ့ ရလဒ်ကို အရင်ပြပြီး server ကပြန်ဖြေရှင်းတဲ့အခါ reconcile လုပ်ပါတယ်။ Fail ဖြစ်ရင် React က value ကို ပြန်ရုပ်နိုင်ဖို့ <code>startTransition</code> နဲ့ တွဲသုံးပါ။</p>",
+                        "@1",
+                        "<p>Optimism ကို အမြန်နှိပ်လေ့ရှိတဲ့ action — like၊ toggle၊ cart ထည့်ခြင်း — အတွက်ပဲ သုံးပြီး အချိန်ကြာတဲ့ job တွေအတွက် မသုံးပါနဲ့။</p>"
+                    ])
+                ]},
+
+                { name: 'Module 7 · APIs and Middleware', mmName: 'မော်ဂျူး ၇ · APIs နှင့် Middleware', items: [
+                    t('Route Handlers: GET and POST', [
+                        "<p>Files named <code>route.ts</code> export one function per HTTP method: GET, POST, PUT, PATCH, DELETE. They can live in <code>app/api/...</code> or anywhere you need a real endpoint.</p>",
+                        codeBlock('// app/api/posts/route.ts\nimport { NextResponse } from "next/server";\n\nexport async function GET() {\n  const posts = await db.post.findMany();\n  return NextResponse.json(posts);\n}\n\nexport async function POST(request: Request) {\n  const body = await request.json();\n  const post = await db.post.create({ data: body });\n  return NextResponse.json(post, { status: 201 });\n}'),
+                        "<p>A segment cannot export both a page and a route handler — pick one per URL.</p>"
+                    ],
+                    'Route Handlers — GET နှင့် POST', [
+                        "<p><code>route.ts</code> အမည်ရ file တွေက HTTP method တစ်ခုချင်းစီအတွက် function တစ်ခုစီ export လုပ်ပါတယ် — GET၊ POST၊ PUT၊ PATCH၊ DELETE။ <code>app/api/...</code> မှာ ဖြစ်စေ၊ endpoint လိုအပ်တဲ့ မည်သည့်နေရာမှာ ဖြစ်စေ ထားနိုင်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Segment တစ်ခုက page နှင့် route handler နှစ်ခုလုံးကို export လုပ်၍ မရပါ — URL တစ်ခုအတွက် တစ်ခုပဲ ရွေးပါ။</p>"
+                    ]),
+                    t('The Request and Response Objects', [
+                        "<p>Route handlers receive a standard <code>Request</code> — Next.js extends it as <code>NextRequest</code> with <code>nextUrl</code> and typed cookies — and return a <code>Response</code>, usually via <code>NextResponse.json()</code>.</p>",
+                        codeBlock('import { NextRequest, NextResponse } from "next/server";\n\nexport async function GET(request: NextRequest) {\n  const sort = request.nextUrl.searchParams.get("sort") || "new";\n  const origin = request.headers.get("origin");\n  return NextResponse.json(\n    { sort, origin },\n    { headers: { "Cache-Control": "no-store" } }\n  );\n}')
+                    ],
+                    'Request နှင့် Response Objects', [
+                        "<p>Route handler တွေက standard <code>Request</code> ကို လက်ခံပြီး — Next.js က ၎င်းကို <code>nextUrl</code> နှင့် typed cookie တွေပါတဲ့ <code>NextRequest</code> အဖြစ် ချဲ့ပေးထားကာ — <code>Response</code> ပြန် return ပါတယ်၊ များသောအားဖြင့် <code>NextResponse.json()</code> ကတစ်ဆင့်။</p>",
+                        "@1"
+                    ]),
+                    t('Dynamic Route Handlers', [
+                        "<p>Bracket folders work in route handlers too: <code>app/api/posts/[id]/route.ts</code> receives <code>params</code> — a Promise in recent Next.js versions.</p>",
+                        "<p>Return proper status codes: 404 for missing resources, 400 for bad input, 401/403 for auth failures.</p>",
+                        codeBlock('// app/api/posts/[id]/route.ts\nimport { NextResponse } from "next/server";\n\nexport async function GET(\n  request: Request,\n  { params }: { params: Promise<{ id: string }> }\n) {\n  const { id } = await params;\n  const post = await db.post.findUnique({ where: { id } });\n  if (!post) {\n    return NextResponse.json({ error: "Not found" }, { status: 404 });\n  }\n  return NextResponse.json(post);\n}')
+                    ],
+                    'Dynamic Route Handlers အခြေခံ', [
+                        "<p>Bracket folder တွေက route handler မှာလည်း အလုပ်လုပ်ပါတယ် — <code>app/api/posts/[id]/route.ts</code> က <code>params</code> ကို လက်ခံပြီး၊ ၎င်းက Next.js မကြာသေးမီ version တွေမှာ Promise ဖြစ်ပါတယ်။</p>",
+                        "<p>မှန်ကန်တဲ့ status code ပြန်ပါ — resource ပျောက်ရင် 404၊ input မှားရင် 400၊ auth မအောင်မြင်ရင် 401/403။</p>",
+                        "@2"
+                    ]),
+                    t('Middleware and Matchers', [
+                        "<p><code>middleware.ts</code> at the project root runs before a request reaches a route — ideal for redirects, auth checks, A/B tests and geo headers. It runs on the Edge runtime, so Node-only libraries will not work.</p>",
+                        "<p>The exported <code>config.matcher</code> keeps middleware off static assets — an unscoped matcher runs on every file and hurts performance.</p>",
+                        codeBlock('// middleware.ts\nimport { NextResponse } from "next/server";\nimport type { NextRequest } from "next/server";\n\nexport function middleware(request: NextRequest) {\n  const token = request.cookies.get("session")?.value;\n  if (!token && request.nextUrl.pathname.startsWith("/dashboard")) {\n    return NextResponse.redirect(new URL("/login", request.url));\n  }\n  return NextResponse.next();\n}\n\nexport const config = {\n  matcher: ["/dashboard/:path*", "/api/:path*"],\n};')
+                    ],
+                    'Middleware နှင့် Matchers', [
+                        "<p>Project root မှာရှိတဲ့ <code>middleware.ts</code> က request က route ရောက်မီ လုပ်ဆောင်ပါတယ် — redirect၊ auth check၊ A/B test နှင့် geo header တွေအတွက် အသင့်ဆုံး။ ၎င်းက Edge runtime ပေါ်မှာ run လို့ Node-only library တွေ အလုပ်မလုပ်ပါ။</p>",
+                        "<p>Export လုပ်ထားတဲ့ <code>config.matcher</code> က middleware ကို static asset တွေကနေ ခွဲထားပါတယ် — scope မထားတဲ့ matcher က file တိုင်းမှာ run လို့ performance ကျပါတယ်။</p>",
+                        "@2"
+                    ]),
+                    t('Environment Variables and Config', [
+                        "<p>Variables in <code>.env.local</code> load automatically. Anything prefixed <code>NEXT_PUBLIC_</code> is inlined into the browser bundle — never put secrets in it.</p>",
+                        codeBlock('# .env.local\nDATABASE_URL=postgres://user:pass@host/db\nNEXT_PUBLIC_API_URL=https://api.example.com'),
+                        codeBlock('// server-only code\nconst url = process.env.DATABASE_URL;\n\n// available in the browser\nconst apiUrl = process.env.NEXT_PUBLIC_API_URL;'),
+                        "<p>Use <code>.env.development</code> and <code>.env.production</code> for environment-specific defaults, and keep <code>.env*.local</code> out of git.</p>"
+                    ],
+                    'Environment Variables နှင့် Config', [
+                        "<p><code>.env.local</code> ထဲက variable တွေက အလိုအလျောက် load ဖြစ်ပါတယ်။ <code>NEXT_PUBLIC_</code> နဲ့ စတဲ့အရာတွေက browser bundle ထဲ တိုက်ရိုက် ထည့်သွင်းလိုက်တာကြောင့် secret ဘယ်တော့မှ မထည့်ပါနဲ့။</p>",
+                        "@1",
+                        "@2",
+                        "<p>Environment အလိုက် default အတွက် <code>.env.development</code> နှင့် <code>.env.production</code> သုံးပြီး <code>.env*.local</code> ကို git ထဲ မထည့်ပါနဲ့။</p>"
+                    ])
+                ]},
+
+                { name: 'Module 8 · Caching and Data Patterns', mmName: 'မော်ဂျူး ၈ · Caching နှင့် Data ပုံစံများ', items: [
+                    t('The Next.js Data Cache', [
+                        "<p><code>fetch</code> results can be cached per-URL on the server. <code>next.revalidate</code> sets a lifetime in seconds; <code>next.tags</code> labels the entry for on-demand purging. <code>cache: \"no-store\"</code> opts out entirely.</p>",
+                        codeBlock('const res = await fetch("https://api.example.com/products", {\n  next: { revalidate: 60, tags: ["products"] },\n});'),
+                        "<p>Separate from the client router cache, which keeps visited pages in memory for instant back/forward navigation.</p>"
+                    ],
+                    'Next.js Data Cache အသုံးပြုခြင်း', [
+                        "<p><code>fetch</code> ရလဒ်တွေကို server ပေါ်မှာ URL အလိုက် cache လုပ်နိုင်ပါတယ်။ <code>next.revalidate</code> က second နဲ့ lifetime သတ်မှတ်ပြီး <code>next.tags</code> က on-demand purge အတွက် entry ကို label လုပ်ပါတယ်။ <code>cache: \"no-store\"</code> က လုံးဝ ပယ်ဖျက်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Client router cache နဲ့ သီးသန့်ဖြစ်ပြီး ၎င်းက visit လုပ်ထားတဲ့ page တွေကို memory မှာ ထားပြီး back/forward navigation ကို ချက်ချင်း ဖြစ်စေပါတယ်။</p>"
+                    ]),
+                    t('Cache Components and Revalidation Strategies', [
+                        "<p>The newest caching model lets you mark whole functions with <code>\"use cache\"</code> and control their lifetime with <code>cacheLife</code> — fine-grained caching at the function level instead of the fetch level. It is enabled with the cacheComponents config flag.</p>",
+                        codeBlock("// app/lib/posts.ts\nexport async function getPosts() {\n  'use cache';\n  const res = await fetch('https://api.example.com/posts');\n  return res.json();\n}"),
+                        "<p>Pick a strategy per kind of data: static plus ISR for slowly changing content, tag-based revalidation for shared data, and <code>no-store</code> for truly per-user data.</p>"
+                    ],
+                    'Cache Components နှင့် Revalidation နည်းဗျူဟာများ', [
+                        "<p>အသစ်ဆုံး caching model က function တစ်ခုချင်းစီကို <code>\"use cache\"</code> နဲ့ မှတ်သားကာ <code>cacheLife</code> နဲ့ lifetime ထိန်းချုပ်ခွင့်ပြုပါတယ် — fetch level အစား function level မှာ အသေးစိတ်ကျကျ cache လုပ်ခြင်း။ ၎င်းက cacheComponents config flag နဲ့ ဖွင့်ရပါတယ်။</p>",
+                        "@1",
+                        "<p>Data အမျိုးအစားတိုင်းအတွက် နည်းဗျူဟာ ရွေးပါ — ပြောင်းလဲနှေးတဲ့ content အတွက် static ပေါင်း ISR၊ မျှဝေသုံးတဲ့ data အတွက် tag-based revalidation၊ တကယ့် per-user data အတွက် <code>no-store</code>။</p>"
+                    ]),
+                    t('Parallel Routes with @folder', [
+                        "<p>A folder prefixed with <code>@</code> is a <b>slot</b>. Slots are passed as props to the parent layout, so one URL can render several independent regions — a feed plus a notifications panel, each with its own loading and error files.</p>",
+                        codeBlock('// app/feed/layout.tsx\nexport default function Layout({\n  children,\n  feed,\n  notifications,\n}: {\n  children: React.ReactNode;\n  feed: React.ReactNode;\n  notifications: React.ReactNode;\n}) {\n  return (\n    <div>\n      {notifications}\n      {children}\n      {feed}\n    </div>\n  );\n}'),
+                        "<p>Add a <code>default.tsx</code> in each slot folder so hard refreshes and unmatched routes still render something sensible.</p>"
+                    ],
+                    '@folder ဖြင့် Parallel Routes', [
+                        "<p><code>@</code> နဲ့ စတဲ့ folder က <b>slot</b> ဖြစ်ပါတယ်။ Slot တွေက parent layout ထံ prop အဖြစ် ပေးပို့လိုက်လို့ URL တစ်ခုတည်းက independent region အများအပြားကို render လုပ်နိုင်ပါတယ် — feed နှင့် notification panel တစ်ခုချင်းစီ ကိုယ်ပိုင် loading နှင့် error file များဖြင့်။</p>",
+                        "@1",
+                        "<p>Hard refresh နှင့် unmatched route တွေက သင့်တော်တဲ့အရာ ဆက် render ဖို့ slot folder တိုင်းမှာ <code>default.tsx</code> ထည့်ပါ။</p>"
+                    ]),
+                    t('Intercepting Routes', [
+                        "<p>Route groups combined with the <code>(.)</code> markers let a click open a modal without leaving the page: <code>@modal/(.)[id]/page.tsx</code> intercepts navigation to <code>/photos/[id]</code> at the same level. A full page load still renders the real page.</p>",
+                        "<p>Markers: <code>(.)</code> same segment, <code>(..)</code> one up, <code>(..)(..)</code> two up, <code>(...)</code> from the root.</p>",
+                        codeBlock('app/\n  photos/[id]/page.tsx        # real page: /photos/42\n  @modal/\n    (.)[id]/page.tsx           # modal over /photos/*\n    default.tsx')
+                    ],
+                    'Intercepting Routes စနစ်', [
+                        "<p>Route group နှင့် <code>(.)</code> marker တွေ ပေါင်းစပ်ရင် click တစ်ခုက page မချန်ဘဲ modal ဖွင့်နိုင်ပါတယ် — <code>@modal/(.)[id]/page.tsx</code> က အတန်းတူမှာ <code>/photos/[id]</code> ကို လမ်းကြောင်းပေါ်မှ ဖမ်းယူပါတယ်။ Full page load ဖြစ်ရင်တော့ တကယ့် page ကိုပဲ render ပါတယ်။</p>",
+                        "<p>Marker များ — <code>(.)</code> တူညီတဲ့ segment၊ <code>(..)</code> တစ်ဆင့်အထက်၊ <code>(..)(..)</code> နှစ်ဆင့်အထက်၊ <code>(...)</code> root ကနေ။</p>",
+                        "@2"
+                    ]),
+                    t('Incremental Static Regeneration Concepts', [
+                        "<p>ISR renders a page at build time, then regenerates it in the background after <code>revalidate</code> seconds. Visitors keep getting a fast cached copy while a fresh one is produced — stale-while-revalidate.</p>",
+                        codeBlock('// app/stats/page.tsx\nexport const revalidate = 300;\n\nexport default async function Page() {\n  const res = await fetch("https://api.example.com/stats", {\n    next: { revalidate: 300 },\n  });\n  const stats = await res.json();\n  return <pre>{JSON.stringify(stats)}</pre>;\n}'),
+                        "<p>Pair it with <code>generateStaticParams</code> to pre-build the popular dynamic routes and let the long tail be generated on demand.</p>"
+                    ],
+                    'Incremental Static Regeneration (ISR) အခြေခံ', [
+                        "<p>ISR က page ကို build time မှာ render ပြီး <code>revalidate</code> second ကြာရင် background မှာ ပြန် generate ပါတယ်။ Visitor တွေက အမြန်ဆုံး cache copy ကို ဆက်ရရှိနေစဉ် fresh copy ကို ထုတ်နေပါတယ် — stale-while-revalidate။</p>",
+                        "@1",
+                        "<p>ရေပန်းစားတဲ့ dynamic route တွေကို pre-build လုပ်ဖို့ <code>generateStaticParams</code> နဲ့ တွဲသုံးပြီး long tail ကို on-demand generate ခွင့်ပြုပါ။</p>"
+                    ])
+                ]},
+
+                { name: 'Module 9 · Auth, Styling and Media', mmName: 'မော်ဂျူး ၉ · Auth၊ Styling နှင့် Media', items: [
+                    t('Authentication Concepts: Sessions vs JWT', [
+                        "<p><b>Sessions</b> store data on the server and put only an ID in the cookie — revocation is instant. <b>JWTs</b> are self-contained signed tokens: verification needs no lookup, but logout and role changes wait until the token expires.</p>",
+                        codeBlock('// A session record lives on the server;\n// the cookie only holds an opaque id\ntype Session = {\n  userId: string;\n  expires: number;\n};'),
+                        "<p>For most web apps, database-backed sessions with secure, httpOnly, SameSite cookies are the simplest safe default.</p>"
+                    ],
+                    'Authentication အခြေချ — Sessions နှင့် JWT', [
+                        "<p><b>Sessions</b> က data ကို server မှာ သိမ်းဆည်းပြီး cookie ထဲမှာ ID ပဲ ထည့်ပါတယ် — ပယ်ဖျက်လိုက်ရင် ချက်ချင်း သက်ရောက်ပါတယ်။ <b>JWT</b> တွေက self-contained signed token တွေဖြစ်ပြီး verify ဖို့ lookup မလိုပေမယ့် logout နှင့် role ပြောင်းတာတွေက token သက်တမ်းကုန်တဲ့အထိ စောင့်ရပါတယ်။</p>",
+                        "@1",
+                        "<p>Web app အများစုအတွက် database ကိုအခြေခံတဲ့ session နှင့် secure၊ httpOnly၊ SameSite cookie တွေက ရိုးရှင်းဆုံး ဘေးကင်းတဲ့ default ဖြစ်ပါတယ်။</p>"
+                    ]),
+                    t('Implementing Auth with NextAuth and Auth.js', [
+                        "<p>Auth.js (formerly NextAuth) wires providers, sessions and middleware into a Next.js app in a few small files.</p>",
+                        codeBlock('// auth.ts\nimport NextAuth from "next-auth";\nimport GitHub from "next-auth/providers/github";\n\nexport const { handlers, auth, signIn, signOut } = NextAuth({\n  providers: [GitHub],\n});'),
+                        codeBlock('// app/api/auth/[...nextauth]/route.ts\nimport { handlers } from "@/auth";\n\nexport const { GET, POST } = handlers;'),
+                        "<p>Protect pages server-side with an <code>auth()</code> call inside the page — never rely on hiding links in the UI.</p>"
+                    ],
+                    'NextAuth နှင့် Auth.js ဖြင့် Auth တည်ဆောက်ခြင်း', [
+                        "<p>Auth.js (ယခင် NextAuth) က provider၊ session နှင့် middleware တွေကို file အနည်းငယ်ထဲမှာ Next.js app နဲ့ ချိတ်ဆက်ပေးပါတယ်။</p>",
+                        "@1",
+                        "@2",
+                        "<p>Page တွေကို UI မှာ link ဝှက်ထားရုံအားကိုးမနေဘဲ page အတွင်းက <code>auth()</code> call နဲ့ server ဘက်မှာ ကာကွယ်ပါ။</p>"
+                    ]),
+                    t('Styling with Tailwind CSS', [
+                        "<p>Tailwind ships utility classes directly in your JSX. <code>create-next-app --tailwind</code> sets it up with the <code>globals.css</code> directives and path aliases already configured.</p>",
+                        codeBlock('export default function Card({ title }: { title: string }) {\n  return (\n    <div className="rounded-xl border border-slate-200 p-4 shadow">\n      <h3 className="font-semibold">{title}</h3>\n    </div>\n  );\n}'),
+                        "<p>Common mistake: fighting the cascade with <code>!important</code> — compose utilities or extract a shared component instead.</p>"
+                    ],
+                    'Tailwind CSS ဖြင့် Styling', [
+                        "<p>Tailwind က utility class တွေကို JSX ထဲ တိုက်ရိုက် ထည့်ပေးပါတယ်။ <code>create-next-app --tailwind</code> က <code>globals.css</code> directive နှင့် path alias တွေ အဆင်သင့်ဖြစ်အောင် setup လုပ်ပေးပါတယ်။</p>",
+                        "@1",
+                        "<p>အများဆုံး မှားလေ့ရှိတာက <code>!important</code> နဲ့ cascade ကို တိုက်ခိုက်တာ — utility တွေ ပေါင်းစပ်ပါ သို့ shared component ခွဲထုတ်ပါ။</p>"
+                    ]),
+                    t('CSS Modules in Next.js', [
+                        "<p>Any <code>*.module.css</code> file is scoped locally: import it and use the returned object. Class names are hashed per build, so collisions are impossible.</p>",
+                        codeBlock("import styles from \"./card.module.css\";\n\nexport default function Card({ title }: { title: string }) {\n  return <div className={styles.card}>{title}</div>;\n}"),
+                        codeBlock('/* app/card.module.css */\n.card {\n  padding: 1rem;\n  border-radius: 12px;\n  border: 1px solid #e2e8f0;\n}', 'CSS'),
+                        "<p>Modules suit larger component styles; true global styles stay in <code>globals.css</code>.</p>"
+                    ],
+                    'Next.js ရှိ CSS Modules', [
+                        "<p><code>*.module.css</code> file မှန်သမျှက local scope ဖြစ်ပြီး import လုပ်ကာ return ရတဲ့ object ကို သုံးပါ။ Class name တွေက build အလိုက် hash ဖြစ်လို့ တိုက်မိစရာ မရှိပါ။</p>",
+                        "@1",
+                        "@2",
+                        "<p>Module တွေက component style ကြီးတွေအတွက် သင့်ပြီး true global style တွေက <code>globals.css</code> မှာပဲ ထားပါ။</p>"
+                    ]),
+                    t('next/font and next/image', [
+                        "<p><code>next/font</code> downloads fonts at build time, self-hosts them and generates the CSS — zero network requests from the browser and no layout shift. <code>next/image</code> adds automatic sizing, modern formats and lazy loading.</p>",
+                        codeBlock('import { Inter } from "next/font/google";\nimport Image from "next/image";\n\nconst inter = Inter({ subsets: ["latin"] });\n\nexport default function Home() {\n  return (\n    <main className={inter.className}>\n      <Image\n        src="/hero.jpg"\n        alt="Hero"\n        width={800}\n        height={450}\n        priority\n      />\n    </main>\n  );\n}'),
+                        "<p>Always set <code>width</code> and <code>height</code> (or use <code>fill</code>) on Image, and mark above-the-fold images with <code>priority</code>.</p>"
+                    ],
+                    'next/font နှင့် next/image', [
+                        "<p><code>next/font</code> က font တွေကို build time မှာ download လုပ်၊ self-host လုပ်ပြီး CSS ထုတ်ပေးပါတယ် — browser ကနေ network request လုံးဝ မလိုဘဲ layout shift လည်း မရှိပါ။ <code>next/image</code> က automatic sizing၊ modern format နှင့် lazy loading ထည့်ပေးပါတယ်။</p>",
+                        "@1",
+                        "<p>Image ပေါ်မှာ အမြဲတမ်း <code>width</code> နှင့် <code>height</code> (သို့ <code>fill</code>) သတ်မှတ်ပြီး above-the-fold image တွေကို <code>priority</code> နဲ့ မှတ်သားပါ။</p>"
+                    ])
+                ]},
+
+                { name: 'Module 10 · Production Ready', mmName: 'မော်ဂျူး ၁၀ · Production အဆင်သင့်', items: [
+                    t('The Metadata API and SEO', [
+                        "<p>Export a static <code>metadata</code> object from any layout or page, or implement <code>generateMetadata()</code> when it depends on the URL. Next.js merges nested metadata from the root down.</p>",
+                        codeBlock('// app/layout.tsx\nimport type { Metadata } from "next";\n\nexport const metadata: Metadata = {\n  title: "My Store",\n  description: "Handmade goods, shipped worldwide.",\n  openGraph: {\n    images: ["/og.png"],\n  },\n};'),
+                        "<p>Social images, canonical URLs and viewport settings all live here — no manual head tags required.</p>"
+                    ],
+                    'Metadata API နှင့် SEO', [
+                        "<p>မည်သည့် layout သို့ page ကနေပင် static <code>metadata</code> object export လုပ်ပါ၊ URL ပေါ်မူတည်ရင် <code>generateMetadata()</code> သုံးပါ။ Next.js က nested metadata ကို root ကနေ အောက်အထိ merge လုပ်ပေးပါတယ်။</p>",
+                        "@1",
+                        "<p>Social image၊ canonical URL နှင့် viewport setting အားလုံး ဒီမှာပဲ — head tag လက်နဲ့ ရေးစရာ မလိုပါဘူး။</p>"
+                    ]),
+                    t('The Performance Checklist', [
+                        "<p>A quick audit: keep pages static where possible, stream slow data with Suspense, load fonts with next/font, optimize images with next/image, and ship client components only where interaction needs them.</p>",
+                        codeBlock('import dynamic from "next/dynamic";\n\nconst HeavyChart = dynamic(() => import("./heavy-chart"), {\n  ssr: false,\n  loading: () => <p>Loading chart...</p>,\n});'),
+                        "<p>Measure with the build output and Lighthouse, never with the dev server.</p>"
+                    ],
+                    'Performance Checklist အတိုချုပ်', [
+                        "<p>အမြန် စစ်ဆေးမှု — ဖြစ်နိုင်သမျှ page ကို static ထား၊ data နှေးရင် Suspense နဲ့ stream လုပ်၊ font ကို next/font နဲ့ တင်၊ image ကို next/image နဲ့ optimize လုပ်၊ interaction လိုအပ်တဲ့နေရာမှာပဲ client component ပို့ပါ။</p>",
+                        "@1",
+                        "<p>Build output နှင့် Lighthouse နဲ့ တိုင်းတာပါ၊ dev server နဲ့ ဘယ်တော့မှ မတိုင်းပါနဲ့။</p>"
+                    ]),
+                    t('Bundles, Code Splitting and Lighthouse', [
+                        "<p>Next.js splits JavaScript per route automatically; only the components marked <code>\"use client\"</code> add weight to the client bundle. The build output lists each route's size — treat regressions like failing tests.</p>",
+                        codeBlock('npm run build\n# Route (app)                 Size\n# \u25cf /                        4.2 kB\n# \u25cf /blog/[slug]             3.1 kB\n\nnpx @next/bundle-analyzer', 'Terminal'),
+                        "<p>Practical Lighthouse targets for content sites: performance above 90, LCP under 2.5s, CLS under 0.1.</p>"
+                    ],
+                    'Bundle၊ Code Splitting နှင့် Lighthouse', [
+                        "<p>Next.js က JavaScript ကို route အလိုက် အလိုအလျောက် ခွဲပေးပြီး <code>\"use client\"</code> နဲ့ မှတ်သားထားတဲ့ component တွေပဲ client bundle ကို အလေးချိန် တိုးစေပါတယ်။ Build output က route တစ်ခုချင်းစာ size ကို ဖော်ပြပါတယ် — regression တွေကို test fail လိုပဲ ကိုင်တွယ်ပါ။</p>",
+                        "@1",
+                        "<p>Content site တွေအတွက် Lighthouse ပန်းတိုင် — performance 90 အထက်၊ LCP 2.5s အောက်၊ CLS 0.1 အောက်။</p>"
+                    ]),
+                    t('Deploying to Vercel and Self-Hosting', [
+                        "<p>Vercel is the zero-config option: connect the repo and every push becomes a preview deployment. Self-hosting means running <code>next start</code> behind a Node server, or setting <code>output: \"standalone\"</code> for a trimmed Docker image.</p>",
+                        codeBlock('// next.config.ts\nconst nextConfig = {\n  output: "standalone",\n};\n\nexport default nextConfig;'),
+                        codeBlock('npm run build\nnpm run start          # self-host on :3000\nnpx vercel deploy --prod   # or ship to Vercel', 'Terminal'),
+                        "<p>Whichever you choose, set environment variables in the dashboard — they are not stored in the repo.</p>"
+                    ],
+                    'Vercel တင်ခြင်းနှင့် Self-Hosting', [
+                        "<p>Vercel က zero-config ရွေးချယ်စရာ — repo ချိတ်လိုက်ရုံနဲ့ push တိုင်းက preview deployment ဖြစ်လာပါတယ်။ Self-hosting ဆိုတာ Node server နောက်က <code>next start</code> run တာ သို့ Docker image လျှော့ချဖို့ <code>output: \"standalone\"</code> သတ်မှတ်တာ ဖြစ်ပါတယ်။</p>",
+                        "@1",
+                        "@2",
+                        "<p>ဘယ်ဟာပဲ ရွေးရွေး dashboard မှာ environment variable တွေ သတ်မှတ်ပါ — ၎င်းတွေက repo မှာ မသိမ်းထားပါဘူး။</p>"
+                    ]),
+                    t('Project Structure and Client State Management', [
+                        "<p>Grow the <code>app/</code> directory by feature — <code>(marketing)</code>, <code>(dashboard)</code>, <code>api/</code> — and keep reusable UI in <code>components/</code> and pure helpers in <code>lib/</code>. Server state belongs to the database and the cache; the client only owns UI state.</p>",
+                        codeBlock('app/\n  (marketing)/\n  (dashboard)/\n  api/\ncomponents/\n  ui/\nlib/\n  db.ts\n  auth.ts\nactions/'),
+                        "<p>When client state outgrows <code>useState</code>, reach for React context or a small store (Zustand, Jotai) — and keep server data out of it.</p>"
+                    ],
+                    'Project Structure နှင့် Client State Management', [
+                        "<p><code>app/</code> directory ကို feature အလိုက် ကြီးထွားပါ — <code>(marketing)</code>၊ <code>(dashboard)</code>၊ <code>api/</code> — reusable UI ကို <code>components/</code> မှာ၊ pure helper တွေကို <code>lib/</code> မှာ ထားပါ။ Server state က database နှင့် cache ပိုင်တာ ဖြစ်ပြီး client က UI state ပဲ ပိုင်ပါတယ်။</p>",
+                        "@1",
+                        "<p>Client state က <code>useState</code> ထက် ကြီးလာရင် React context သို့ store အသေးစိတ် (Zustand၊ Jotai) ကို သုံးပါ — နှင့် server data ကို သူ့ထဲ မထည့်ပါနဲ့။</p>"
+                    ])
+                ]}
+            ]}
+        ];
+
+        /* ---------------- Module count ---------------- */
+        var MODULES = 0;
+        COURSE.forEach(function (part) { MODULES += part.modules.length; });
+
+        /* ---------------- Flatten the course ---------------- */
+        var SECTIONS = [];
+        var TREE = COURSE.map(function (part, pi) {
+            var partName = (LANG === 'mm' && part.mmName) ? part.mmName : part.name;
+            return {
+                short: part.short,
+                name: partName,
+                nameEn: part.name,
+                nameMm: part.mmName || part.name,
+                pi: pi,
+                modules: part.modules.map(function (mod) {
+                    var modName = (LANG === 'mm' && mod.mmName) ? mod.mmName : mod.name;
+                    return {
+                        name: modName,
+                        nameEn: mod.name,
+                        nameMm: mod.mmName || mod.name,
+                        items: mod.items.map(function (item) {
+                            var rec = {
+                                n: SECTIONS.length + 1,
+                                id: 't' + (SECTIONS.length + 1),
+                                title: item.title,
+                                body: item.body,
+                                titleEn: item.titleEn,
+                                titleMm: item.titleMm,
+                                pi: pi,
+                                part: part.short,
+                                module: modName
+                            };
+                            SECTIONS.push(rec);
+                            return rec;
+                        })
+                    };
+                })
+            };
+        });
+
+        /* ---------------- Safe storage ---------------- */
+        function lsGet(key, fallback) {
+            try {
+                var v = localStorage.getItem(key);
+                return v === null ? fallback : v;
+            } catch (e) { return fallback; }
+        }
+
+        function lsJson(key, fallback) {
+            try {
+                var raw = localStorage.getItem(key);
+                if (raw === null) return fallback;
+                return JSON.parse(raw);
+            } catch (e) { return fallback; }
+        }
+
+        /* ---------------- State ---------------- */
+        var visitedRaw = lsJson('next-visited', []);
+        if (!Array.isArray(visitedRaw)) visitedRaw = [];
+
+        var state = {
+            index: 0,
+            theme: lsGet('next-theme', 'light'),
+            visited: new Set(visitedRaw),
+            openParts: new Set()
+        };
+
+        state.visited = new Set(Array.from(state.visited).filter(function (id) {
+            return SECTIONS.some(function (s) { return s.id === id; });
+        }));
+
+        var saved = lsGet('next-active', '');
+        if (saved) {
+            var found = SECTIONS.findIndex(function (s) { return s.id === saved; });
+            if (found >= 0) state.index = found;
+        }
+        state.openParts.add(SECTIONS[state.index].pi);
+
+        /* ---------------- Elements ---------------- */
+        var navEl = document.getElementById('nav');
+        var docEl = document.getElementById('doc');
+        var crumbEl = document.getElementById('crumb');
+        var searchEl = document.getElementById('search');
+        var themeBtn = document.getElementById('theme-btn');
+        var langBtn = document.getElementById('lang-btn');
+        var langLabelEl = document.getElementById('lang-label');
+        var brandSubEl = document.getElementById('brand-sub');
+        var homeBtn = document.getElementById('home-btn');
+        var menuBtn = document.getElementById('menu-btn');
+        var backdrop = document.getElementById('backdrop');
+
+        var ICONS = {
+            sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>',
+            moon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>',
+            arrow: '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"></path></svg>'
+        };
+
+        /* ---------------- Navigation tree ---------------- */
+        function matchTitle(it, filter) {
+            if (!filter) return true;
+            return (it.titleEn || it.title).toLowerCase().indexOf(filter) > -1 ||
+                (it.titleMm || '').toLowerCase().indexOf(filter) > -1;
+        }
+        function matchName(en, mm, filter) {
+            if (!filter) return false;
+            return en.toLowerCase().indexOf(filter) > -1 || mm.toLowerCase().indexOf(filter) > -1;
+        }
+
+        function renderNav(filter) {
+            filter = (filter || '').toLowerCase();
+            var html = '';
+
+            TREE.forEach(function (part) {
+                if (filter) {
+                    var any = part.modules.some(function (mod) {
+                        return mod.items.some(function (it) {
+                            return matchTitle(it, filter);
+                        }) ||
+                            matchName(mod.nameEn, mod.nameMm, filter) ||
+                            matchName(part.nameEn, part.nameMm, filter);
+                    });
+                    if (!any) return;
+                }
+
+                var open = filter ? true : state.openParts.has(part.pi);
+                html += '<button class="part-head ' + (open ? 'open' : '') + '" onclick="togglePart(' + part.pi + ')">' +
+                    part.short + ' · ' + part.name + ICONS.arrow + '</button>';
+
+                if (!open) return;
+
+                part.modules.forEach(function (mod) {
+                    var items = mod.items.filter(function (it) {
+                        if (!filter) return true;
+                        return matchTitle(it, filter) ||
+                            matchName(mod.nameEn, mod.nameMm, filter) ||
+                            matchName(part.nameEn, part.nameMm, filter);
+                    });
+                    if (!items.length) return;
+
+                    html += '<div class="nav-group">' + mod.name + '</div>';
+                    items.forEach(function (it) {
+                        var cls = 'nav-item';
+                        if (it.n - 1 === state.index) cls += ' active';
+                        if (state.visited.has(it.id)) cls += ' done';
+                        html += '<button class="' + cls + '" onclick="go(' + (it.n - 1) + ')">' +
+                            '<span class="nav-num">' + it.n + '</span>' +
+                            '<span>' + it.title + '</span></button>';
+                    });
+                });
+            });
+
+            if (!html) html = '<div class="nav-group">' + tr('noTopics') + '</div>';
+            navEl.innerHTML = html;
+        }
+
+        function togglePart(pi) {
+            if (state.openParts.has(pi)) state.openParts.delete(pi);
+            else state.openParts.add(pi);
+            renderNav(searchEl.value);
+        }
+
+        function renderProgress() {
+            document.getElementById('progress-text').textContent = state.visited.size + ' / ' + SECTIONS.length;
+            document.getElementById('progress-bar').style.width = (state.visited.size / SECTIONS.length * 100) + '%';
+        }
+
+        function go(i) {
+            if (i < 0 || i >= SECTIONS.length) return;
+            state.index = i;
+            var s = SECTIONS[i];
+            state.visited.add(s.id);
+            state.openParts.add(s.pi);
+            try { localStorage.setItem('next-active', s.id); } catch (e) {}
+            try { localStorage.setItem('next-visited', JSON.stringify(Array.from(state.visited))); } catch (e) {}
+
+            crumbEl.textContent = s.part + ' · ' + s.title;
+            docEl.innerHTML = '<span class="tag">' + s.part + ' — ' + s.module + '</span>' + s.body +
+                '<div class="pager">' +
+                '<button ' + (i === 0 ? 'disabled' : '') + ' onclick="go(' + (i - 1) + ')">' +
+                '<small>' + tr('prev') + '</small><b>' + (i > 0 ? SECTIONS[i - 1].title : tr('start')) + '</b></button>' +
+                '<button class="next" ' + (i === SECTIONS.length - 1 ? 'disabled' : '') + ' onclick="go(' + (i + 1) + ')">' +
+                '<small>' + tr('next') + '</small><b>' + (i < SECTIONS.length - 1 ? SECTIONS[i + 1].title : tr('end')) + '</b></button>' +
+                '</div>';
+
+            renderNav(searchEl.value);
+            renderProgress();
+            window.scrollTo(0, 0);
+            closeNav();
+        }
+
+        /* ---------------- Theme ---------------- */
+        function applyTheme() {
+            document.documentElement.setAttribute('data-theme', state.theme);
+            themeBtn.innerHTML = state.theme === 'dark' ? ICONS.sun : ICONS.moon;
+            try { localStorage.setItem('next-theme', state.theme); } catch (e) {}
+        }
+
+        themeBtn.addEventListener('click', function () {
+            state.theme = state.theme === 'dark' ? 'light' : 'dark';
+            applyTheme();
+        });
+
+        /* ---------------- Language ---------------- */
+        function setLang(l) {
+            try { localStorage.setItem('pj-lang', (l === 'mm') ? 'mm' : 'en'); } catch (e) {}
+            try { localStorage.setItem('buddyEduLang', (l === 'mm') ? 'my' : 'en'); } catch (e) {}
+            location.reload();
+        }
+
+        langBtn.addEventListener('click', function () {
+            setLang(LANG === 'mm' ? 'en' : 'mm');
+        });
+
+        /* ---------------- Mobile nav ---------------- */
+        function closeNav() { document.body.classList.remove('nav-open'); }
+        menuBtn.addEventListener('click', function () { document.body.classList.toggle('nav-open'); });
+        backdrop.addEventListener('click', closeNav);
+
+        /* ---------------- Search & keyboard ---------------- */
+        searchEl.addEventListener('input', function () { renderNav(this.value); });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.metaKey || e.ctrlKey || e.altKey) return;
+            var tag = (e.target.tagName || '').toLowerCase();
+            if (tag === 'input' || tag === 'textarea') return;
+            if (e.key === 'ArrowRight') go(state.index + 1);
+            if (e.key === 'ArrowLeft') go(state.index - 1);
+        });
+
+        /* ---------------- Init ---------------- */
+        langLabelEl.textContent = tr('langCode');
+        langBtn.title = tr('langAria');
+        langBtn.setAttribute('aria-label', tr('langAria'));
+        homeBtn.title = tr('home');
+        homeBtn.setAttribute('aria-label', tr('home'));
+        var planLink = document.getElementById('plan-link');
+        planLink.title = tr('plan');
+        planLink.setAttribute('aria-label', tr('plan'));
+        themeBtn.title = tr('theme');
+        themeBtn.setAttribute('aria-label', tr('theme'));
+        menuBtn.title = tr('menu');
+        menuBtn.setAttribute('aria-label', tr('menu'));
+        brandSubEl.textContent = brandSub();
+        searchEl.placeholder = phSearch();
+        document.getElementById('progress-label').textContent = tr('topics');
+        applyTheme();
+        go(state.index);
+    </script>
+</body>
+</html>

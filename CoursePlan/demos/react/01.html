@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01. Personal Profile Website — Buddy Demo</title>
+<style>
+:root{--accent:#0f766e;--dark:#115e59;--soft:#f0fdfa;--bg:#f5f7fb;--text:#0f172a;--muted:#64748b;--border:#e4e9f2;--card:#fff}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+.demo-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 5%;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.demo-bar .back{font-weight:700;font-size:14px;color:#fff;text-decoration:none;padding:8px 15px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--dark))}
+.demo-bar .tag{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.demo{width:min(920px,92%);margin:34px auto 64px;flex:1}
+.demo h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.02em}
+.demo .lead{color:var(--muted);margin:8px 0 26px;max-width:640px}
+.demo-foot{border-top:1px solid var(--border);padding:18px 5%;text-align:center;color:var(--muted);font-size:13px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 12px 28px -22px rgba(15,23,42,.45);margin-bottom:18px}
+.panel h2{font-size:18px;margin-bottom:10px;letter-spacing:-.01em}
+.btn{display:inline-block;border:none;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;font-size:14px;background:var(--accent);color:#fff;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:var(--dark)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:var(--soft)}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--border);border-radius:10px;width:100%;background:#fff;color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 4px}
+pre,.terminal{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13.5px;line-height:1.7}
+.grid{display:grid;gap:16px}
+code{font-family:Consolas,monospace;background:var(--soft);color:var(--dark);padding:2px 6px;border-radius:6px;font-size:.92em}
+.code-block{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13px;line-height:1.65;margin:14px 0;white-space:pre}
+.muted{color:var(--muted);font-size:13.5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+
+</style>
+</head>
+<body>
+<header class="demo-bar">
+    <a class="back" href="../../React/index.html">← Back to React Course</a>
+    <span class="tag">React · Project 01</span>
+</header>
+<main class="demo">
+    <h1>01. Personal Profile Website</h1>
+    <p class="lead">Create reusable profile components and pass user data through props.</p>
+    
+<section class="panel" id="reactProfile"></section>
+<p class="muted">Rendered by a small <code>renderProfile(user)</code> function — the same idea as a React component taking <code>props</code>.</p>
+<div class="code-block">function Profile({ user }) {
+  return (
+    &lt;article className="card"&gt;
+      &lt;Avatar initials={user.initials} /&gt;
+      &lt;h2&gt;{user.name}&lt;/h2&gt;
+      &lt;p&gt;{user.bio}&lt;/p&gt;
+    &lt;/article&gt;
+  );
+}
+
+&lt;Profile user={{ name: "Aye Mya", initials: "AM", bio: "Front-end learner" }} /&gt;</div>
+<script>
+(function () {
+    function avatar(initials) { return '<div class="r-av">' + initials + '</div>'; }
+    function renderProfile(user) {
+        return '<article class="r-card" style="text-align:center;padding:26px">' + avatar(user.initials) +
+            '<h2 style="margin:10px 0 2px;font-size:20px">' + user.name + '</h2>' +
+            '<p class="muted" style="margin:0">' + user.bio + '</p></article>';
+    }
+    document.getElementById('reactProfile').innerHTML =
+        renderProfile({ name: 'Aye Mya', initials: 'AM', bio: 'Front-end learner · Yangon' });
+})();
+</script>
+<style>
+.r-av{width:76px;height:76px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-size:24px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--accent),var(--dark))}
+</style>
+</main>
+<footer class="demo-foot">Buddy Edu · Practical Work demo — React Project 01</footer>
+</body>
+</html>

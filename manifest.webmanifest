@@ -1,0 +1,27 @@
+{
+    "name": "Buddy — Learn & Plan Web Development",
+    "short_name": "Buddy",
+    "description": "Structured study plans and interactive lessons for HTML, CSS, JavaScript, Node.js and React — in English and Myanmar.",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "any",
+    "theme_color": "#6366f1",
+    "background_color": "#f5f7fb",
+    "lang": "en",
+    "categories": ["education", "developer"],
+    "icons": [
+        {
+            "src": "./icons/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        },
+        {
+            "src": "./icons/icon-maskable.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "maskable"
+        }
+    ]
+}

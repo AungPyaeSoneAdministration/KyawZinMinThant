@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete Node.js course outline with modules, topics, exercises, and study progress. English and Myanmar supported.">
+    <title>Buddy Edu | Node.js Course Outline
+    </title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        :root {
+            --accent: #16a34a;
+            --accent-dark: #15803d;
+            --accent-soft: #f0fdf4;
+            --accent-pale: #bbf7d0;
+        }
+    
+    </style>
+
+
+
+</head><body>
+
+    <!-- ======================= Navbar ======================= -->
+    <nav class="navbar">
+        <a href="../index.html" class="logo">Buddy <span>Edu
+        </span>
+
+        
+        </a><button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" aria-expanded="false" data-i18n-attr="aria-label:nav.toggle">
+            <span>
+            </span><span>
+            </span><span>
+            </span>
+        
+
+        
+        </button><div class="nav-menu" data-nav-menu>
+            <div class="nav-links">
+                <a href="../index.html" data-i18n="nav.home">Home
+                
+                </a><a href="#overview" data-i18n="nav.overview">Overview
+                
+                </a><a href="#modules" data-i18n="nav.modules">Modules
+                
+                </a><a href="#schedule" data-i18n="nav.plan">Study Plan
+                
+                </a><a href="#references" data-i18n="nav.references">References
+                
+                </a><a href="../Learning/index.html" class="ext" data-i18n="nav.learn">Learn
+            
+
+            
+                </a>
+            </div><div class="lang-switch" role="group" aria-label="Language" data-i18n-attr="aria-label:nav.langswitch">
+                <button class="lang-btn" data-set-lang="en" aria-pressed="true">EN
+                
+                </button><button class="lang-btn" data-set-lang="my" aria-pressed="false">မြန်မာ
+    <!-- ======================= Hero ======================= -->
+    
+                </button>
+            </div>
+        </div>
+    </nav><header class="hero">
+        <div class="hero-content">
+            <span class="badge" data-i18n="hero.badge">SERVER-SIDE DEVELOPMENT COURSE
+
+            
+            </span><h1 data-i18n="hero.title" data-i18n-html="hero.title">Node.js <span>Course Outline
+            </span>
+
+            
+            </h1><p data-i18n="hero.desc">
+                Learn Node.js from the runtime, REPL, and modules to the file system,
+                async patterns, Express, REST APIs, databases, authentication, testing,
+                and deployment. Build real backend projects step by step.
+            
+
+            
+            </p><div class="hero-actions">
+                <a href="#modules" class="btn" data-i18n="hero.cta">Explore Course Modules →
+                
+                </a><a href="../Learning/index.html" class="btn btn-ghost" data-i18n="hero.cta2">Open Learning Hub →
+
+    
+                </a>
+            </div>
+        </div>
+    </header><main>
+
+        <!-- ======================= Overview ======================= -->
+        <section class="container" id="overview">
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">10
+                    
+                    </div><p data-i18n="stats.modules">Course Modules
+                
+
+                
+                    </p>
+                </div><div class="stat-card">
+                    <div class="stat-number">8
+                    
+                    </div><p data-i18n="stats.weeks">Suggested Weeks
+                
+
+                
+                    </p>
+                </div><div class="stat-card">
+                    <div class="stat-number">6+
+                    
+                    </div><p data-i18n="stats.projects">Practical Projects
+                
+
+                
+                    </p>
+                </div><div class="stat-card">
+                    <div class="stat-number" id="statProgress">0%
+                    
+                    </div><p data-i18n="stats.progress">Learning Progress
+                    </p><div style="margin-top: 35px;">
+                
+                    </div>
+                </div><h2 class="section-title" data-i18n="overview.title">Course Overview
+
+                
+                </h2><p class="section-desc" data-i18n="overview.desc">
+                    This course covers the Node.js runtime, REPL, CommonJS modules,
+                    npm, the file system, events and async patterns, HTTP and Express,
+                    REST APIs, databases, authentication and security, testing and
+                    debugging, and deployment.
+                
+            
+
+            
+                </p>
+            </div><div class="progress-card">
+                <div class="progress-header">
+                    <h3 data-i18n="progress.title">My Learning Progress
+                    <strong id="progressPercent">0%
+                
+
+                
+                    </strong>
+                    </h3>
+                </div><div
+                    class="progress-bar"
+                    id="progressBar"
+                    role="progressbar"
+                    data-i18n-attr="aria-label:progress.barlabel"
+                    aria-label="Course completion"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                >
+                    <div class="progress-fill" id="progressFill">
+                    </div><p class="progress-text" id="progressText" data-i18n="progress.start">
+                    Start learning Node.js today!
+                
+            
+
+        
+
+        <!-- ======================= Modules ======================= -->
+        
+                    </p>
+                </div>
+            </div>
+        </section><section class="container" id="modules">
+
+            <h2 class="section-title" data-i18n="modules.title">Course Modules
+
+            
+            </h2><p class="section-desc" data-i18n="modules.desc">
+                Open each module and check topics when you finish studying.
+            
+
+            
+            </p><div class="actions">
+                <button class="btn btn-primary" id="expandAll" data-i18n="btn.expand">Expand All
+                
+                </button><button class="btn" id="collapseAll" data-i18n="btn.collapse">Collapse All
+                
+                </button><button class="btn" id="resetProgress" data-i18n="btn.reset">Reset Progress
+            
+
+            
+                </button>
+            </div><div class="module-list" id="moduleList">
+
+        
+
+        <!-- ======================= Schedule ======================= -->
+        
+            </div>
+        </section><section class="container" id="schedule">
+
+            <h2 class="section-title" data-i18n="schedule.title">Course Schedule
+
+            
+            </h2><p class="section-desc" data-i18n="schedule.desc">Suggested 8-week learning plan.
+
+            
+            </p><div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.week">Week
+                            
+                            </th><th data-i18n="table.topics">Topics
+                            
+                            </th><th data-i18n="table.practical">Practical Work
+                        
+                    
+
+                    
+                            </th>
+                        </tr>
+                    </thead><tbody>
+                        <tr>
+                            <td data-i18n="week.1.w">Week 1
+                            
+                            </td><td data-i18n="week.1.t">Node.js Fundamentals, REPL and Runtime
+                            
+                            </td><td data-i18n="week.1.p">Hello Node Script
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.2.w">Week 2
+                            
+                            </td><td data-i18n="week.2.t">Modules, CommonJS and NPM
+                            
+                            </td><td data-i18n="week.2.p">Small Utility Module
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.3.w">Week 3
+                            
+                            </td><td data-i18n="week.3.t">File System, Paths and Streams
+                            
+                            </td><td data-i18n="week.3.p">File Organizer CLI
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.4.w">Week 4
+                            
+                            </td><td data-i18n="week.4.t">Events, Async and Error Handling
+                            
+                            </td><td data-i18n="week.4.p">Notes App with JSON Storage
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.5.w">Week 5
+                            
+                            </td><td data-i18n="week.5.t">HTTP Server and Express Basics
+                            
+                            </td><td data-i18n="week.5.p">Express Web Server
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.6.w">Week 6
+                            
+                            </td><td data-i18n="week.6.t">REST API Design and Status Codes
+                            
+                            </td><td data-i18n="week.6.p">Weather CLI and JSON API
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.7.w">Week 7
+                            
+                            </td><td data-i18n="week.7.t">Databases, Authentication and Security
+                            
+                            </td><td data-i18n="week.7.p">Todo API with JWT Auth
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.8.w">Week 8
+                            
+                            </td><td data-i18n="week.8.t">Testing, Deployment and Final Project
+                            
+                            </td><td data-i18n="week.8.p">E-Commerce API Backend
+                        
+                    
+                
+            
+
+        
+
+        <!-- ======================= Outcomes ======================= -->
+        
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section><section class="container" id="outcomes">
+
+            <h2 class="section-title" data-i18n="outcomes.title">Learning Outcomes
+
+            
+            </h2><p class="section-desc" data-i18n="outcomes.desc">
+                Skills students should gain after completing the course.
+            
+
+            
+            </p><div class="cards">
+                <article class="card">
+                    <div class="card-number">01
+                    
+                    </div><h3 data-i18n="out.1.t">Node.js Runtime
+                    
+                    </h3><p data-i18n="out.1.d">Explain how Node.js runs JavaScript on the server and how it differs from the browser.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">02
+                    
+                    </div><h3 data-i18n="out.2.t">Modules and NPM
+                    
+                    </h3><p data-i18n="out.2.d">Structure projects with CommonJS modules and manage dependencies using npm.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">03
+                    
+                    </div><h3 data-i18n="out.3.t">Files and Data
+                    
+                    </h3><p data-i18n="out.3.d">Read, write, and stream files and store data as JSON files or in a database.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">04
+                    
+                    </div><h3 data-i18n="out.4.t">Web Servers and REST APIs
+                    
+                    </h3><p data-i18n="out.4.d">Build HTTP servers with Express and design REST APIs with correct status codes.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">05
+                    
+                    </div><h3 data-i18n="out.5.t">Authentication and Security
+                    
+                    </h3><p data-i18n="out.5.d">Validate input, hash passwords, issue JWTs, and apply basic security middleware.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">06
+                    
+                    </div><h3 data-i18n="out.6.t">Testing and Deployment
+                    
+                    </h3><p data-i18n="out.6.d">Write unit and API tests, debug with Node tools, and deploy projects to hosting platforms.
+                
+            
+
+        
+
+        <!-- ======================= Projects ======================= -->
+        
+                    </p>
+                </article>
+            </div>
+        </section><section class="container" id="projects">
+
+            <h2 class="section-title" data-i18n="projects.title">Practical Projects
+
+            
+            </h2><p class="section-desc" data-i18n="projects.desc">
+                Practice your skills through real Node.js exercises.
+            
+
+            
+            </p><div class="cards">
+                <a class="card demo-card" href="../demos/node/01.html">
+                    <h3 data-i18n="proj.1.t">01. File Organizer CLI
+                    
+                    </h3><p data-i18n="proj.1.d">Create a script that sorts files in a folder into subfolders by extension.
+                
+
+                
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/node/02.html">
+                    <h3 data-i18n="proj.2.t">02. Notes App
+                    
+                    </h3><p data-i18n="proj.2.d">Build a CLI to add, list, and delete notes stored in a JSON file.
+                
+
+                
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/node/03.html">
+                    <h3 data-i18n="proj.3.t">03. Weather CLI
+                    
+                    </h3><p data-i18n="proj.3.d">Make a command-line app that fetches weather data from a public API.
+                
+
+                
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/node/04.html">
+                    <h3 data-i18n="proj.4.t">04. Products REST API
+                    
+                    </h3><p data-i18n="proj.4.d">Build an Express API with full CRUD endpoints for a product list.
+                
+
+                
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/node/05.html">
+                    <h3 data-i18n="proj.5.t">05. Todo API with Auth
+                    
+                    </h3><p data-i18n="proj.5.d">Add user registration, login with JWT, and protected todo endpoints.
+                
+
+                
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/node/06.html">
+                    <h3 data-i18n="proj.6.t">06. E-Commerce API Backend
+                    
+                    </h3><p data-i18n="proj.6.d">Build and deploy a final backend with products, cart, orders, auth, and tests.
+                
+            
+
+        
+
+        <!-- ======================= References ======================= -->
+        
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a>
+            </div>
+        </section><section class="container" id="references">
+
+            <h2 class="section-title" data-i18n="refs.title">Node.js References
+
+            
+            </h2><p class="section-desc" data-i18n="refs.desc">
+                Use these references to review Node.js APIs, packages, and guides.
+            
+
+            
+            </p><div class="references">
+                <a class="reference-link" href="https://nodejs.org/docs/latest/api/" target="_blank" rel="noopener noreferrer" data-i18n="refs.link1" data-i18n-html="refs.link1">
+                    Node.js Documentation <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://developer.mozilla.org/en-US/docs/Glossary/Node.js" target="_blank" rel="noopener noreferrer" data-i18n="refs.link2" data-i18n-html="refs.link2">
+                    MDN Node.js Overview <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://docs.npmjs.com/" target="_blank" rel="noopener noreferrer" data-i18n="refs.link3" data-i18n-html="refs.link3">
+                    npm Documentation <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://expressjs.com/" target="_blank" rel="noopener noreferrer" data-i18n="refs.link4" data-i18n-html="refs.link4">
+                    Express Documentation <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://javascript.info/node" target="_blank" rel="noopener noreferrer" data-i18n="refs.link5" data-i18n-html="refs.link5">
+                    JavaScript.info Node.js <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://github.com/nodejs/node" target="_blank" rel="noopener noreferrer" data-i18n="refs.link6" data-i18n-html="refs.link6">
+                    Node.js on GitHub <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://nodejs.org/en/learn" target="_blank" rel="noopener noreferrer" data-i18n="refs.link7" data-i18n-html="refs.link7">
+                    Node.js Learn Guides <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://github.com/goldbergyoni/nodebestpractices" target="_blank" rel="noopener noreferrer" data-i18n="refs.link8" data-i18n-html="refs.link8">
+                    Node.js Best Practices <span>↗
+                    </span>
+                
+            
+
+        
+
+    
+
+    <!-- ======================= Footer ======================= -->
+        
+    
+<!-- ======================= Scripts ======================= -->
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <nav class="footer-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="#overview" data-i18n="nav.plan">Study Plan</a>
+            <a href="../../Learning/index.html" data-i18n="nav.learn">Learn</a>
+        </nav>
+        <div class="footer-bottom" style="justify-content: center;">
+            <span>© <span data-year></span> Buddy Edu. <span data-i18n="footer.rights">All rights reserved.</span></span>
+        </div>
+    </footer>
+
+    <script src="../assets/js/i18n.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        /* ---------------- Translations ---------------- */
+        const I18N = {
+            en: {
+                "__title__": "Buddy Edu | Node.js Course Outline",
+
+                "nav.home": "Home",
+                "nav.overview": "Overview",
+                "nav.modules": "Modules",
+                "nav.plan": "Study Plan",
+                "nav.references": "References",
+                "nav.learn": "Learn",
+                "nav.toggle": "Toggle menu",
+                "nav.langswitch": "Language",
+
+                "hero.badge": "SERVER-SIDE DEVELOPMENT COURSE",
+                "hero.title": "Node.js <span>Course Outline</span>",
+                "hero.desc": "Learn Node.js from the runtime, REPL, and modules to the file system, async patterns, Express, REST APIs, databases, authentication, testing, and deployment. Build real backend projects step by step.",
+                "hero.cta": "Explore Course Modules →",
+                "hero.cta2": "Open Learning Hub →",
+
+                "stats.modules": "Course Modules",
+                "stats.weeks": "Suggested Weeks",
+                "stats.projects": "Practical Projects",
+                "stats.progress": "Learning Progress",
+
+                "overview.title": "Course Overview",
+                "overview.desc": "This course covers the Node.js runtime, REPL, CommonJS modules, npm, the file system, events and async patterns, HTTP and Express, REST APIs, databases, authentication and security, testing and debugging, and deployment.",
+
+                "progress.title": "My Learning Progress",
+                "progress.barlabel": "Course completion",
+                "progress.start": "Start learning Node.js today!",
+                "progress.done": "{done} of {total} topics completed. Congratulations! You completed the course!",
+                "progress.more": "{done} of {total} topics completed. Keep learning and track your progress.",
+
+                "modules.title": "Course Modules",
+                "modules.desc": "Open each module and check topics when you finish studying.",
+                "btn.expand": "Expand All",
+                "btn.collapse": "Collapse All",
+                "btn.reset": "Reset Progress",
+                "module.topics": "{n} topics",
+                "module.learn": "Topics to Learn",
+                "module.objective": "Learning Objective:",
+                "module.check": "Mark {topic} as completed",
+                "module.confirm": "Reset all completed Node.js topics?",
+
+                "schedule.title": "Course Schedule",
+                "schedule.desc": "Suggested 8-week learning plan.",
+                "table.week": "Week",
+                "table.topics": "Topics",
+                "table.practical": "Practical Work",
+
+                "week.1.w": "Week 1", "week.1.t": "Node.js Fundamentals, REPL and Runtime", "week.1.p": "Hello Node Script",
+                "week.2.w": "Week 2", "week.2.t": "Modules, CommonJS and NPM", "week.2.p": "Small Utility Module",
+                "week.3.w": "Week 3", "week.3.t": "File System, Paths and Streams", "week.3.p": "File Organizer CLI",
+                "week.4.w": "Week 4", "week.4.t": "Events, Async and Error Handling", "week.4.p": "Notes App with JSON Storage",
+                "week.5.w": "Week 5", "week.5.t": "HTTP Server and Express Basics", "week.5.p": "Express Web Server",
+                "week.6.w": "Week 6", "week.6.t": "REST API Design and Status Codes", "week.6.p": "Weather CLI and JSON API",
+                "week.7.w": "Week 7", "week.7.t": "Databases, Authentication and Security", "week.7.p": "Todo API with JWT Auth",
+                "week.8.w": "Week 8", "week.8.t": "Testing, Deployment and Final Project", "week.8.p": "E-Commerce API Backend",
+
+                "outcomes.title": "Learning Outcomes",
+                "outcomes.desc": "Skills students should gain after completing the course.",
+                "out.1.t": "Node.js Runtime", "out.1.d": "Explain how Node.js runs JavaScript on the server and how it differs from the browser.",
+                "out.2.t": "Modules and NPM", "out.2.d": "Structure projects with CommonJS modules and manage dependencies using npm.",
+                "out.3.t": "Files and Data", "out.3.d": "Read, write, and stream files and store data as JSON files or in a database.",
+                "out.4.t": "Web Servers and REST APIs", "out.4.d": "Build HTTP servers with Express and design REST APIs with correct status codes.",
+                "out.5.t": "Authentication and Security", "out.5.d": "Validate input, hash passwords, issue JWTs, and apply basic security middleware.",
+                "out.6.t": "Testing and Deployment", "out.6.d": "Write unit and API tests, debug with Node tools, and deploy projects to hosting platforms.",
+
+                "projects.title": "Practical Projects",
+                "projects.desc": "Practice your skills through real Node.js exercises.",
+                "proj.demo": "Live demo ↗",
+                "proj.1.t": "01. File Organizer CLI", "proj.1.d": "Create a script that sorts files in a folder into subfolders by extension.",
+                "proj.2.t": "02. Notes App", "proj.2.d": "Build a CLI to add, list, and delete notes stored in a JSON file.",
+                "proj.3.t": "03. Weather CLI", "proj.3.d": "Make a command-line app that fetches weather data from a public API.",
+                "proj.4.t": "04. Products REST API", "proj.4.d": "Build an Express API with full CRUD endpoints for a product list.",
+                "proj.5.t": "05. Todo API with Auth", "proj.5.d": "Add user registration, login with JWT, and protected todo endpoints.",
+                "proj.6.t": "06. E-Commerce API Backend", "proj.6.d": "Build and deploy a final backend with products, cart, orders, auth, and tests.",
+
+                "refs.title": "Node.js References",
+                "refs.desc": "Use these references to review Node.js APIs, packages, and guides.",
+                "refs.link1": "Node.js Documentation <span>↗</span>",
+                "refs.link2": "MDN Node.js Overview <span>↗</span>",
+                "refs.link3": "npm Documentation <span>↗</span>",
+                "refs.link4": "Express Documentation <span>↗</span>",
+                "refs.link5": "JavaScript.info Node.js <span>↗</span>",
+                "refs.link6": "Node.js on GitHub <span>↗</span>",
+                "refs.link7": "Node.js Learn Guides <span>↗</span>",
+                "refs.link8": "Node.js Best Practices <span>↗</span>",
+
+
+                "footer.blurb": "Free, project-based web development courses for everyone — in English and Myanmar.",
+                "footer.courses": "Courses",
+                "footer.explore": "Explore",
+                "footer.rights": "All rights reserved.",
+                "footer.tagline": "Learn • Practice • Build • Improve"
+            },
+
+            my: {
+                "__title__": "Buddy Edu | Node.js သင်တန်းအစီအစဉ်",
+
+                "nav.home": "ပင်မစာမျက်နှာ",
+                "nav.overview": "ခြုံငုံသုံးသပ်ချက်",
+                "nav.modules": "မော်ဂျူးများ",
+                "nav.plan": "လေ့လာရေးအစီအစဉ်",
+                "nav.references": "ကိုးကားစာရင်း",
+                "nav.learn": "လေ့လာရန်",
+                "nav.toggle": "မီနူး ဖွင့်ရန်/ပိတ်ရန်",
+                "nav.langswitch": "ဘာသာစကား",
+
+                "hero.badge": "ဆာဗာဘက် ဖွံ့ဖြိုးရေး သင်တန်း",
+                "hero.title": "Node.js <span>သင်တန်းအစီအစဉ်</span>",
+                "hero.desc": "Node runtime၊ REPL နှင့် module များမှစ၍ file system၊ async ပုံစံများ၊ Express၊ REST API၊ database၊ authentication၊ testing နှင့် deployment အထိ Node.js ကို လေ့လာပါ။ လက်တွေး backend ပရောဂျက်များကို အဆင့်ဆင့် တည်ဆောက်ပါ။",
+                "hero.cta": "မော်ဂျူးများ စတင်ကြည့်ရန် →",
+                "hero.cta2": "လေ့လာရေးစင်တာ ဖွင့်ရန် →",
+
+                "stats.modules": "သင်တန်းမော်ဂျူးများ",
+                "stats.weeks": "အကြံပြုပတ်ရက်များ",
+                "stats.projects": "လက်တွေးပရောဂျက်များ",
+                "stats.progress": "လေ့လာမှုတိုးတက်မှု",
+
+                "overview.title": "သင်တန်းအကြောင်း ခြုံငုံသုံးသပ်ချက်",
+                "overview.desc": "ဤသင်တန်းတွင် Node.js runtime၊ REPL၊ CommonJS module များ၊ npm၊ file system၊ event နှင့် async ပုံစံများ၊ HTTP နှင့် Express၊ REST API၊ database၊ authentication နှင့် security၊ testing နှင့် debugging နှင့် deployment ပါဝင်ပါသည်။",
+
+                "progress.title": "ကျွန်ုပ်၏ လေ့လာမှုတိုးတက်မှု",
+                "progress.barlabel": "သင်တန်းပြီးဆုံးမှု",
+                "progress.start": "ယနေ့ Node.js စတင်လေ့လာပါ!",
+                "progress.done": "ခေါင်းစဉ် {total} ခုတွင် {done} ခု ပြီးပါပြီ။ ဂုဏ်ယူပါသည်! သင်တန်းပြီးဆုံးပါပြီ!",
+                "progress.more": "ခေါင်းစဉ် {total} ခုတွင် {done} ခု ပြီးပါပြီ။ ဆက်လက်လေ့လာပြီး တိုးတက်မှုကို မှတ်တမ်းတင်ပါ။",
+
+                "modules.title": "သင်တန်းမော်ဂျူးများ",
+                "modules.desc": "မော်ဂျူးတစ်ခုချင်းစီကို ဖွင့်ပြီး လေ့လာပြီးသည်နှင့် ခေါင်းစဉ်များကို အမှတ်ပါ။",
+                "btn.expand": "အားလုံးဖွင့်ရန်",
+                "btn.collapse": "အားလုံးချုပ်ရန်",
+                "btn.reset": "တိုးတက်မှု ပြန်လည်သတ်မှတ်ရန်",
+                "module.topics": "ခေါင်းစဉ် {n} ခု",
+                "module.learn": "လေ့လာရန် ခေါင်းစဉ်များ",
+                "module.objective": "လေ့လာရည်ရွယ်ချက် -",
+                "module.check": "{topic} ကို ပြီးပြီဟု မှတ်သားရန်",
+                "module.confirm": "ပြီးဆုံးပြီးသော Node.js ခေါင်းစဉ်အားလုံးကို ပြန်လည်သတ်မှတ်မှာလား?",
+
+                "schedule.title": "သင်တန်းအချိန်ဇယား",
+                "schedule.desc": "အကြံပြုထားသော ပတ် ၈ ပတ်စာ လေ့လာရေးအစီအစဉ်။",
+                "table.week": "ပတ်",
+                "table.topics": "ခေါင်းစဉ်များ",
+                "table.practical": "လက်တွေးအလုပ်",
+
+                "week.1.w": "ပတ် ၁", "week.1.t": "Node.js အခြေခံများ၊ REPL နှင့် runtime", "week.1.p": "Hello Node script",
+                "week.2.w": "ပတ် ၂", "week.2.t": "Module များ၊ CommonJS နှင့် npm", "week.2.p": "Utility module အသေး",
+                "week.3.w": "ပတ် ၃", "week.3.t": "File system၊ path များနှင့် stream", "week.3.p": "File Organizer CLI",
+                "week.4.w": "ပတ် ၄", "week.4.t": "Event၊ async ပုံစံများနှင့် error handling", "week.4.p": "JSON storage ပါ Notes App",
+                "week.5.w": "ပတ် ၅", "week.5.t": "HTTP server နှင့် Express အခြေခံ", "week.5.p": "Express web server",
+                "week.6.w": "ပတ် ၆", "week.6.t": "REST API ဒီဇိုင်းနှင့် status code များ", "week.6.p": "Weather CLI နှင့် JSON API",
+                "week.7.w": "ပတ် ၇", "week.7.t": "Database၊ authentication နှင့် security", "week.7.p": "JWT auth ပါ Todo API",
+                "week.8.w": "ပတ် ၈", "week.8.t": "Testing၊ deployment နှင့် နောက်ဆုံးပရောဂျက်", "week.8.p": "E-Commerce API backend",
+
+                "outcomes.title": "သင်ယူမှုရလဒ်များ",
+                "outcomes.desc": "သင်တန်းပြီးဆုံးပြီးနောက် ရရှိသင့်သော ကျွမ်းကျင်မှုများ။",
+                "out.1.t": "Node.js runtime", "out.1.d": "Node.js က server ပေါ်တွင် JavaScript ကို မည်သို့ run ပြုလုပ်ပြီး browser နှင့် မည်သို့ ကွာခြားကြောင်း ရှင်းပြနိုင်ပါ။",
+                "out.2.t": "Module များနှင့် npm", "out.2.d": "CommonJS module များဖြင့် project ကို ဖွဲ့စည်းပြီး npm ဖြင့် dependency များ စီမံပါ။",
+                "out.3.t": "File များနှင့် Data", "out.3.d": "File များကို ဖတ်၊ ရေး၊ stream လုပ်ပြီး data ကို JSON file များ သို့မဟုတ် database တွင် သိမ်းဆည်းပါ။",
+                "out.4.t": "Web server နှင့် REST API", "out.4.d": "Express ဖြင့် HTTP server တည်ဆောက်ပြီး မှန်ကန်သော status code များဖြင့် REST API များ ဒီဇိုင်းဆွဲပါ။",
+                "out.5.t": "Authentication နှင့် security", "out.5.d": "Input စစ်ဆေးခြင်း၊ password hashing၊ JWT ထုတ်ပေးခြင်းနှင့် security middleware အခြေခံများ အသုံးချပါ။",
+                "out.6.t": "Testing နှင့် deployment", "out.6.d": "Unit နှင့် API test များ ရေးပြီး Node debugging ကိရိယာများ အသုံးပြုကာ project များကို hosting platform များတွင် deploy လုပ်ပါ။",
+
+                "projects.title": "လက်တွေး ပရောဂျက်များ",
+                "projects.desc": "တကယ့် Node.js လေ့ကျင့်ခန်းများဖြင့် သင်၏ကျွမ်းကျင်မှုကို လေ့ကျင့်ပါ။",
+                "proj.demo": "တိုက်ရိုက် ကြည့်ရန်",
+                "proj.1.t": "01. File Organizer CLI", "proj.1.d": "Folder အတွင်းရှိ file များကို extension အလိုက် ခွဲခြမ်း စုစည်းပေးသော script တစ်ခု ဖန်တီးပါ။",
+                "proj.2.t": "02. Notes App", "proj.2.d": "JSON file တွင် သိမ်းဆည်းထားသော note များကို ထည့်၊ စာရင်းကြည့်၊ ဖျက်နိုင်သော CLI တစ်ခု တည်ဆောက်ပါ။",
+                "proj.3.t": "03. Weather CLI", "proj.3.d": "Public API မှ weather data ကို ဆွဲယူပြသသော command-line app တစ်ခု ဖန်တီးပါ။",
+                "proj.4.t": "04. Products REST API", "proj.4.d": "Product စာရင်းအတွက် full CRUD endpoint များပါ Express API တစ်ခု တည်ဆောက်ပါ။",
+                "proj.5.t": "05. Todo API with Auth", "proj.5.d": "User registration၊ JWT ဖြင့် login နှင့် protected todo endpoint များ ထည့်ပါ။",
+                "proj.6.t": "06. E-Commerce API backend", "proj.6.d": "Product၊ cart၊ order၊ auth နှင့် test များပါ final backend ကို တည်ဆောက်ပြီး deploy လုပ်ပါ။",
+
+                "refs.title": "Node.js ကိုးကားစာရင်းများ",
+                "refs.desc": "Node.js API၊ package များနှင့် လမ်းညွှန်များကို ပြန်လည်လေ့လာရန် ဤကိုးကားချက်များကို အသုံးပြုပါ။",
+                "refs.link1": "Node.js စာတမ်းများ <span>↗</span>",
+                "refs.link2": "MDN ၏ Node.js ခြုံငုံသုံးသပ်ချက် <span>↗</span>",
+                "refs.link3": "npm စာတမ်းများ <span>↗</span>",
+                "refs.link4": "Express စာတမ်းများ <span>↗</span>",
+                "refs.link5": "JavaScript.info Node.js <span>↗</span>",
+                "refs.link6": "GitHub ရှိ Node.js <span>↗</span>",
+                "refs.link7": "Node.js Learn လမ်းညွှန်များ <span>↗</span>",
+                "refs.link8": "Node.js အကောင်းဆုံးနည်းလမ်းများ <span>↗</span>",
+
+
+                "footer.blurb": "အားလုံးအတွက် အခမဲ့၊ ပရောဂျက်အခြေခံ ဝဘ်ဖွံ့ဖြိုးရေး သင်တန်းများ — အင်္ဂလိပ်နှင့် မြန်မာ။",
+                "footer.courses": "သင်တန်းများ",
+                "footer.explore": "လေ့လာရန်",
+                "footer.rights": "မူပိုင်ခွင့်အားလုံး ထိန်းသိမ်းထားပါသည်။",
+                "footer.tagline": "လေ့လာ • လေ့ကျင့် • တည်ဆောက် • တိုးတက်"
+            }
+        };
+
+        /* ---------------- Course modules ---------------- */
+        const modules = [
+            {
+                title: "Node.js Fundamentals",
+                titleMy: "Node.js အခြေခံများ",
+                description: "Understand the Node.js runtime, REPL, and how to run your first script.",
+                descriptionMy: "Node.js runtime၊ REPL ကို နားလည်ပြီး ပထမဆုံး script ကို run ပြုလုပ်ပါ။",
+                topics: [
+                    "What is Node.js?",
+                    "Installing Node.js",
+                    "Node REPL",
+                    "Node vs Browser",
+                    "JavaScript Modules Recap",
+                    "Your First Node Script",
+                    "Global Objects",
+                    "Node Versions and LTS"
+                ],
+                objective: "Run Node.js scripts confidently and explain how the Node runtime differs from the browser.",
+                objectiveMy: "Node.js script များကို ယုံကြည်စွာ run နိုင်ပြီး Node runtime သည် browser နှင့် မည်သို့ ကွာခြားကြောင်း ရှင်းပြနိုင်ပါ။"
+            },
+            {
+                title: "Modules and NPM",
+                titleMy: "Module များနှင့် NPM",
+                description: "Organize code with modules and manage packages with npm.",
+                descriptionMy: "Module များဖြင့် code ကို စီစဉ်ပြီး npm ဖြင့် package များကို စီမံပါ။",
+                topics: [
+                    "CommonJS require()",
+                    "module.exports",
+                    "Built-in Modules",
+                    "npm init",
+                    "npm install",
+                    "package.json",
+                    "Semantic Versioning",
+                    "npx",
+                    "node_modules"
+                ],
+                objective: "Structure projects with CommonJS modules and manage dependencies using npm.",
+                objectiveMy: "CommonJS module များဖြင့် project ကို ဖွဲ့စည်းပြီး npm ဖြင့် dependency များကို စီမံပါ။"
+            },
+            {
+                title: "File System",
+                titleMy: "File System",
+                description: "Read, write, and organize files using the fs and path modules.",
+                descriptionMy: "fs နှင့် path module များဖြင့် file များကို ဖတ်၊ ရေးနှင့် စီစဉ်ပါ။",
+                topics: [
+                    "fs Module Overview",
+                    "Reading Files",
+                    "Writing Files",
+                    "fs.promises",
+                    "File Paths",
+                    "path Module",
+                    "Working with Directories",
+                    "Streams Basics"
+                ],
+                objective: "Handle files safely with synchronous and asynchronous fs methods.",
+                objectiveMy: "Sync နှင့် async fs နည်းလမ်းများဖြင့် file များကို ဘေးကင်းစွာ စီမံပါ။"
+            },
+            {
+                title: "Events and Async",
+                titleMy: "Event များနှင့် Async",
+                description: "Handle asynchronous work with events, promises, and async/await.",
+                descriptionMy: "Event၊ promise နှင့် async/await ဖြင့် asynchronous အလုပ်များကို စီမံပါ။",
+                topics: [
+                    "EventEmitter Basics",
+                    "Custom Events",
+                    "Callback Pattern",
+                    "Promises",
+                    "async/await",
+                    "Error Handling",
+                    "Unhandled Rejections",
+                    "Timers: setTimeout and setInterval"
+                ],
+                objective: "Write reliable asynchronous code and handle errors at every step.",
+                objectiveMy: "ယုံကြည်စိတ်ချရသော async code ရေးပြီး အဆင့်တိုင်းတွင် error များကို စီမံပါ။"
+            },
+            {
+                title: "HTTP and Express",
+                titleMy: "HTTP နှင့် Express",
+                description: "Build web servers with the http module and Express.",
+                descriptionMy: "http module နှင့် Express ဖြင့် web server များ တည်ဆောက်ပါ။",
+                topics: [
+                    "The http Module",
+                    "Creating a Server",
+                    "Request and Response",
+                    "Installing Express",
+                    "Routes and Handlers",
+                    "Middleware",
+                    "Serving Static Files",
+                    "Environment Variables with dotenv"
+                ],
+                objective: "Create a working web server with routes, middleware, and static files.",
+                objectiveMy: "Route၊ middleware နှင့် static file များပါ အလုပ်လုပ်သော web server တစ်ခု ဖန်တီးပါ။"
+            },
+            {
+                title: "REST APIs",
+                titleMy: "REST API များ",
+                description: "Design and implement RESTful endpoints that perform CRUD operations.",
+                descriptionMy: "CRUD လုပ်ဆောင်ချက်များ ပြုလုပ်သော RESTful endpoint များကို ဒီဇိုင်းဆွဲပြီး အကောင်အထည်ဖော်ပါ။",
+                topics: [
+                    "REST Principles",
+                    "CRUD Operations",
+                    "Route Parameters",
+                    "Query Strings",
+                    "HTTP Status Codes",
+                    "JSON Request Body",
+                    "Testing with Postman",
+                    "API Design Best Practices"
+                ],
+                objective: "Design a clean JSON API with predictable routes and correct status codes.",
+                objectiveMy: "ခန့်မှန်းနိုင်သော route နှင့် မှန်ကန်သော status code များဖြင့် သန့်ရှင်းသော JSON API တစ်ခု ဒီဇိုင်းဆွဲပါ။"
+            },
+            {
+                title: "Data and Databases",
+                titleMy: "Data နှင့် Database များ",
+                description: "Store application data in JSON files and databases.",
+                descriptionMy: "Application data ကို JSON file များနှင့် database များတွင် သိမ်းဆည်းပါ။",
+                topics: [
+                    "JSON File Storage",
+                    "Reading and Writing JSON",
+                    "MongoDB Overview",
+                    "Mongoose Basics",
+                    "SQL Databases Overview",
+                    "Database CRUD",
+                    "Data Modeling",
+                    "Database Configuration"
+                ],
+                objective: "Persist data reliably and perform full CRUD operations against a database.",
+                objectiveMy: "Data ကို ယုံကြည်စွာ သိမ်းဆည်းပြီး database ပေါ်တွင် full CRUD လုပ်ဆောင်ချက်များ ပြုလုပ်ပါ။"
+            },
+            {
+                title: "Authentication and Security",
+                titleMy: "Authentication နှင့် Security",
+                description: "Protect routes with validation, password hashing, and JWT.",
+                descriptionMy: "Validation၊ password hashing နှင့် JWT ဖြင့် route များကို ကာကွယ်ပါ။",
+                topics: [
+                    "Input Validation",
+                    "Password Hashing with bcrypt",
+                    "JSON Web Tokens (JWT)",
+                    "Sessions Overview",
+                    "Authorization Middleware",
+                    "CORS",
+                    "Helmet Basics",
+                    "Securing Environment Variables"
+                ],
+                objective: "Build secure authentication flows and apply basic server hardening.",
+                objectiveMy: "ဘေးကင်းသော authentication flow များ တည်ဆောက်ပြီး server hardening အခြေခံများ အသုံးချပါ။"
+            },
+            {
+                title: "Testing and Debugging",
+                titleMy: "Testing နှင့် Debugging",
+                description: "Find bugs faster and prove your API works with automated tests.",
+                descriptionMy: "Bug များကို ပိုမိုမြန်ဆန်စွာ ရှာဖွေပြီး automated test များဖြင့် API အလုပ်လုပ်ကြောင်း သက်သေပြပါ။",
+                topics: [
+                    "console Methods",
+                    "Logging vs Debugging",
+                    "node inspect",
+                    "debugger Statement",
+                    "Unit Tests with node:test",
+                    "Test-Driven Basics",
+                    "Testing APIs with Supertest",
+                    "Test Data and Fixtures"
+                ],
+                objective: "Write automated tests and use Node debugging tools to fix issues.",
+                objectiveMy: "Automated test များ ရေးပြီး Node debugging ကိရိယာများဖြင့် ပြဿနာများကို ဖြေရှင်းပါ။"
+            },
+            {
+                title: "Deployment and Final Project",
+                titleMy: "Deployment နှင့် နောက်ဆုံးပရောဂျက်",
+                description: "Ship your Node.js app to production and complete the final project.",
+                descriptionMy: "Node.js app ကို production တွင် ဖြန့်ဝေပြီး နောက်ဆုံးပရောဂျက်ကို ပြီးစီးပါ။",
+                topics: [
+                    "nodemon for Development",
+                    "process and process.env",
+                    "Hosting Options",
+                    "Deploying Your App",
+                    "Logging Basics",
+                    "Error Monitoring",
+                    "Project Planning",
+                    "Final Project Build",
+                    "Deployment Checklist"
+                ],
+                objective: "Deploy a tested, documented Node.js API and present the final project.",
+                objectiveMy: "စမ်းသပ်ပြီးဖြစ်သော Node.js API တစ်ခုကို deploy လုပ်ကာ နောက်ဆုံးပရောဂျက်ကို တင်ပြပါ။"
+            }
+        ];
+
+        /* ---------------- Progress logic ---------------- */
+        const STORAGE_KEY = "buddyEduNodeProgress";
+        const moduleList = document.getElementById("moduleList");
+        const allTopics = modules.flatMap(module => module.topics);
+
+        const isMy = () => BuddyI18n.getLang() === "my";
+        const pick = (en, my) => (isMy() && my ? my : en);
+
+        function loadProgress() {
+            try {
+                const saved = JSON.parse(
+                    localStorage.getItem(STORAGE_KEY) || "[]"
+                );
+
+                if (!Array.isArray(saved)) return [];
+
+                return saved.filter(topic => allTopics.includes(topic));
+            } catch (error) {
+                return [];
+            }
+        }
+
+        let completedTopics = loadProgress();
+
+        function saveProgress() {
+            try {
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(completedTopics)
+                );
+            } catch (error) {
+                console.warn("Could not save progress.", error);
+            }
+        }
+
+        function updateProgress() {
+            const total = allTopics.length;
+            const completed = completedTopics.length;
+            const percent = total
+                ? Math.round(completed / total * 100)
+                : 0;
+
+            document.getElementById("progressFill").style.width =
+                percent + "%";
+
+            document.getElementById("progressPercent").textContent =
+                percent + "%";
+
+            document.getElementById("statProgress").textContent =
+                percent + "%";
+
+            const key = percent === 100 ? "progress.done"
+                : completed === 0 ? "progress.start"
+                : "progress.more";
+
+            document.getElementById("progressText").textContent =
+                completed === 0 && percent !== 100
+                    ? BuddyI18n.t("progress.start")
+                    : BuddyI18n.t(key, { done: completed, total: total });
+
+            document.getElementById("progressBar").setAttribute(
+                "aria-valuenow",
+                percent
+            );
+        }
+
+        function renderModules(openIndexes) {
+            const keepOpen = openIndexes || [];
+
+            moduleList.innerHTML = "";
+
+            modules.forEach((module, index) => {
+                const details = document.createElement("details");
+                details.className = "module";
+                details.open = keepOpen.includes(index);
+
+                const summary = document.createElement("summary");
+
+                const number = document.createElement("div");
+                number.className = "module-number";
+                number.textContent = String(index + 1).padStart(2, "0");
+
+                const info = document.createElement("div");
+                info.className = "module-info";
+
+                const heading = document.createElement("h3");
+                heading.textContent = pick(module.title, module.titleMy);
+
+                const description = document.createElement("p");
+                description.textContent = pick(module.description, module.descriptionMy);
+
+                info.append(heading, description);
+
+                const count = document.createElement("span");
+                count.className = "topic-count";
+                count.textContent = BuddyI18n.t("module.topics", { n: module.topics.length });
+
+                const arrow = document.createElement("span");
+                arrow.className = "module-arrow";
+                arrow.textContent = "▼";
+
+                summary.append(number, info, count, arrow);
+
+                const body = document.createElement("div");
+                body.className = "module-body";
+
+                const subheading = document.createElement("h4");
+                subheading.textContent = BuddyI18n.t("module.learn");
+
+                const topicList = document.createElement("div");
+                topicList.className = "topic-list";
+
+                module.topics.forEach(topic => {
+                    const label = document.createElement("label");
+                    label.className = "topic";
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.checked = completedTopics.includes(topic);
+                    checkbox.setAttribute(
+                        "aria-label",
+                        BuddyI18n.t("module.check", { topic: topic })
+                    );
+
+                    const text = document.createElement("span");
+                    text.textContent = topic;
+
+                    if (checkbox.checked) {
+                        label.classList.add("completed");
+                    }
+
+                    checkbox.addEventListener("change", () => {
+                        if (checkbox.checked) {
+                            if (!completedTopics.includes(topic)) {
+                                completedTopics.push(topic);
+                            }
+                            label.classList.add("completed");
+                        } else {
+                            completedTopics = completedTopics.filter(
+                                item => item !== topic
+                            );
+                            label.classList.remove("completed");
+                        }
+
+                        saveProgress();
+                        updateProgress();
+                    });
+
+                    label.append(checkbox, text);
+                    topicList.appendChild(label);
+                });
+
+                const objective = document.createElement("div");
+                objective.className = "objective";
+
+                const strong = document.createElement("strong");
+                strong.textContent = BuddyI18n.t("module.objective") + " ";
+
+                objective.append(
+                    strong,
+                    document.createTextNode(
+                        pick(module.objective, module.objectiveMy)
+                    )
+                );
+
+                body.append(subheading, topicList, objective);
+                details.append(summary, body);
+                moduleList.appendChild(details);
+            });
+
+            updateProgress();
+        }
+
+        function getOpenIndexes() {
+            return Array.from(document.querySelectorAll(".module"))
+                .map((el, i) => (el.open ? i : -1))
+                .filter(i => i >= 0);
+        }
+
+        document.getElementById("expandAll").addEventListener("click", () => {
+            document.querySelectorAll(".module").forEach(module => {
+                module.open = true;
+            });
+        });
+
+        document.getElementById("collapseAll").addEventListener("click", () => {
+            document.querySelectorAll(".module").forEach(module => {
+                module.open = false;
+            });
+        });
+
+        document.getElementById("resetProgress").addEventListener("click", () => {
+            if (!confirm(BuddyI18n.t("module.confirm"))) return;
+
+            completedTopics = [];
+            saveProgress();
+            renderModules();
+        });
+
+        /* Re-render dynamic content whenever the language changes */
+        document.addEventListener("buddy:langchange", () => {
+            renderModules(getOpenIndexes());
+        });
+
+        BuddyI18n.init(I18N);
+    </script>
+</body>
+</html>

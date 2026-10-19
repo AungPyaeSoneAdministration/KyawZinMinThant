@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06. Final Website — Buddy Demo</title>
+<style>
+:root{--accent:#7c3aed;--dark:#5b21b6;--soft:#f5f3ff;--bg:#f5f7fb;--text:#0f172a;--muted:#64748b;--border:#e4e9f2;--card:#fff}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+.demo-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 5%;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.demo-bar .back{font-weight:700;font-size:14px;color:#fff;text-decoration:none;padding:8px 15px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--dark))}
+.demo-bar .tag{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.demo{width:min(920px,92%);margin:34px auto 64px;flex:1}
+.demo h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.02em}
+.demo .lead{color:var(--muted);margin:8px 0 26px;max-width:640px}
+.demo-foot{border-top:1px solid var(--border);padding:18px 5%;text-align:center;color:var(--muted);font-size:13px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 12px 28px -22px rgba(15,23,42,.45);margin-bottom:18px}
+.panel h2{font-size:18px;margin-bottom:10px;letter-spacing:-.01em}
+.btn{display:inline-block;border:none;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;font-size:14px;background:var(--accent);color:#fff;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:var(--dark)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:var(--soft)}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--border);border-radius:10px;width:100%;background:#fff;color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 4px}
+pre,.terminal{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13.5px;line-height:1.7}
+.grid{display:grid;gap:16px}
+code{font-family:Consolas,monospace;background:var(--soft);color:var(--dark);padding:2px 6px;border-radius:6px;font-size:.92em}
+.code-block{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13px;line-height:1.65;margin:14px 0;white-space:pre}
+.muted{color:var(--muted);font-size:13.5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+
+</style>
+</head>
+<body>
+<header class="demo-bar">
+    <a class="back" href="../../CSS/index.html">← Back to CSS Course</a>
+    <span class="tag">CSS · Project 06</span>
+</header>
+<main class="demo">
+    <h1>06. Final Website</h1>
+    <p class="lead">Style a multi-section website with responsive layouts.</p>
+    
+<div class="fsite">
+    <header class="fsite-head">
+        <b>StyledCo</b>
+        <nav><a href="#f-about">About</a><a href="#f-work">Work</a><a href="#f-contact">Contact</a></nav>
+    </header>
+    <section class="fsite-hero" id="f-about">
+        <h2>A complete, responsive layout</h2>
+        <p>Header, hero, feature grid and footer — all styled with CSS Grid and Flexbox.</p>
+    </section>
+    <section class="fsite-grid" id="f-work">
+        <article><b>Brand</b><p class="muted">Identity systems</p></article>
+        <article><b>Web</b><p class="muted">Responsive sites</p></article>
+        <article><b>Apps</b><p class="muted">UI toolkits</p></article>
+    </section>
+    <footer class="fsite-foot" id="f-contact">hello@styledco.example · © StyledCo</footer>
+</div>
+<style>
+.fsite{border:1px solid var(--border);border-radius:18px;overflow:hidden;background:#fff}
+.fsite-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:14px 22px;border-bottom:1px solid var(--border)}
+.fsite-head nav a{margin-left:14px;color:var(--muted);text-decoration:none;font-weight:600;font-size:14px}
+.fsite-head nav a:hover{color:var(--accent)}
+.fsite-hero{padding:44px 24px;text-align:center;background:linear-gradient(135deg,var(--soft),#fff);border-bottom:1px solid var(--border)}
+.fsite-hero h2{font-size:clamp(22px,4vw,32px);letter-spacing:-.02em}
+.fsite-hero p{color:var(--muted);max-width:480px;margin:8px auto 0}
+.fsite-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--border)}
+.fsite-grid article{background:#fff;padding:22px;text-align:center}
+.fsite-grid b{font-size:16px;color:var(--dark)}
+.fsite-foot{padding:16px 22px;background:var(--soft);color:var(--muted);font-size:13.5px;text-align:center}
+</style>
+</main>
+<footer class="demo-foot">Buddy Edu · Practical Work demo — CSS Project 06</footer>
+</body>
+</html>

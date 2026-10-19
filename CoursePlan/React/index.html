@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete React course outline with modules, topics, exercises, and study progress. English and Myanmar supported.">
+    <title>Buddy Edu | React Course Outline
+    </title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        :root {
+            --accent: #0f766e;
+            --accent-dark: #115e59;
+            --accent-soft: #f0fdfa;
+            --accent-pale: #99f6e4;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .hero-tags .tag {
+            display: inline-block;
+            padding: 6px 13px;
+            border: 1px solid rgba(255, 255, 255, .35);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .12);
+            font-size: 13px;
+        }
+
+        .progress-hint {
+            margin-bottom: 14px;
+        }
+
+        .topic .lesson-link {
+            display: inline-block;
+            margin-top: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .level {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 11px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent-dark);
+            font-size: 11px;
+            font-weight: 800;
+        }
+    
+    </style>
+
+
+
+</head><body>
+
+    <!-- ======================= Navbar ======================= -->
+    <nav class="navbar">
+        <a href="../index.html" class="logo">Buddy <span>Edu
+        </span>
+
+        
+        </a><button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" aria-expanded="false">
+            <span>
+            </span><span>
+            </span><span>
+            </span>
+        
+
+        
+        </button><div class="nav-menu" data-nav-menu>
+            <div class="nav-links">
+                <a href="../index.html" data-i18n="nav.home">Home
+                
+                </a><a href="#overview" data-i18n="nav.overview">Overview
+                
+                </a><a href="#modules" data-i18n="nav.modules">Modules
+                
+                </a><a href="#schedule" data-i18n="nav.plan">Study Plan
+                
+                </a><a href="#references" data-i18n="nav.references">References
+                
+                </a><a href="../Learning/index.html" class="ext" data-i18n="nav.learn">Learn
+            
+
+            
+                </a>
+            </div><div class="lang-switch" role="group" aria-label="Language">
+                <button class="lang-btn" data-set-lang="en" aria-pressed="true">EN
+                
+                </button><button class="lang-btn" data-set-lang="my" aria-pressed="false">မြန်မာ
+    <!-- ======================= Hero ======================= -->
+    
+                </button>
+            </div>
+        </div>
+    </nav><header class="hero">
+        <div class="hero-content">
+            <span class="badge" data-i18n="hero.badge">REACT DEVELOPMENT COURSE
+
+            
+            </span><h1 data-i18n="hero.title" data-i18n-html="hero.title">React Development <span>Course Outline
+            </span>
+
+            
+            </h1><p data-i18n="hero.desc">
+                Learn React step by step, from your first component to hooks,
+                forms, routing, and building complete interactive applications.
+            
+
+            
+            </p><div class="hero-tags">
+                <span class="tag" data-i18n="hero.tag1">⚛ React
+                
+                </span><span class="tag" data-i18n="hero.tag2">📘 Beginner to Advanced
+                
+                </span><span class="tag" data-i18n="hero.tag3">🛠 Hands-on Projects
+                
+                </span><span class="tag" data-i18n="hero.tag4">⏱ 8-Week Plan
+            
+
+            
+                </span>
+            </div><div class="hero-actions">
+                <a href="#modules" class="btn" data-i18n="hero.cta">Explore Course Modules →
+                
+                </a><a href="../Learning/index.html" class="btn btn-ghost" data-i18n="hero.cta2">Open Learning Hub →
+
+    
+                </a>
+            </div>
+        </div>
+    </header><main>
+
+        <!-- ======================= Overview ======================= -->
+        <section class="container" id="overview">
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="moduleTotal">10
+                    
+                    </div><p data-i18n="stats.modules">Course Modules
+                
+
+                
+                    </p>
+                </div><div class="stat-card">
+                    <div class="stat-number" id="topicTotal">0
+                    
+                    </div><p data-i18n="stats.topics">Learning Topics
+                
+
+                
+                    </p>
+                </div><div class="stat-card">
+                    <div class="stat-number" id="completedTotal">0
+                    
+                    </div><p data-i18n="stats.completed">Topics Completed
+                
+
+                
+                    </p>
+                </div><div class="stat-card">
+                    <div class="stat-number" id="statProgress">0%
+                    
+                    </div><p data-i18n="stats.progress">Learning Progress
+                    </p><div style="margin-top: 35px;">
+                
+                    </div>
+                </div><h2 class="section-title" data-i18n="overview.title">Course Overview
+
+                
+                </h2><p class="section-desc" data-i18n="overview.desc">
+                    This course covers React fundamentals, JSX, components and props,
+                    events, state and forms, hooks, styling, routing, testing, and a
+                    complete final project.
+                
+            
+
+            
+                </p>
+            </div><div class="progress-card">
+                <div class="progress-header">
+                    <h3 data-i18n="progress.title">Your Learning Progress
+                    <strong id="progressPercent">0%
+                
+
+                
+                    </strong>
+                    </h3>
+                </div><p class="progress-text progress-hint" data-i18n="progress.hint">
+                    Check a topic after you have studied and practiced it.
+                
+
+                
+                </p><div
+                    class="progress-bar"
+                    id="progressBar"
+                    role="progressbar"
+                    data-i18n-attr="aria-label:progress.barlabel"
+                    aria-label="Course completion"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                >
+                    <div class="progress-fill" id="progressFill">
+                    </div><p class="progress-text" id="progressText">
+                    0 of 0 topics completed — all topics remaining.
+                
+            
+
+        
+
+        <!-- ======================= Modules ======================= -->
+        
+                    </p>
+                </div>
+            </div>
+        </section><section class="container" id="modules">
+
+            <h2 class="section-title" data-i18n="modules.title">React Learning Modules
+
+            
+            </h2><p class="section-desc" data-i18n="modules.desc">
+                Follow the modules in order for a structured learning experience.
+                Check each topic after completing the lesson and its practice exercises.
+            
+
+            
+            </p><div class="actions">
+                <button class="btn btn-primary" id="expandAll" data-i18n="btn.expand">Expand All
+                
+                </button><button class="btn" id="collapseAll" data-i18n="btn.collapse">Collapse All
+                
+                </button><button class="btn" id="resetProgress" data-i18n="btn.reset">Reset Progress
+            
+
+            
+                </button>
+            </div><div class="module-list" id="moduleList">
+
+        
+
+        <!-- ======================= Schedule ======================= -->
+        
+            </div>
+        </section><section class="container" id="schedule">
+
+            <h2 class="section-title" data-i18n="schedule.title">8-Week Study Plan
+
+            
+            </h2><p class="section-desc" data-i18n="schedule.desc">
+                Suggested schedule for learning React with regular practice.
+            
+
+            
+            </p><div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.week">Week
+                            
+                            </th><th data-i18n="table.topics">Topics
+                            
+                            </th><th data-i18n="table.practical">Practice
+                        
+                    
+
+                    
+                            </th>
+                        </tr>
+                    </thead><tbody>
+                        <tr>
+                            <td data-i18n="week.1.w">Week 1
+                            
+                            </td><td data-i18n="week.1.t">Introduction, setup, first app, JSX
+                            
+                            </td><td data-i18n="week.1.p">Build a simple React page
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.2.w">Week 2
+                            
+                            </td><td data-i18n="week.2.t">Components, props, children
+                            
+                            </td><td data-i18n="week.2.p">Profile cards
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.3.w">Week 3
+                            
+                            </td><td data-i18n="week.3.t">Events, conditions, lists
+                            
+                            </td><td data-i18n="week.3.p">Interactive task list
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.4.w">Week 4
+                            
+                            </td><td data-i18n="week.4.t">useState, forms, controlled inputs
+                            
+                            </td><td data-i18n="week.4.p">Registration form
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.5.w">Week 5
+                            
+                            </td><td data-i18n="week.5.t">useEffect, useRef, useContext
+                            
+                            </td><td data-i18n="week.5.p">API data viewer
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.6.w">Week 6
+                            
+                            </td><td data-i18n="week.6.t">useReducer, useMemo, useCallback, custom hooks
+                            
+                            </td><td data-i18n="week.6.p">Reusable state logic
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.7.w">Week 7
+                            
+                            </td><td data-i18n="week.7.t">CSS, modules, Router, Suspense
+                            
+                            </td><td data-i18n="week.7.p">Multi-page website
+                        
+                        
+                            </td>
+                        </tr><tr>
+                            <td data-i18n="week.8.w">Week 8
+                            
+                            </td><td data-i18n="week.8.t">Advanced concepts, review, interview prep
+                            
+                            </td><td data-i18n="week.8.p">Complete a final project
+                        
+                    
+                
+            
+
+        
+
+        <!-- ======================= Outcomes ======================= -->
+        
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section><section class="container" id="outcomes">
+
+            <h2 class="section-title" data-i18n="outcomes.title">Learning Outcomes
+
+            
+            </h2><p class="section-desc" data-i18n="outcomes.desc">
+                Skills students should gain after completing the React course.
+            
+
+            
+            </p><div class="cards">
+                <article class="card">
+                    <div class="card-number">01
+                    
+                    </div><h3 data-i18n="out.1.t">React Fundamentals
+                    
+                    </h3><p data-i18n="out.1.d">Understand React and component-based development.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">02
+                    
+                    </div><h3 data-i18n="out.2.t">Reusable Components
+                    
+                    </h3><p data-i18n="out.2.d">Create reusable components using props and JSX.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">03
+                    
+                    </div><h3 data-i18n="out.3.t">State Management
+                    
+                    </h3><p data-i18n="out.3.d">Manage application state with React Hooks.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">04
+                    
+                    </div><h3 data-i18n="out.4.t">Forms and Events
+                    
+                    </h3><p data-i18n="out.4.d">Build interactive forms and handle user events.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">05
+                    
+                    </div><h3 data-i18n="out.5.t">API Data
+                    
+                    </h3><p data-i18n="out.5.d">Fetch and display data from APIs.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">06
+                    
+                    </div><h3 data-i18n="out.6.t">Routing
+                    
+                    </h3><p data-i18n="out.6.d">Create multi-page applications with routing.
+                
+
+                
+                    </p>
+                </article><article class="card">
+                    <div class="card-number">07
+                    
+                    </div><h3 data-i18n="out.7.t">Complete Projects
+                    
+                    </h3><p data-i18n="out.7.d">Build and organize a complete React project.
+                
+            
+
+        
+
+        <!-- ======================= Prerequisites ======================= -->
+        
+                    </p>
+                </article>
+            </div>
+        </section><section class="container" id="prerequisites">
+
+            <h2 class="section-title" data-i18n="prerequisites.title">Prerequisites
+
+            
+            </h2><p class="section-desc" data-i18n="prerequisites.desc">
+                Basic knowledge you should have before starting this course.
+            
+
+            
+            </p><div class="cards">
+                <article class="card">
+                    <div class="card-number">01
+                    
+                    </div><h3 data-i18n="pre.1.t">HTML fundamentals
+                
+
+                
+                    </h3>
+                </article><article class="card">
+                    <div class="card-number">02
+                    
+                    </div><h3 data-i18n="pre.2.t">CSS fundamentals and responsive design
+                
+
+                
+                    </h3>
+                </article><article class="card">
+                    <div class="card-number">03
+                    
+                    </div><h3 data-i18n="pre.3.t">JavaScript variables and data types
+                
+
+                
+                    </h3>
+                </article><article class="card">
+                    <div class="card-number">04
+                    
+                    </div><h3 data-i18n="pre.4.t">Functions, arrays, and objects
+                
+
+                
+                    </h3>
+                </article><article class="card">
+                    <div class="card-number">05
+                    
+                    </div><h3 data-i18n="pre.5.t">ES6 modules, arrow functions, and destructuring
+                
+
+                
+                    </h3>
+                </article><article class="card">
+                    <div class="card-number">06
+                    
+                    </div><h3 data-i18n="pre.6.t">Basic understanding of npm and the terminal
+                
+            
+
+        
+
+        <!-- ======================= Projects ======================= -->
+        
+                    </h3>
+                </article>
+            </div>
+        </section><section class="container" id="projects">
+
+            <h2 class="section-title" data-i18n="projects.title">Practical Projects
+
+            
+            </h2><p class="section-desc" data-i18n="projects.desc">
+                Apply your knowledge by building real applications.
+            
+
+            
+            </p><div class="cards">
+                <a class="card demo-card" href="../demos/react/01.html">
+                    <h3 data-i18n="proj.1.t">01. Personal Profile Website
+                    
+                    </h3><p data-i18n="proj.1.d">Create reusable profile components and pass user data through props.
+                    <span class="level" data-i18n="proj.1.l">Beginner
+                
+
+                
+                    </span>
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/react/02.html">
+                    <h3 data-i18n="proj.2.t">02. To-Do List App
+                    
+                    </h3><p data-i18n="proj.2.d">Add, complete, filter, and delete tasks using React state.
+                    <span class="level" data-i18n="proj.2.l">Beginner
+                
+
+                
+                    </span>
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/react/03.html">
+                    <h3 data-i18n="proj.3.t">03. Student Registration System
+                    
+                    </h3><p data-i18n="proj.3.d">Build a form with validation, multiple inputs, and a student list.
+                    <span class="level" data-i18n="proj.3.l">Intermediate
+                
+
+                
+                    </span>
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/react/04.html">
+                    <h3 data-i18n="proj.4.t">04. Weather or API Dashboard
+                    
+                    </h3><p data-i18n="proj.4.d">Fetch external data, display loading states, and handle errors.
+                    <span class="level" data-i18n="proj.4.l">Intermediate
+                
+
+                
+                    </span>
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/react/05.html">
+                    <h3 data-i18n="proj.5.t">05. Multi-Page Education Website
+                    
+                    </h3><p data-i18n="proj.5.d">Use React Router, reusable layouts, and navigation between pages.
+                    <span class="level" data-i18n="proj.5.l">Intermediate
+                
+
+                
+                    </span>
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a><a class="card demo-card" href="../demos/react/06.html">
+                    <h3 data-i18n="proj.6.t">06. Buddy Edu Learning Platform
+                    
+                    </h3><p data-i18n="proj.6.d">Create course cards, progress tracking, quizzes, and a student dashboard.
+                    <span class="level" data-i18n="proj.6.l">Final Project
+                
+            
+
+        
+
+        <!-- ======================= References ======================= -->
+        
+                    </span>
+                    </p>
+                <span class="demo-badge"><span data-i18n="proj.demo">Live demo ↗</span></span></a>
+            </div>
+        </section><section class="container" id="references">
+
+            <h2 class="section-title" data-i18n="refs.title">Official Learning Resources
+
+            
+            </h2><p class="section-desc" data-i18n="refs.desc">
+                Use these references alongside the course modules.
+            
+
+            
+            </p><div class="references">
+                <a class="reference-link" href="https://react.dev/learn" target="_blank" rel="noopener noreferrer">
+                    Official React Documentation <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://react.dev/reference/react" target="_blank" rel="noopener noreferrer">
+                    React API Reference <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://react.dev/reference/react/hooks" target="_blank" rel="noopener noreferrer">
+                    React Hooks Reference <span>↗
+                    </span>
+                
+
+                
+                </a><a class="reference-link" href="https://github.com/facebook/react" target="_blank" rel="noopener noreferrer">
+                    React on GitHub <span>↗
+                    </span>
+                
+            
+
+        
+
+    
+
+    <!-- ======================= Footer ======================= -->
+        
+    
+<!-- ======================= Scripts ======================= -->
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <nav class="footer-links">
+            <a href="index.html" data-i18n="nav.home">Home</a>
+            <a href="#overview" data-i18n="nav.plan">Study Plan</a>
+            <a href="../../Learning/index.html" data-i18n="nav.learn">Learn</a>
+        </nav>
+        <div class="footer-bottom" style="justify-content: center;">
+            <span>© <span data-year></span> Buddy Edu. <span data-i18n="footer.rights">All rights reserved.</span></span>
+        </div>
+    </footer>
+
+    <script src="../assets/js/i18n.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        /* ---------------- Translations ---------------- */
+        const I18N = {
+            en: {
+                "__title__": "Buddy Edu | React Course Outline",
+
+                "nav.home": "Home",
+                "nav.overview": "Overview",
+                "nav.modules": "Modules",
+                "nav.plan": "Study Plan",
+                "nav.references": "References",
+                "nav.learn": "Learn",
+
+                "hero.badge": "REACT DEVELOPMENT COURSE",
+                "hero.title": "React Development <span>Course Outline</span>",
+                "hero.desc": "Learn React step by step, from your first component to hooks, forms, routing, and building complete interactive applications.",
+                "hero.tag1": "⚛ React",
+                "hero.tag2": "📘 Beginner to Advanced",
+                "hero.tag3": "🛠 Hands-on Projects",
+                "hero.tag4": "⏱ 8-Week Plan",
+                "hero.cta": "Explore Course Modules →",
+                "hero.cta2": "Open Learning Hub →",
+
+                "stats.modules": "Course Modules",
+                "stats.topics": "Learning Topics",
+                "stats.completed": "Topics Completed",
+                "stats.progress": "Learning Progress",
+
+                "overview.title": "Course Overview",
+                "overview.desc": "This course covers React fundamentals, JSX, components and props, events, state and forms, hooks, styling, routing, testing, and a complete final project.",
+
+                "progress.title": "Your Learning Progress",
+                "progress.barlabel": "Course completion",
+                "progress.hint": "Check a topic after you have studied and practiced it.",
+                "progress.start": "0 of {total} topics completed — all topics remaining.",
+                "progress.one": "{done} of {total} topics completed — 1 topic remaining.",
+                "progress.more": "{done} of {total} topics completed — {remaining} topics remaining.",
+                "progress.done": "{done} of {total} topics completed. 🎉 Course completed!",
+
+                "modules.title": "React Learning Modules",
+                "modules.desc": "Follow the modules in order for a structured learning experience. Check each topic after completing the lesson and its practice exercises.",
+                "btn.expand": "Expand All",
+                "btn.collapse": "Collapse All",
+                "btn.reset": "Reset Progress",
+                "module.topics": "{n} topics",
+                "module.learn": "Topics to Learn",
+                "module.objective": "Learning Objective:",
+                "module.check": "Mark {topic} as completed",
+                "module.lesson": "Study lesson ↗",
+                "module.confirm": "Reset all React course progress?",
+
+                "schedule.title": "8-Week Study Plan",
+                "schedule.desc": "Suggested schedule for learning React with regular practice.",
+                "table.week": "Week",
+                "table.topics": "Topics",
+                "table.practical": "Practice",
+
+                "week.1.w": "Week 1", "week.1.t": "Introduction, setup, first app, JSX", "week.1.p": "Build a simple React page",
+                "week.2.w": "Week 2", "week.2.t": "Components, props, children", "week.2.p": "Profile cards",
+                "week.3.w": "Week 3", "week.3.t": "Events, conditions, lists", "week.3.p": "Interactive task list",
+                "week.4.w": "Week 4", "week.4.t": "useState, forms, controlled inputs", "week.4.p": "Registration form",
+                "week.5.w": "Week 5", "week.5.t": "useEffect, useRef, useContext", "week.5.p": "API data viewer",
+                "week.6.w": "Week 6", "week.6.t": "useReducer, useMemo, useCallback, custom hooks", "week.6.p": "Reusable state logic",
+                "week.7.w": "Week 7", "week.7.t": "CSS, modules, Router, Suspense", "week.7.p": "Multi-page website",
+                "week.8.w": "Week 8", "week.8.t": "Advanced concepts, review, interview prep", "week.8.p": "Complete a final project",
+
+                "outcomes.title": "Learning Outcomes",
+                "outcomes.desc": "Skills students should gain after completing the React course.",
+                "out.1.t": "React Fundamentals", "out.1.d": "Understand React and component-based development.",
+                "out.2.t": "Reusable Components", "out.2.d": "Create reusable components using props and JSX.",
+                "out.3.t": "State Management", "out.3.d": "Manage application state with React Hooks.",
+                "out.4.t": "Forms and Events", "out.4.d": "Build interactive forms and handle user events.",
+                "out.5.t": "API Data", "out.5.d": "Fetch and display data from APIs.",
+                "out.6.t": "Routing", "out.6.d": "Create multi-page applications with routing.",
+                "out.7.t": "Complete Projects", "out.7.d": "Build and organize a complete React project.",
+
+                "prerequisites.title": "Prerequisites",
+                "prerequisites.desc": "Basic knowledge you should have before starting this course.",
+                "pre.1.t": "HTML fundamentals",
+                "pre.2.t": "CSS fundamentals and responsive design",
+                "pre.3.t": "JavaScript variables and data types",
+                "pre.4.t": "Functions, arrays, and objects",
+                "pre.5.t": "ES6 modules, arrow functions, and destructuring",
+                "pre.6.t": "Basic understanding of npm and the terminal",
+
+                "projects.title": "Practical Projects",
+                "projects.desc": "Apply your knowledge by building real applications.",
+                "proj.demo": "Live demo ↗",
+                "proj.1.t": "01. Personal Profile Website", "proj.1.d": "Create reusable profile components and pass user data through props.", "proj.1.l": "Beginner",
+                "proj.2.t": "02. To-Do List App", "proj.2.d": "Add, complete, filter, and delete tasks using React state.", "proj.2.l": "Beginner",
+                "proj.3.t": "03. Student Registration System", "proj.3.d": "Build a form with validation, multiple inputs, and a student list.", "proj.3.l": "Intermediate",
+                "proj.4.t": "04. Weather or API Dashboard", "proj.4.d": "Fetch external data, display loading states, and handle errors.", "proj.4.l": "Intermediate",
+                "proj.5.t": "05. Multi-Page Education Website", "proj.5.d": "Use React Router, reusable layouts, and navigation between pages.", "proj.5.l": "Intermediate",
+                "proj.6.t": "06. Buddy Edu Learning Platform", "proj.6.d": "Create course cards, progress tracking, quizzes, and a student dashboard.", "proj.6.l": "Final Project",
+
+                "refs.title": "Official Learning Resources",
+                "refs.desc": "Use these references alongside the course modules.",
+
+
+                "footer.blurb": "Free, project-based web development courses for everyone — in English and Myanmar.",
+                "footer.courses": "Courses",
+                "footer.explore": "Explore",
+                "footer.rights": "All rights reserved.",
+                "footer.tagline": "Learn Today. Build Tomorrow."
+            },
+
+            my: {
+                "__title__": "Buddy Edu | React သင်တန်းအစီအစဉ်",
+
+                "nav.home": "ပင်မစာမျက်နှာ",
+                "nav.overview": "ခြုံငုံသုံးသပ်ချက်",
+                "nav.modules": "မော်ဂျူးများ",
+                "nav.plan": "လေ့လာရေးအစီအစဉ်",
+                "nav.references": "ကိုးကားစာရင်း",
+                "nav.learn": "လေ့လာရန်",
+
+                "hero.badge": "React ဖွံ့ဖြိုးရေး သင်တန်း",
+                "hero.title": "React <span>သင်တန်းအစီအစဉ်</span>",
+                "hero.desc": "React ကို အခြေခံ component မှစ၍ hook၊ form နှင့် routing အထိ အဆင့်ဆင့် လေ့လာပါ။ Interactive application အပြည့်အစုံ တည်ဆောက်နည်းကို လက်တွေးလေ့လာပါ။",
+                "hero.tag1": "⚛ React",
+                "hero.tag2": "📘 အခြေခံမှ အဆင့်မြင့်အထိ",
+                "hero.tag3": "🛠 လက်တွေး ပရောဂျက်များ",
+                "hero.tag4": "⏱ ပတ် ၈ ပတ်စာ အစီအစဉ်",
+                "hero.cta": "မော်ဂျူးများ စတင်ကြည့်ရန် →",
+                "hero.cta2": "လေ့လာရေးစင်တာ ဖွင့်ရန် →",
+
+                "stats.modules": "သင်တန်းမော်ဂျူးများ",
+                "stats.topics": "လေ့လာရန် ခေါင်းစဉ်များ",
+                "stats.completed": "ပြီးဆုံးပြီး ခေါင်းစဉ်များ",
+                "stats.progress": "လေ့လာမှုတိုးတက်မှု",
+
+                "overview.title": "သင်တန်းအကြောင်း ခြုံငုံသုံးသပ်ချက်",
+                "overview.desc": "ဤသင်တန်းတွင် React အခြေခံများ၊ JSX၊ component နှင့် prop များ၊ event များ၊ state နှင့် form များ၊ hook များ၊ styling၊ routing၊ testing နှင့် နောက်ဆုံးပရောဂျက် အပြည့်အစုံ ပါဝင်ပါသည်။",
+
+                "progress.title": "ကျွန်ုပ်၏ လေ့လာမှုတိုးတက်မှု",
+                "progress.barlabel": "သင်တန်းပြီးဆုံးမှု",
+                "progress.hint": "သင်ခန်းစာ လေ့လာပြီး လက်တွေးလုပ်ဆောင်ပြီးပါက ခေါင်းစဉ်ကို အမှတ်ပါ။",
+                "progress.start": "ခေါင်းစဉ် {total} ခုတွင် 0 ခု ပြီးပါပြီ — ခေါင်းစဉ်အားလုံး ကျန်ရှိနေသေးသည်။",
+                "progress.one": "ခေါင်းစဉ် {total} ခုတွင် {done} ခု ပြီးပါပြီ — 1 ခု ကျန်ရှိသေးသည်။",
+                "progress.more": "ခေါင်းစဉ် {total} ခုတွင် {done} ခု ပြီးပါပြီ — {remaining} ခု ကျန်ရှိသေးသည်။",
+                "progress.done": "ခေါင်းစဉ် {total} ခုတွင် {done} ခု ပြီးပါပြီ။ 🎉 သင်တန်း ပြီးဆုံးပါပြီ!",
+
+                "modules.title": "React လေ့လာရေးမော်ဂျူးများ",
+                "modules.desc": "စနစ်တကျ လေ့လာနိုင်ရန် မော်ဂျူးများကို အစဉ်လိုက် လိုက်နာပါ။ သင်ခန်းစာနှင့် လက်တွေးလေ့ကျင့်ခန်းများ ပြီးဆုံးပြီးချိန်တွင် ခေါင်းစဉ်တစ်ခုချင်းစီကို အမှတ်ပါ။",
+                "btn.expand": "အားလုံးဖွင့်ရန်",
+                "btn.collapse": "အားလုံးချုပ်ရန်",
+                "btn.reset": "တိုးတက်မှု ပြန်လည်သတ်မှတ်ရန်",
+                "module.topics": "ခေါင်းစဉ် {n} ခု",
+                "module.learn": "လေ့လာရန် ခေါင်းစဉ်များ",
+                "module.objective": "လေ့လာရည်ရွယ်ချက် -",
+                "module.check": "{topic} ကို ပြီးပြီဟု မှတ်သားရန်",
+                "module.lesson": "သင်ခန်းစာ လေ့လာရန် ↗",
+                "module.confirm": "React သင်တန်း၏ တိုးတက်မှုအားလုံးကို ပြန်လည်သတ်မှတ်မှာလား?",
+
+                "schedule.title": "ပတ် ၈ ပတ်စာ လေ့လာရေးအစီအစဉ်",
+                "schedule.desc": "ပုံမှန် လေ့ကျင့်ခန်းများနှင့်အတူ React လေ့လာရန် အကြံပြုထားသော အချိန်ဇယား။",
+                "table.week": "ပတ်",
+                "table.topics": "ခေါင်းစဉ်များ",
+                "table.practical": "လက်တွေးအလုပ်",
+
+                "week.1.w": "ပတ် ၁", "week.1.t": "မိတ်ဆက်၊ setup၊ first app၊ JSX", "week.1.p": "ရိုးရှင်းသော React စာမျက်နှာ တည်ဆောက်ရန်",
+                "week.2.w": "ပတ် ၂", "week.2.t": "Component၊ prop နှင့် children", "week.2.p": "Profile card များ",
+                "week.3.w": "ပတ် ၃", "week.3.t": "Event၊ condition နှင့် list", "week.3.p": "Interactive task list",
+                "week.4.w": "ပတ် ၄", "week.4.t": "useState၊ form နှင့် controlled input", "week.4.p": "မှတ်ပုံတင် form",
+                "week.5.w": "ပတ် ၅", "week.5.t": "useEffect၊ useRef နှင့် useContext", "week.5.p": "API အချက်အလက် ကြည့်ရှုသူ",
+                "week.6.w": "ပတ် ၆", "week.6.t": "useReducer၊ useMemo၊ useCallback နှင့် custom hook များ", "week.6.p": "ပြန်လည်အသုံးပြုနိုင်သော state logic",
+                "week.7.w": "ပတ် ၇", "week.7.t": "CSS၊ module၊ Router နှင့် Suspense", "week.7.p": "အပိုင်းများစုပါ ဝဘ်ဆိုဒ်",
+                "week.8.w": "ပတ် ၈", "week.8.t": "အဆင့်မြင့်အခြေခံများ၊ ပြန်လည်သုံးသပ်ခြင်း၊ အငတ်ဗျူဟာ ပြင်ဆင်ခြင်း", "week.8.p": "နောက်ဆုံးပရောဂျက် ပြီးစီးရန်",
+
+                "outcomes.title": "သင်ယူမှုရလဒ်များ",
+                "outcomes.desc": "သင်တန်းပြီးဆုံးပြီးနောက် ရရှိသင့်သော ကျွမ်းကျင်မှုများ။",
+                "out.1.t": "React အခြေခံများ", "out.1.d": "React နှင့် component အခြေခံ ဖွံ့ဖြိုးရေးကို နားလည်ပါ။",
+                "out.2.t": "ပြန်လည်အသုံးပြုနိုင်သော Component များ", "out.2.d": "prop နှင့် JSX များဖြင့် ပြန်လည်အသုံးပြုနိုင်သော component များ ဖန်တီးပါ။",
+                "out.3.t": "State စီမံခန့်ခွဲမှု", "out.3.d": "React Hook များဖြင့် application state ကို စီမံပါ။",
+                "out.4.t": "Form နှင့် Event များ", "out.4.d": "Interactive form များ တည်ဆောက်ပြီး အသုံးပြုသူ event များကို ကိုင်တွယ်ပါ။",
+                "out.5.t": "API အချက်အလက်", "out.5.d": "API များမှ အချက်အလက်များ ယူသုံးပြီး ပြသပါ။",
+                "out.6.t": "Routing", "out.6.d": "Routing ဖြင့် အပိုင်းများစုပါ application များ ဖန်တီးပါ။",
+                "out.7.t": "အပြည့်အစုံ ပရောဂျက်များ", "out.7.d": "အပြည့်အစုံ React ပရောဂျက်တစ်ခုကို တည်ဆောက်၍ စနစ်တကျ စီစဉ်ပါ။",
+
+                "prerequisites.title": "ကြိုတင်လိုအပ်ချက်များ",
+                "prerequisites.desc": "ဤသင်တန်း စတင်မီ သိရှိထားသင့်သော အခြေခံအသိပညာများ။",
+                "pre.1.t": "HTML အခြေခံများ",
+                "pre.2.t": "CSS အခြေခံနှင့် responsive design",
+                "pre.3.t": "JavaScript variable များနှင့် data type များ",
+                "pre.4.t": "Function၊ array နှင့် object များ",
+                "pre.5.t": "ES6 module၊ arrow function နှင့် destructuring",
+                "pre.6.t": "npm နှင့် terminal အကြောင်း အခြေခံနားလည်မှု",
+
+                "projects.title": "လက်တွေး ပရောဂျက်များ",
+                "projects.desc": "တကယ့် application များ တည်ဆောက်ခြင်းဖြင့် သင်၏ဗဟုသုတကို အသုံးချပါ။",
+                "proj.demo": "တိုက်ရိုက် ကြည့်ရန်",
+                "proj.1.t": "01. ကိုယ်ရေး profile ဝဘ်ဆိုဒ်", "proj.1.d": "ပြန်လည်အသုံးပြုနိုင်သော profile component များ ဖန်တီးပြီး prop များဖြင့် အသုံးပြုသူအချက်အလက် ပေးပို့ပါ။", "proj.1.l": "အခြေခံ",
+                "proj.2.t": "02. To-Do List App", "proj.2.d": "React state ဖြင့် task များ ထည့်၊ ပြီးအောင်၊ filter ချ နှင့် ဖျက်ပါ။", "proj.2.l": "အခြေခံ",
+                "proj.3.t": "03. ကျောင်းသား မှတ်ပုံတင်စနစ်", "proj.3.d": "Validation၊ input အမျိုးမျိုးနှင့် ကျောင်းသားစာရင်းပါ form တစ်ခု တည်ဆောက်ပါ။", "proj.3.l": "အလယ်အလတ်",
+                "proj.4.t": "04. မိုးလေဝသ / API Dashboard", "proj.4.d": "ပြင်ပ data ယူသုံးပြီး loading state များ ပြသကာ error များကို ကိုင်တွယ်ပါ။", "proj.4.l": "အလယ်အလတ်",
+                "proj.5.t": "05. အပိုင်းများစုပါ ပညာရေး ဝဘ်ဆိုဒ်", "proj.5.d": "React Router၊ ပြန်လည်အသုံးပြုနိုင်သော layout များနှင့် စာမျက်နှာများကြား navigation အသုံးပြုပါ။", "proj.5.l": "အလယ်အလတ်",
+                "proj.6.t": "06. Buddy Edu လေ့လာရေး Platform", "proj.6.d": "Course card များ၊ တိုးတက်မှု မှတ်တမ်းတင်ခြင်း၊ quiz များနှင့် ကျောင်းသား dashboard ဖန်တီးပါ။", "proj.6.l": "နောက်ဆုံးပရောဂျက်",
+
+                "refs.title": "တရားဝင် လေ့လာရေး အရင်းအမြစ်များ",
+                "refs.desc": "ဤကိုးကားချက်များကို သင်တန်းမော်ဂျူးများနှင့်အတူ တွဲဖက်အသုံးပြုပါ။",
+
+
+                "footer.blurb": "အားလုံးအတွက် အခမဲ့၊ ပရောဂျက်အခြေခံ ဝဘ်ဖွံ့ဖြိုးရေး သင်တန်းများ — အင်္ဂလိပ်နှင့် မြန်မာ။",
+                "footer.courses": "သင်တန်းများ",
+                "footer.explore": "လေ့လာရန်",
+                "footer.rights": "မူပိုင်ခွင့်အားလုံး ထိန်းသိမ်းထားပါသည်။",
+                "footer.tagline": "ယနေ့ လေ့လာ • မနက်ဖြန် တည်ဆောက်"
+            }
+        };
+
+        /* ---------------- Course modules ---------------- */
+        const modules = [
+            {
+                title: "React Introduction & Setup",
+                titleMy: "React မိတ်ဆက်နှင့် Setup",
+                description: "Understand React and prepare your development environment.",
+                descriptionMy: "React ကို နားလည်ပြီး development environment ကို ပြင်ဆင်ပါ။",
+                topics: [
+                    ["What is React?", "react_intro.asp"],
+                    ["React Get Started", "react_getstarted.asp"],
+                    ["Creating Your First App", "react_first_app.asp"],
+                    ["Rendering HTML", "react_render.asp"],
+                    ["React Upgrade", "react_upgrade.asp"],
+                    ["React Server", "react_server.asp"],
+                    ["React Compiler", "react_compiler.asp"]
+                ],
+                objective: "Set up a React development environment and understand how React renders interfaces.",
+                objectiveMy: "React development environment ပြင်ဆင်ပြီး React မည်သို့ interface များ ပြသသည်ကို နားလည်ပါ။"
+            },
+            {
+                title: "JavaScript ES6 & JSX",
+                titleMy: "JavaScript ES6 နှင့် JSX",
+                description: "Learn the JavaScript features and syntax used in React.",
+                descriptionMy: "React တွင် အသုံးပြုသော JavaScript အင်္ဂါရပ်များနှင့် syntax ကို လေ့လာပါ။",
+                topics: [
+                    ["JavaScript ES6 in React", "react_es6.asp"],
+                    ["JSX Introduction", "react_jsx.asp"],
+                    ["JSX Expressions", "react_jsx_expressions.asp"],
+                    ["JSX Attributes", "react_jsx_attributes.asp"],
+                    ["JSX If Statements", "react_jsx_if_statements.asp"],
+                    ["JSX and JavaScript Expressions", "react_jsx_expressions.asp"]
+                ],
+                objective: "Use ES6 features and write correct JSX syntax in React components.",
+                objectiveMy: "ES6 အင်္ဂါရပ်များ အသုံးပြုပြီး React component များတွင် မှန်ကန်သော JSX syntax ရေးပါ။"
+            },
+            {
+                title: "Components & Props",
+                titleMy: "Component နှင့် Prop များ",
+                description: "Build reusable user interface elements.",
+                descriptionMy: "ပြန်လည်အသုံးပြုနိုင်သော user interface element များ တည်ဆောက်ပါ။",
+                topics: [
+                    ["React Components", "react_components.asp"],
+                    ["Class Components", "react_class.asp"],
+                    ["Function Components", "react_components.asp"],
+                    ["Props", "react_props.asp"],
+                    ["Props Destructuring", "react_props_destructuring.asp"],
+                    ["Props Children", "react_props_children.asp"]
+                ],
+                objective: "Build reusable components and pass data between them with props.",
+                objectiveMy: "ပြန်လည်အသုံးပြုနိုင်သော component များ တည်ဆောက်ပြီး prop များဖြင့် data ပေးပို့ပါ။"
+            },
+            {
+                title: "Events, Conditions & Lists",
+                titleMy: "Event၊ Condition နှင့် List များ",
+                description: "Make components interactive and render dynamic content.",
+                descriptionMy: "Component များကို interactive ဖြစ်စေပြီး dynamic content များ ပြသပါ။",
+                topics: [
+                    ["React Events", "react_events.asp"],
+                    ["Conditional Rendering", "react_conditional_rendering.asp"],
+                    ["Rendering Lists", "react_lists.asp"],
+                    ["Keys in Lists", "react_lists.asp"],
+                    ["Event Handlers", "react_events.asp"]
+                ],
+                objective: "Handle user events and render lists and conditional content.",
+                objectiveMy: "အသုံးပြုသူ event များကို ကိုင်တွယ်ပြီး list နှင့် condition ပါ content များ ပြသပါ။"
+            },
+            {
+                title: "React State & Forms",
+                titleMy: "React State နှင့် Form များ",
+                description: "Manage component state and collect user input.",
+                descriptionMy: "Component state ကို စီမံပြီး အသုံးပြုသူ၏ ထည့်သွင်းချက်များ စုဆောင်းပါ။",
+                topics: [
+                    ["useState Hook", "react_usestate.asp"],
+                    ["React Forms", "react_forms.asp"],
+                    ["Form Submission", "react_forms_submit.asp"],
+                    ["Textarea", "react_forms_textarea.asp"],
+                    ["Select Inputs", "react_forms_select.asp"],
+                    ["Multiple Inputs", "react_forms_multiple_inputs.asp"],
+                    ["Checkboxes", "react_forms_checkbox.asp"],
+                    ["Radio Buttons", "react_forms_radio.asp"]
+                ],
+                objective: "Build controlled forms and manage component state with useState.",
+                objectiveMy: "Controlled form များ တည်ဆောက်ပြီး useState ဖြင့် component state ကို စီမံပါ။"
+            },
+            {
+                title: "React Hooks",
+                titleMy: "React Hook များ",
+                description: "Use hooks to manage state, side effects, and reusable logic.",
+                descriptionMy: "State၊ side effect နှင့် ပြန်လည်အသုံးပြုနိုင်သော logic များကို စီမံရန် hook များ အသုံးပြုပါ။",
+                topics: [
+                    ["What Are Hooks?", "react_hooks.asp"],
+                    ["useState", "react_usestate.asp"],
+                    ["useEffect", "react_useeffect.asp"],
+                    ["useContext", "react_usecontext.asp"],
+                    ["useRef", "react_useref.asp"],
+                    ["useReducer", "react_usereducer.asp"],
+                    ["useCallback", "react_usecallback.asp"],
+                    ["useMemo", "react_usememo.asp"],
+                    ["Custom Hooks", "react_customhooks.asp"]
+                ],
+                objective: "Apply built-in and custom hooks to manage state, effects, and reusable logic.",
+                objectiveMy: "State၊ effect နှင့် ပြန်လည်အသုံးပြုနိုင်သော logic များ စီမံရန် built-in နှင့် custom hook များကို အသုံးချပါ။"
+            },
+            {
+                title: "Styling & UI Techniques",
+                titleMy: "Styling နှင့် UI နည်းလမ်းများ",
+                description: "Style components and manage advanced rendering techniques.",
+                descriptionMy: "Component များကို style လုပ်ပြီး အဆင့်မြင့် rendering နည်းလမ်းများကို စီမံပါ။",
+                topics: [
+                    ["React CSS Styling", "react_css_styling.asp"],
+                    ["CSS Modules", "react_css_modules.asp"],
+                    ["CSS-in-JS", "react_css_js.asp"],
+                    ["Sass Styling", "react_sass_styling.asp"],
+                    ["React Portals", "react_portals.asp"],
+                    ["React Suspense", "react_suspense.asp"],
+                    ["React Transitions", "react_transitions.asp"]
+                ],
+                objective: "Style React components with CSS and modern rendering techniques.",
+                objectiveMy: "CSS နှင့် ခေတ်မီ rendering နည်းလမ်းများဖြင့် React component များကို style လုပ်ပါ။"
+            },
+            {
+                title: "Routing & Advanced Patterns",
+                titleMy: "Routing နှင့် အဆင့်မြင့် Pattern များ",
+                description: "Organize applications and learn reusable component patterns.",
+                descriptionMy: "Application များကို စနစ်တကျ စီစဉ်ပြီး ပြန်လည်အသုံးပြုနိုင်သော component pattern များကို လေ့လာပါ။",
+                topics: [
+                    ["React Router", "react_router.asp"],
+                    ["Forward Ref", "react_forward_ref.asp"],
+                    ["Higher-Order Components", "react_hoc.asp"],
+                    ["Component Composition", "react_components.asp"],
+                    ["Loading UI with Suspense", "react_suspense.asp"]
+                ],
+                objective: "Build multi-page applications using routing and reusable component patterns.",
+                objectiveMy: "Routing နှင့် ပြန်လည်အသုံးပြုနိုင်သော component pattern များဖြင့် အပိုင်းများစုပါ application များ တည်ဆောက်ပါ။"
+            },
+            {
+                title: "Testing Your Knowledge",
+                titleMy: "သင်၏ ဗဟုသုတကို စမ်းသပ်ခြင်း",
+                description: "Practice, review, and prepare for React interviews.",
+                descriptionMy: "လေ့ကျင့်၊ ပြန်လည်သုံးသပ်ပြီး React အငတ်ဗျူဟာအတွက် ပြင်ဆင်ပါ။",
+                topics: [
+                    ["React Exercises", "react_exercises.asp"],
+                    ["React Quiz", "react_quiz.asp"],
+                    ["React Syllabus", "react_syllabus.asp"],
+                    ["React Study Plan", "react_study_plan.asp"],
+                    ["React Interview Preparation", "react_interview_prep.asp"]
+                ],
+                objective: "Review React knowledge and practice common interview questions.",
+                objectiveMy: "React ဗဟုသုတကို ပြန်လည်သုံးသပ်ပြီး အများသုံး အငတ်ဗျူဟာမေးခွန်းများ လေ့ကျင့်ပါ။"
+            },
+            {
+                title: "Final Project & Best Practices",
+                titleMy: "နောက်ဆုံးပရောဂျက်နှင့် အကောင်းဆုံးနည်းလမ်းများ",
+                description: "Combine your knowledge into a complete React application.",
+                descriptionMy: "သင်၏ဗဟုသုတကို ပေါင်းစပ်၍ အပြည့်အစုံ React application တစ်ခု ဖန်တီးပါ။",
+                topics: [
+                    ["Plan the Project Structure", null],
+                    ["Build Reusable Components", null],
+                    ["Manage State and Forms", null],
+                    ["Fetch and Display API Data", null],
+                    ["Add Routing and Navigation", null],
+                    ["Handle Loading and Error States", null],
+                    ["Test, Review, and Refactor", null],
+                    ["Prepare the Project for Deployment", null]
+                ],
+                objective: "Plan, build, test, and deploy a complete React application.",
+                objectiveMy: "အပြည့်အစုံ React application တစ်ခုကို စီစဉ်၊ တည်ဆောက်၊ စမ်းသပ်နှင့် deploy လုပ်ပါ။"
+            }
+        ];
+
+        /* ---------------- Progress logic ---------------- */
+        const STORAGE_KEY = "buddyEduReactProgress";
+        const moduleList = document.getElementById("moduleList");
+
+        const isMy = () => BuddyI18n.getLang() === "my";
+        const pick = (en, my) => (isMy() && my ? my : en);
+
+        const topicId = (moduleIndex, topicIndex) =>
+            `topic-${moduleIndex}-${topicIndex}`;
+
+        const allTopicIds = modules.flatMap((module, moduleIndex) =>
+            module.topics.map((topic, topicIndex) =>
+                topicId(moduleIndex, topicIndex)
+            )
+        );
+
+        function loadProgress() {
+            try {
+                const saved = JSON.parse(
+                    localStorage.getItem(STORAGE_KEY) || "{}"
+                );
+
+                if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+                    return saved;
+                }
+            } catch (error) {
+                console.warn("Saved progress could not be loaded.", error);
+            }
+            return {};
+        }
+
+        let progressState = loadProgress();
+
+        const isDone = id => progressState[id] === true;
+
+        function saveProgress() {
+            try {
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(progressState)
+                );
+            } catch (error) {
+                console.warn("Could not save progress.", error);
+            }
+        }
+
+        function updateProgress() {
+            const total = allTopicIds.length;
+            const completed = allTopicIds.filter(isDone).length;
+            const remaining = total - completed;
+            const percent = total
+                ? Math.round(completed / total * 100)
+                : 0;
+
+            document.getElementById("moduleTotal").textContent = modules.length;
+            document.getElementById("topicTotal").textContent = total;
+            document.getElementById("completedTotal").textContent = completed;
+
+            document.getElementById("progressFill").style.width =
+                percent + "%";
+
+            document.getElementById("progressPercent").textContent =
+                percent + "%";
+
+            document.getElementById("statProgress").textContent =
+                percent + "%";
+
+            const key = percent === 100 ? "progress.done"
+                : completed === 0 ? "progress.start"
+                : remaining === 1 ? "progress.one"
+                : "progress.more";
+
+            document.getElementById("progressText").textContent =
+                BuddyI18n.t(key, {
+                    done: completed,
+                    total: total,
+                    remaining: remaining
+                });
+
+            document.getElementById("progressBar").setAttribute(
+                "aria-valuenow",
+                percent
+            );
+        }
+
+        function renderModules(openIndexes) {
+            const keepOpen = openIndexes || [];
+
+            moduleList.innerHTML = "";
+
+            modules.forEach((module, moduleIndex) => {
+                const details = document.createElement("details");
+                details.className = "module";
+                details.open = keepOpen.includes(moduleIndex);
+
+                const summary = document.createElement("summary");
+
+                const number = document.createElement("div");
+                number.className = "module-number";
+                number.textContent = String(moduleIndex + 1).padStart(2, "0");
+
+                const info = document.createElement("div");
+                info.className = "module-info";
+
+                const heading = document.createElement("h3");
+                heading.textContent = pick(module.title, module.titleMy);
+
+                const description = document.createElement("p");
+                description.textContent = pick(module.description, module.descriptionMy);
+
+                info.append(heading, description);
+
+                const count = document.createElement("span");
+                count.className = "topic-count";
+                count.textContent = BuddyI18n.t("module.topics", { n: module.topics.length });
+
+                const arrow = document.createElement("span");
+                arrow.className = "module-arrow";
+                arrow.textContent = "▼";
+
+                summary.append(number, info, count, arrow);
+
+                const body = document.createElement("div");
+                body.className = "module-body";
+
+                const subheading = document.createElement("h4");
+                subheading.textContent = BuddyI18n.t("module.learn");
+
+                const topicList = document.createElement("div");
+                topicList.className = "topic-list";
+
+                module.topics.forEach((topic, topicIndex) => {
+                    const id = topicId(moduleIndex, topicIndex);
+
+                    const label = document.createElement("label");
+                    label.className = "topic";
+
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.id = id;
+                    checkbox.checked = isDone(id);
+                    checkbox.setAttribute(
+                        "aria-label",
+                        BuddyI18n.t("module.check", { topic: topic[0] })
+                    );
+
+                    const text = document.createElement("span");
+                    text.textContent = topic[0];
+
+                    if (checkbox.checked) {
+                        label.classList.add("completed");
+                    }
+
+                    checkbox.addEventListener("change", () => {
+                        progressState[id] = checkbox.checked;
+                        label.classList.toggle(
+                            "completed",
+                            checkbox.checked
+                        );
+                        saveProgress();
+                        updateProgress();
+                    });
+
+                    label.append(checkbox, text);
+                    topicList.appendChild(label);
+                });
+
+                const objective = document.createElement("div");
+                objective.className = "objective";
+
+                const strong = document.createElement("strong");
+                strong.textContent = BuddyI18n.t("module.objective") + " ";
+
+                objective.append(
+                    strong,
+                    document.createTextNode(
+                        pick(module.objective, module.objectiveMy)
+                    )
+                );
+
+                body.append(subheading, topicList, objective);
+                details.append(summary, body);
+                moduleList.appendChild(details);
+            });
+
+            updateProgress();
+        }
+
+        function getOpenIndexes() {
+            return Array.from(document.querySelectorAll(".module"))
+                .map((el, i) => (el.open ? i : -1))
+                .filter(i => i >= 0);
+        }
+
+        document.getElementById("expandAll").addEventListener("click", () => {
+            document.querySelectorAll(".module").forEach(module => {
+                module.open = true;
+            });
+        });
+
+        document.getElementById("collapseAll").addEventListener("click", () => {
+            document.querySelectorAll(".module").forEach(module => {
+                module.open = false;
+            });
+        });
+
+        document.getElementById("resetProgress").addEventListener("click", () => {
+            if (!confirm(BuddyI18n.t("module.confirm"))) return;
+
+            progressState = {};
+            saveProgress();
+            renderModules();
+        });
+
+        /* Re-render dynamic content whenever the language changes */
+        document.addEventListener("buddy:langchange", () => {
+            renderModules(getOpenIndexes());
+        });
+
+        BuddyI18n.init(I18N);
+    </script>
+</body>
+</html>

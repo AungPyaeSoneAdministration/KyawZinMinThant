@@ -1,66 +1,410 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn JavaScript by building — a full course plus 50 hands-on browser projects.">
-    <title>JS Learning Hub</title>
-    <script>
-        (function () {
-            var t = localStorage.getItem('mp-theme');
-            if (t) document.documentElement.setAttribute('data-theme', t);
-        })();
-    </script>
-    <link rel="stylesheet" href="main.css">
+    <meta name="description" content="Buddy — learn web development with structured study plans and interactive lessons. HTML, CSS, JavaScript, Node.js and React.">
+    <title>Buddy | Learn &amp; Plan Web Development</title>
+    <meta name="theme-color" content="#6366f1">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icons/icon.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Buddy">
+
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e4e9f2;
+            --primary: #6366f1;
+            --primary-2: #8b5cf6;
+            --primary-soft: rgba(99, 102, 241, .12);
+            --glass: rgba(255, 255, 255, .58);
+            --glass-strong: rgba(255, 255, 255, .74);
+            --glass-brd: rgba(255, 255, 255, .85);
+            --shadow: 0 20px 44px -28px rgba(15, 23, 42, .5);
+            --radius: 22px;
+            --blur: blur(18px) saturate(170%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+                "Noto Sans Myanmar", "Myanmar Text", "Padauk", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            z-index: -1;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+        }
+        body::before {
+            width: 520px; height: 520px; top: -190px; right: -150px;
+            background: var(--primary); opacity: .18;
+        }
+        body::after {
+            width: 460px; height: 460px; bottom: -190px; left: -140px;
+            background: var(--primary-2); opacity: .16;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .wrap {
+            width: min(1120px, 92%);
+            margin: 0 auto;
+            padding: 34px 0 60px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------- Top bar ---------- */
+        .top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo {
+            width: 46px; height: 46px; flex: none;
+            display: grid; place-items: center;
+            border-radius: 14px; color: #fff;
+            font-weight: 800; font-size: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            box-shadow: 0 12px 24px -12px rgba(99, 102, 241, .9);
+        }
+
+        .top h1 { font-size: 18px; letter-spacing: -.01em; }
+        .top .sub { font-size: 12px; color: var(--muted); }
+
+        .install-btn {
+            margin-left: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--glass-brd);
+            background: var(--glass-strong);
+            -webkit-backdrop-filter: var(--blur);
+            backdrop-filter: var(--blur);
+            color: var(--primary);
+            font: inherit;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, .85);
+            transition: transform .2s, box-shadow .2s, border-color .2s;
+        }
+
+        .install-btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--primary);
+            box-shadow: 0 18px 34px -18px rgba(15, 23, 42, .55), inset 0 1px 0 rgba(255, 255, 255, .85);
+        }
+
+        .install-btn:active { transform: translateY(0); }
+        .install-btn[hidden] { display: none; }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            text-align: center;
+            margin: 58px auto 0;
+            max-width: 760px;
+            animation: rise .5s cubic-bezier(.2, .7, .2, 1);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .hero h2 {
+            margin: 20px 0 0;
+            font-size: clamp(32px, 6vw, 54px);
+            line-height: 1.1;
+            letter-spacing: -.03em;
+            font-weight: 800;
+        }
+
+        .grad {
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 620px;
+            margin: 16px auto 0;
+            color: var(--muted);
+            font-size: clamp(15px, 2.4vw, 17px);
+        }
+
+        /* ---------- Entry cards ---------- */
+        .entries {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin: 48px auto 0;
+            width: 100%;
+        }
+
+        .entry {
+            --c: var(--primary);
+            --c2: var(--primary-2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 34px 30px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--glass);
+            -webkit-backdrop-filter: var(--blur);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--glass-brd);
+            box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, .85);
+            transition: transform .25s, box-shadow .25s, border-color .25s;
+        }
+
+        .entry::after {
+            content: "";
+            position: absolute;
+            width: 240px; height: 240px;
+            top: -100px; right: -80px;
+            border-radius: 50%;
+            background: var(--c);
+            opacity: .14;
+            filter: blur(46px);
+            pointer-events: none;
+        }
+
+        .entry:hover {
+            transform: translateY(-6px);
+            border-color: var(--c);
+            box-shadow: 0 30px 60px -32px rgba(15, 23, 42, .6), inset 0 1px 0 rgba(255, 255, 255, .85);
+        }
+
+        .entry.plans { --c: #7c3aed; --c2: #5b21b6; }
+        .entry.learn { --c: #6366f1; --c2: #8b5cf6; }
+
+        .entry-icon {
+            width: 62px; height: 62px;
+            display: grid; place-items: center;
+            border-radius: 18px;
+            font-size: 28px;
+            background: linear-gradient(135deg, var(--c), var(--c2));
+            box-shadow: 0 16px 30px -16px var(--c);
+        }
+
+        .entry .kicker {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            color: var(--c);
+        }
+
+        .entry h3 { font-size: 23px; letter-spacing: -.01em; }
+
+        .entry p { color: var(--muted); font-size: 15px; flex: 1; }
+
+        .entry-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .entry-meta span {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--c);
+            background: color-mix(in srgb, var(--c) 12%, transparent);
+            border-radius: 99px;
+            padding: 4px 12px;
+        }
+
+        .entry-link {
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--c);
+            transition: letter-spacing .2s;
+        }
+
+        .entry:hover .entry-link { letter-spacing: .3px; }
+
+        /* ---------- Note + footer ---------- */
+        .note {
+            margin: 34px auto 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13.5px;
+        }
+
+        .note b { color: var(--text); }
+
+        footer {
+            width: min(1120px, 92%);
+            margin: 0 auto;
+            padding: 26px 0 34px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 13px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero, .entry { animation: none; transition: none; }
+        }
+
+        @media (max-width: 760px) {
+            .hero { margin-top: 40px; }
+            .entries { grid-template-columns: 1fr; }
+            footer { justify-content: center; text-align: center; }
+        }
+    </style>
 </head>
+
 <body>
-    <header class="top">
-        <div class="bar">
-            <div class="logo">JS</div>
+    <div class="wrap">
+        <header class="top">
+            <div class="logo">B</div>
             <div>
-                <h1>JS Learning Hub</h1>
-                <p class="sub">Course &amp; projects for the web</p>
+                <h1>Buddy</h1>
+                <p class="sub">Plan it · Learn it · Build it</p>
             </div>
-            <span class="spacer"></span>
-            <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle dark mode" title="Toggle theme">
-                <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></svg>
+            <button class="install-btn" id="installBtn" type="button" hidden>
+                <span aria-hidden="true">⬇</span> Install app
             </button>
-        </div>
-    </header>
+        </header>
 
-    <main class="wrap">
         <section class="hero">
-            <span class="eyebrow">Open source &middot; Offline &middot; No build tools</span>
-            <h2>Learn JavaScript <span class="grad">by building</span></h2>
-            <p class="lead">Three complete courses &mdash; JavaScript, HTML and CSS &mdash; paired with fifty interactive browser projects. Everything runs straight from a file, with no installs or dependencies.</p>
-            <div class="cta">
-                <a class="btn primary" href="JS/index.html">Start with JavaScript</a>
-                <a class="btn ghost" href="JS/JavascriptMiniProject.html">Browse projects</a>
-            </div>
-            <ul class="stats">
-                <li><b>200</b><span>Lessons</span></li>
-                <li><b>50</b><span>Projects</span></li>
-                <li><b>0</b><span>Dependencies</span></li>
-            </ul>
+            <span class="eyebrow">Learn &amp; Plan · English &amp; မြန်မာ</span>
+            <h2>Learn web development <span class="grad">the connected way</span></h2>
+            <p>
+                Buddy pairs structured study plans with hands-on lessons. Pick a view below —
+                your language choice is shared between both.
+            </p>
         </section>
 
-        <section class="toolbar">
-            <label class="search">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                <input id="search" type="search" placeholder="Search sections&hellip;  (press /)" aria-label="Search sections" autocomplete="off">
-            </label>
-            <span class="count" id="count"></span>
+        <section class="entries">
+            <a class="entry plans" href="CoursePlan/index.html">
+                <span class="entry-icon">🗓️</span>
+                <span class="kicker">Plan View</span>
+                <h3>Buddy Edu — Study Plans</h3>
+                <p>
+                    Ten-module course outlines with checklists, 8-week schedules,
+                    exercises and progress tracking for HTML, CSS, JavaScript, Node.js and React.
+                </p>
+                <div class="entry-meta">
+                    <span>5 courses</span>
+                    <span>50 modules</span>
+                    <span>Progress tracking</span>
+                </div>
+                <span class="entry-link">Open Study Plans →</span>
+            </a>
+
+            <a class="entry learn" href="Learning/index.html">
+                <span class="entry-icon">🎓</span>
+                <span class="kicker">Learn View</span>
+                <h3>Full Stack Learning Hub</h3>
+                <p>
+                    Read 300+ lessons across HTML, CSS, JavaScript, TypeScript and Next.js,
+                    and try 50 interactive browser projects — all offline, with no dependencies.
+                </p>
+                <div class="entry-meta">
+                    <span>300+ lessons</span>
+                    <span>50 projects</span>
+                    <span>Dark mode</span>
+                </div>
+                <span class="entry-link">Open Learning Hub →</span>
+            </a>
         </section>
 
-        <section class="grid" id="grid"></section>
+        <p class="note">
+            Connected both ways — jump from any plan to its lessons, or from a lesson back to its plan.
+            Switch language with <b>EN / မြန်မာ</b> on either page.
+        </p>
+    </div>
 
-        <section class="empty" id="empty" hidden>No sections match your search.</section>
-    </main>
-
-    <footer class="foot">
-        <p>Built for learning — add new pages to <code>main.js</code> and they appear here automatically.</p>
+    <footer>
+        <span>© <span id="year"></span> Buddy. Free, project-based web development courses.</span>
+        <span>Learn • Practice • Build • Improve</span>
     </footer>
 
-    <script src="main.js"></script>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        /* ---------- PWA: install + service worker ---------- */
+        (function () {
+            var installBtn = document.getElementById("installBtn");
+            var deferredPrompt = null;
+            var standalone =
+                window.matchMedia("(display-mode: standalone)").matches ||
+                window.navigator.standalone === true;
+
+            window.addEventListener("beforeinstallprompt", function (event) {
+                event.preventDefault();
+                deferredPrompt = event;
+                if (!standalone) installBtn.hidden = false;
+            });
+
+            installBtn.addEventListener("click", function () {
+                if (!deferredPrompt) return;
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.finally(function () {
+                    deferredPrompt = null;
+                    installBtn.hidden = true;
+                });
+            });
+
+            window.addEventListener("appinstalled", function () {
+                deferredPrompt = null;
+                installBtn.hidden = true;
+                standalone = true;
+            });
+
+            if ("serviceWorker" in navigator &&
+                (location.protocol === "https:" ||
+                 location.protocol === "http:" && /^(localhost|127\.0\.0\.1)/.test(location.hostname))) {
+                window.addEventListener("load", function () {
+                    navigator.serviceWorker.register("sw.js").catch(function () {});
+                });
+            }
+        })();
+    </script>
 </body>
 </html>

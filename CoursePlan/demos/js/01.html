@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01. Calculator — Buddy Demo</title>
+<style>
+:root{--accent:#2563eb;--dark:#1d4ed8;--soft:#eff6ff;--bg:#f5f7fb;--text:#0f172a;--muted:#64748b;--border:#e4e9f2;--card:#fff}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+.demo-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 5%;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.demo-bar .back{font-weight:700;font-size:14px;color:#fff;text-decoration:none;padding:8px 15px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--dark))}
+.demo-bar .tag{margin-left:auto;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.demo{width:min(920px,92%);margin:34px auto 64px;flex:1}
+.demo h1{font-size:clamp(24px,4vw,34px);letter-spacing:-.02em}
+.demo .lead{color:var(--muted);margin:8px 0 26px;max-width:640px}
+.demo-foot{border-top:1px solid var(--border);padding:18px 5%;text-align:center;color:var(--muted);font-size:13px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 12px 28px -22px rgba(15,23,42,.45);margin-bottom:18px}
+.panel h2{font-size:18px;margin-bottom:10px;letter-spacing:-.01em}
+.btn{display:inline-block;border:none;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;font-size:14px;background:var(--accent);color:#fff;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:var(--dark)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:var(--soft)}
+input,select,textarea{font:inherit;padding:10px 12px;border:1px solid var(--border);border-radius:10px;width:100%;background:#fff;color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+label{display:block;font-size:13px;font-weight:700;margin:12px 0 4px}
+pre,.terminal{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13.5px;line-height:1.7}
+.grid{display:grid;gap:16px}
+code{font-family:Consolas,monospace;background:var(--soft);color:var(--dark);padding:2px 6px;border-radius:6px;font-size:.92em}
+.code-block{font-family:Consolas,"Courier New",monospace;background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;overflow:auto;font-size:13px;line-height:1.65;margin:14px 0;white-space:pre}
+.muted{color:var(--muted);font-size:13.5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+
+</style>
+</head>
+<body>
+<header class="demo-bar">
+    <a class="back" href="../../JavaScript/index.html">← Back to JavaScript Course</a>
+    <span class="tag">JavaScript · Project 01</span>
+</header>
+<main class="demo">
+    <h1>01. Calculator</h1>
+    <p class="lead">Perform arithmetic operations and handle user input.</p>
+    
+<section class="panel" style="max-width:340px;margin:0 auto">
+    <div class="calc">
+        <input id="calcScreen" readonly value="0" aria-label="Calculator display">
+        <div class="calc-keys">
+            <button data-k="clear" class="op">C</button>
+            <button data-k="back" class="op">⌫</button>
+            <button data-k="%" class="op">%</button>
+            <button data-k="/" class="op">÷</button>
+            <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+            <button data-k="*" class="op">×</button>
+            <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+            <button data-k="-" class="op">−</button>
+            <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+            <button data-k="+" class="op">+</button>
+            <button data-k="0" class="zero">0</button><button data-k=".">.</button>
+            <button data-k="=" class="eq">=</button>
+        </div>
+    </div>
+</section>
+<script>
+(function () {
+    var screen = document.getElementById('calcScreen');
+    var expr = '';
+    function render() { screen.value = expr || '0'; }
+    function evalExpr() {
+        try {
+            if (!expr) return;
+            var safe = expr.replace(/%/g, '/100');
+            if (!/^[0-9+\-*/.() ]+$/.test(safe)) throw 0;
+            var result = Function('"use strict"; return (' + safe + ')')();
+            expr = String(Math.round(result * 1e10) / 1e10);
+        } catch (e) { expr = 'Error'; }
+        render();
+    }
+    document.querySelector('.calc-keys').addEventListener('click', function (e) {
+        var k = e.target.getAttribute && e.target.getAttribute('data-k');
+        if (!k) return;
+        if (k === 'clear') { expr = ''; }
+        else if (k === 'back') { expr = expr.slice(0, -1); }
+        else if (k === '=') { evalExpr(); render(); return; }
+        else {
+            if (expr === 'Error') expr = '';
+            expr += k;
+        }
+        render();
+    });
+})();
+</script>
+<style>
+.calc input{font-size:24px;text-align:right;font-family:Consolas,monospace;border-radius:12px;margin-bottom:10px}
+.calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.calc-keys button{padding:14px 0;font-size:17px;font-weight:700;border:1px solid var(--border);border-radius:12px;background:#fff;cursor:pointer;transition:background .12s}
+.calc-keys button:hover{background:var(--soft)}
+.calc-keys .op{color:var(--accent);font-weight:800}
+.calc-keys .eq{grid-column:span 2;background:var(--accent);color:#fff;border-color:var(--accent)}
+.calc-keys .eq:hover{background:var(--dark)}
+.calc-keys .zero{grid-column:span 2}
+</style>
+</main>
+<footer class="demo-foot">Buddy Edu · Practical Work demo — JavaScript Project 01</footer>
+</body>
+</html>
