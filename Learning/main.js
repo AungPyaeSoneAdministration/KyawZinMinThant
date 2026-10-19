@@ -9,7 +9,7 @@
 
     var STR = {
         en: {
-            brandTitle: 'Full Stack Hub',
+            brandTitle: 'Buddy Learning',
             brandSub: 'HTML · CSS · JS · TypeScript · Next.js',
             navBuddy: 'Buddy Edu',
             navPlans: 'Study Plans',
@@ -35,7 +35,7 @@
             footer: 'Built for learning — add new pages to <code>main.js</code> and they appear here automatically.'
         },
         mm: {
-            brandTitle: 'ဖူးလ်စတက် ဟတ်',
+            brandTitle: 'Buddy Learning',
             brandSub: 'HTML · CSS · JS · TypeScript · Next.js',
             navBuddy: 'Buddy Edu',
             navPlans: 'လေ့လာရေးအစီအစဉ်များ',

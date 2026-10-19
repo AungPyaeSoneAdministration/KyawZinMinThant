@@ -21,6 +21,7 @@
 
 
 
+    <script src="../../assets/js/transitions.js"></script>
 </head><body>
 
     <!-- ======================= Navbar ======================= -->
@@ -49,7 +50,7 @@
                 
                 </a><a href="#references" data-i18n="nav.references">References
                 
-                </a><a href="../Learning/index.html" class="ext" data-i18n="nav.learn">Learn
+                </a><a href="../../Learning/index.html" class="ext" data-i18n="nav.learn">Learn
             
 
             
@@ -82,7 +83,7 @@
             </p><div class="hero-actions">
                 <a href="#modules" class="btn" data-i18n="hero.cta">Explore Course Modules →
                 
-                </a><a href="../Learning/index.html" class="btn btn-ghost" data-i18n="hero.cta2">Open Learning Hub →
+                </a><a href="../../Learning/index.html" class="btn btn-ghost" data-i18n="hero.cta2">Open Learning Hub →
 
     
                 </a>
@@ -529,6 +530,7 @@
         </div>
     </footer>
 
+    <script src="../../assets/js/box.js"></script>
     <script src="../assets/js/i18n.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
@@ -576,6 +578,7 @@
                 "module.objective": "Learning Objective:",
                 "module.check": "Mark {topic} as completed",
                 "module.confirm": "Reset all completed Node.js topics?",
+      "module.confirmTitle": "Reset progress",
 
                 "schedule.title": "Course Schedule",
                 "schedule.desc": "Suggested 8-week learning plan.",
@@ -672,6 +675,7 @@
                 "module.objective": "လေ့လာရည်ရွယ်ချက် -",
                 "module.check": "{topic} ကို ပြီးပြီဟု မှတ်သားရန်",
                 "module.confirm": "ပြီးဆုံးပြီးသော Node.js ခေါင်းစဉ်အားလုံးကို ပြန်လည်သတ်မှတ်မှာလား?",
+      "module.confirmTitle": "တိုးတက်မှု ပြန်လည်သတ်မှတ်ရန်",
 
                 "schedule.title": "သင်တန်းအချိန်ဇယား",
                 "schedule.desc": "အကြံပြုထားသော ပတ် ၈ ပတ်စာ လေ့လာရေးအစီအစဉ်။",
@@ -1105,11 +1109,16 @@
         });
 
         document.getElementById("resetProgress").addEventListener("click", () => {
-            if (!confirm(BuddyI18n.t("module.confirm"))) return;
+            BuddyBox.confirm(BuddyI18n.t("module.confirm"), {
+            title: BuddyI18n.t("module.confirmTitle"),
+            icon: "?"
+        }).then(function (ok) {
+            if (!ok) return;
 
             completedTopics = [];
             saveProgress();
             renderModules();
+        });
         });
 
         /* Re-render dynamic content whenever the language changes */

@@ -350,6 +350,7 @@ button {
 
 .code-window pre {
     padding: 20px;
+    min-height: 188px;
     font-family: Consolas, "Courier New", monospace;
     font-size: 14px;
     line-height: 1.75;
@@ -362,6 +363,20 @@ button {
 .code-window .c-str { color: #86efac; }
 .code-window .c-fn { color: #93c5fd; }
 .code-window .c-cmt { color: #64748b; }
+
+.code-caret {
+    display: inline-block;
+    width: 8px;
+    height: 1.05em;
+    margin-left: 1px;
+    background: #a5b4fc;
+    vertical-align: text-bottom;
+    animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+    50% { opacity: 0; }
+}
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -1322,6 +1337,7 @@ footer::before {
 @media (prefers-reduced-motion: reduce) {
     .fade-up { opacity: 1; transform: none; transition: none; }
     .code-window { animation: none; }
+    .code-caret { animation: none; }
     footer { animation: none; }
     body::before,
     body::after { animation: none; }

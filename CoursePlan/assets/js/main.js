@@ -1,6 +1,6 @@
 /* ============================================================
    Buddy Edu — shared UI behaviour
-   (mobile nav toggle + scroll reveal + footer year)
+   (mobile nav toggle + scroll reveal + hero typing + footer year)
    ============================================================ */
 
 (function () {
@@ -100,6 +100,74 @@
             revealables.forEach(function (el) { observer.observe(el); });
         } else {
             revealables.forEach(function (el) { el.classList.add("in-view"); });
+        }
+
+        /* Hero code typing effect (home page code window) */
+        var codeEl = document.querySelector(".code-window pre > code");
+
+        if (codeEl && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            var tokens = [];
+
+            (function tokenize(node) {
+                for (var i = 0; i < node.childNodes.length; i++) {
+                    var n = node.childNodes[i];
+                    if (n.nodeType === 3) {
+                        if (n.nodeValue) tokens.push({ text: n.nodeValue, cls: "" });
+                    } else if (n.nodeType === 1) {
+                        if (n.className) tokens.push({ text: n.textContent, cls: n.className });
+                        else tokenize(n);
+                    }
+                }
+            })(codeEl);
+
+            var caret = document.createElement("span");
+            caret.className = "code-caret";
+            caret.setAttribute("aria-hidden", "true");
+
+            var tIdx = 0, cIdx = 0, out = null;
+
+            function codeReset() {
+                codeEl.textContent = "";
+                codeEl.appendChild(caret);
+                tIdx = 0; cIdx = 0; out = null;
+            }
+
+            function codeStep() {
+                if (tIdx >= tokens.length) {
+                    setTimeout(function () {
+                        codeReset();
+                        setTimeout(codeStep, 500);
+                    }, 3800);
+                    return;
+                }
+
+                var tok = tokens[tIdx];
+
+                if (cIdx === 0) {
+                    if (tok.cls) {
+                        out = document.createElement("span");
+                        out.className = tok.cls;
+                    } else {
+                        out = document.createTextNode("");
+                    }
+                    codeEl.insertBefore(out, caret);
+                }
+
+                var ch = tok.text.charAt(cIdx);
+                if (out.nodeType === 3) out.nodeValue += ch;
+                else out.textContent += ch;
+
+                cIdx++;
+                if (cIdx >= tok.text.length) { tIdx++; cIdx = 0; }
+
+                var delay = 16 + Math.random() * 26;
+                if (ch === "\n") delay = 300;
+                else if (ch === " ") delay += 18;
+                setTimeout(codeStep, delay);
+            }
+
+            codeReset();
+            setTimeout(codeStep, 600);
         }
 
         /* Footer year */

@@ -60,6 +60,7 @@
 
 
 
+    <script src="../../assets/js/transitions.js"></script>
 </head><body>
 
     <!-- ======================= Navbar ======================= -->
@@ -88,7 +89,7 @@
                 
                 </a><a href="#references" data-i18n="nav.references">References
                 
-                </a><a href="../Learning/index.html" class="ext" data-i18n="nav.learn">Learn
+                </a><a href="../../Learning/index.html" class="ext" data-i18n="nav.learn">Learn
             
 
             
@@ -132,7 +133,7 @@
             </div><div class="hero-actions">
                 <a href="#modules" class="btn" data-i18n="hero.cta">Explore Course Modules →
                 
-                </a><a href="../Learning/index.html" class="btn btn-ghost" data-i18n="hero.cta2">Open Learning Hub →
+                </a><a href="../../Learning/index.html" class="btn btn-ghost" data-i18n="hero.cta2">Open Learning Hub →
 
     
                 </a>
@@ -649,6 +650,7 @@
         </div>
     </footer>
 
+    <script src="../../assets/js/box.js"></script>
     <script src="../assets/js/i18n.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
@@ -701,6 +703,7 @@
                 "module.check": "Mark {topic} as completed",
                 "module.lesson": "Study lesson ↗",
                 "module.confirm": "Reset all React course progress?",
+      "module.confirmTitle": "Reset progress",
 
                 "schedule.title": "8-Week Study Plan",
                 "schedule.desc": "Suggested schedule for learning React with regular practice.",
@@ -804,6 +807,7 @@
                 "module.check": "{topic} ကို ပြီးပြီဟု မှတ်သားရန်",
                 "module.lesson": "သင်ခန်းစာ လေ့လာရန် ↗",
                 "module.confirm": "React သင်တန်း၏ တိုးတက်မှုအားလုံးကို ပြန်လည်သတ်မှတ်မှာလား?",
+      "module.confirmTitle": "တိုးတက်မှု ပြန်လည်သတ်မှတ်ရန်",
 
                 "schedule.title": "ပတ် ၈ ပတ်စာ လေ့လာရေးအစီအစဉ်",
                 "schedule.desc": "ပုံမှန် လေ့ကျင့်ခန်းများနှင့်အတူ React လေ့လာရန် အကြံပြုထားသော အချိန်ဇယား။",
@@ -1238,11 +1242,16 @@
         });
 
         document.getElementById("resetProgress").addEventListener("click", () => {
-            if (!confirm(BuddyI18n.t("module.confirm"))) return;
+            BuddyBox.confirm(BuddyI18n.t("module.confirm"), {
+            title: BuddyI18n.t("module.confirmTitle"),
+            icon: "?"
+        }).then(function (ok) {
+            if (!ok) return;
 
             progressState = {};
             saveProgress();
             renderModules();
+        });
         });
 
         /* Re-render dynamic content whenever the language changes */
